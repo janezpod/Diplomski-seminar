@@ -40,8 +40,10 @@
 \begin{document}
 
 \begin{abstract}
-    V naslovu se pojavijo trije pomembni pojmi. Kodiranje podatkov, stiskanje
-    podatkov in kontekstno-neodvisne gramatike.
+
+    V delu predstavimo motivacijo in osnovne pojme, ki so potrebni za obravnavnje
+    stiskanja podatkov s kontekstno-neodvisnimi gramatikami.
+
 \end{abstract}
 
 \maketitle
@@ -50,8 +52,8 @@
 
 Zapis informacije v neki obliki ni primeren za vsakršno rabo. Besedilo, zapisano z 
 pismenkami, je neberljivo za slepe osebe, saj je komunikacijski kanal v tem primeru
-vid. Pisanega besedila v pravotni obliki ni moč poslati z telegrafom. V tem primeru
-je komunikacijski kanal žica in pismenke se po njej ne morejo sprehoditi. V obeh 
+vid. Prav tako pisanega besedila v pravotni obliki ni moč poslati z telegrafom. V tem
+primeru je komunikacijski kanal žica in pismenke se po njej ne morejo sprehoditi. V obeh 
 primerih je informacija, ki bi jo radi prenesli v neprimerni obliki. V prvem 
 primeru je potrebno besedilo zapisati z Braillovo pisavo. V drugem primeru pa je 
 potrebno besedil pretvoriti v električni signal. Spreminjanje zapisa sporočila
@@ -59,6 +61,7 @@ pravimo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi,
 pa \textit{kod}. 
 
 \begin{primer}
+
     \textit{Morsejeva abeceda} je kodiranje črk, števil in ločil s pomočjo zaporedja kratkih
     in dolgih signalov:
 
@@ -72,16 +75,44 @@ pa \textit{kod}.
 
     \begin{figure}[h]
         \centering
-        \includegraphics[width=4.5cm]{International_Morse_Code.svg.png}
+        \includegraphics[width=4.3cm]{International_Morse_Code.svg.png}
         \caption{Mednarodna Morsejeva abeceda}
     \end{figure}
 
-    Kodiranje črk je takšno, da imajo črke z višjo frekvenco (v angleškem jeziku)
-    krajši zapis. 
-    
     Prvotni namen Morsejeve abecede je komunikacija preko telegrama, saj komunikacijski
-    kanal dovoljuje le električne signale in tišino med njimi. 
- 
+    kanal dovoljuje le električne signale in tišino med njimi.  Kodiranje črk je takšno,
+    da imajo črke z višjo frekvenco (v angleškem jeziku) krajši zapis, s tem se dolžina
+     kodiranega sporočila skrajša in posledično tudi čas prenosa.
+
+\end{primer}
+
+\begin{definicija}
+
+    \textit{Abeceda} je vsaka neprazna množica $ \Sigma $. \textit{Množica vseh besed na    % beseda zamanjati za niz
+    abecedi} $ \Sigma $ je:
+
+    \begin{equation*}
+        \Sigma^* = \{ \, a_1 a_2 a_3 \dots \mid \forall i: a_i \in \Sigma \, \} \cup \{ \varepsilon \}, 
+        % Bi bilo morda bolje definirati takole:
+        % \Sigma^* = \{ \, a_1 a_2 a_3 \dots a_n \mid \forall i: a_i \in \Sigma \, \} \cup \{ \varepsilon \}
+    \end{equation*}
+
+    kjer $ \varepsilon $ prazna beseda.
+
+\end{definicija}
+
+V splošnem ima lahko abeceda poljubno kardinalnost, v diplomski nalogi se bomo srečali le z končnimi abecedami.
+% Kaj se tukaj zgodi z 
+
+\begin{primer}
+    
+    Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem je:
+
+    \begin{align*}
+        ab \in \Sigma^* \\
+        ccc \in \Sigma^* \\
+        cababcccababcccab \in \Sigma^*
+    \end{align*}
 
 \end{primer}
 
