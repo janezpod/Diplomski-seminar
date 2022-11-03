@@ -91,14 +91,14 @@ pa \textit{kod}.
 \begin{definicija}
 
     \textit{Abeceda} je neprazna množica $ \Sigma $. Elementom abecede pravimo \textit{črke}.
-    \textit{Množica vseh končnih besed abecede} $ \Sigma $ je
+    \textit{Množica vseh končnih nizov abecede} $ \Sigma $ je
 
     \[
         \Sigma^* = \{\, a_1 a_2 a_3 \cdots a_n \mid n \in \N_0 \land \forall i: a_i \in \Sigma \,\}, 
     \]
-    kjer za $ n = 0 $ dobimo prazno besedo, ki jo označimo z $ \varepsilon $.
-    \textit{Dolžina besede w} označimo z $ |w| $ in je enaka številu črk v besedi $ w \in \Sigma^* $.
-    \textit{Jezik na abecedi} $ \Sigma $ je poljubna podmnožica množice vseh besed $ \Sigma^* $. 
+    kjer za $ n = 0 $ dobimo prazen niz, ki jo označimo z $ \varepsilon $.
+    \textit{Dolžino niza w} označimo z $ |w| $ in je enaka številu črk v nizu $ w \in \Sigma^* $.
+    \textit{Jezik na abecedi} $ \Sigma $ je poljubna podmnožica množice $ \Sigma^* $. 
 
 \end{definicija}
 
@@ -113,9 +113,9 @@ pa \textit{kod}.
     
     \textit{Kleenejeva zvezdica} ali \textit{Kleenejevo zaprtje} je operacija, ki
     abecedi $ \Sigma $ priredi najmanjšo nadmnožico $ \Sigma^* $, ki vsebuje
-    \textit{prazno besedo} $ \varepsilon $ in je zaprta za konkatenacijo oziroma veriženje.
-    Z drugimi besedami, $ \Sigma^* $ je množica vseh končnih besed oziroma končnih nizov, ki
-    jih lahko generiramo z veriženjem črk abecede $ \Sigma $.  \\
+    \textit{prazen niz} $ \varepsilon $ in je zaprta za konkatenacijo oziroma veriženje.
+    Z drugimi besedami, $ \Sigma^* $ je množica vseh končnih nizov, ki
+    jih lahko generiramo z veriženjem črk abecede $ \Sigma $. \\
     Za abecedo $ \Sigma $ definirajmo
     \begin{align*}
         & \Sigma^0 = \{ \varepsilon \} \\
@@ -145,10 +145,10 @@ pa \textit{kod}.
 
 \begin{definicija}
     
-    \textit{Kodiranje besed abecede} $ \Sigma $ je obrnljiva funkcija $ K \colon \Sigma^* \to \Sigma_c^* $,
-    kjer je $ \Sigma_c $ \textit{kodirna abeceda}. $ K(w) $ imenujemo \textit{koda besede} $ w $.
-    \textit{Dekodiranje} je obraten postopek, ki za podano kodo $ c \in \Sigma_c^* $ vrne prvotno besedo
-    $ w \in \Sigma^* $, ki smo jo kodirali.
+    \textit{Kodiranje nizov abecede} $ \Sigma $ je obrnljiva funkcija $ K \colon \Sigma^* \to \Sigma_c^* $,
+    kjer je $ \Sigma_c $ \textit{kodirna abeceda}. $ K(w) $ imenujemo \textit{koda niza} $ w $.
+    \textit{Dekodiranje} je obraten postopek, ki za podano kodo $ c \in \Sigma_c^* $ vrne prvoten niz
+    $ w \in \Sigma^* $, ki smo ga kodirali.
 
 \end{definicija}
 
@@ -162,8 +162,8 @@ pa \textit{kod}.
         \Sigma_c = \{\, ., -, \_, \_\_\_ \,\} \\
     \end{gather*}
     Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsakei črki iz abecede
-    priredi besedo iz črk kodirne abecede. Funkcija je definirana s tabelo iz Slike~\refeq{fig:Morse},
-    dodatno $ \kappa(\_) = \_\_\_ $ . Za besedo $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodirno 
+    priredi niz črk kodirne abecede. Funkcija je definirana s tabelo iz Slike~\refeq{fig:Morse},
+    dodatno $ \kappa(\_) = \_\_\_ $ . Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodirno 
     funkcijo $ K $ po črkah
     \[
         K(w) = \kappa(a_1)\kappa(a_2)\cdots\kappa(a_n)
@@ -201,11 +201,11 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 
 \begin{primer}\label{Kompresija}
     
-    Za abecedo vzemimo $ \Sigma = \{\, a,b,c \,\} $ in poglejmo besedo
+    Za abecedo vzemimo $ \Sigma = \{\, a,b,c \,\} $ in poglejmo niz
     \[
         w = cababcccababcccab
     \]
-    Opazimo, da se nam v besedi $ w $ večkrat ponovita vzorca $ ab $ in $ ccc $. Zato
+    Opazimo, da se nam v nizu $ w $ večkrat ponovita vzorca $ ab $ in $ ccc $. Zato
     uvedemo novi spremenljivki $ A_1 = ab $ in $ A_2 = ccc $. Sedaj lahko zapišemo $ w $ kot
     \[
         w = cA_1A_1A_2A_1A_1A_2A_1
@@ -215,8 +215,8 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     \[
         w = cA_3A_3A_1
     \]
-    Prvotno besedilo smo z novimi spremeljivkami uspešno skrajšali. Kot bomo videli, smo
-    pretvorili besedo $ w $ v kontekstno neodvisno gramatiko $ G_w $ s
+    Prvotni niz smo z novimi spremeljivkami uspešno skrajšali. Kot bomo videli, smo
+    pretvorili niz $ w $ v kontekstno neodvisno gramatiko $ G_w $ s
     produkcijskimi pravili
     \begin{align*}
         & A_0 \, \rightarrow \, cA_3A_3A_1, \\
@@ -244,10 +244,6 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     \textit{produkcijskih pravil} in $ S \in V $ \textit{začetna spremenljivka}.
 
 \end{definicija}
-
-% Besede so sestavljenje samo iz elementov abecede. Nizi so sestavljeni tako iz
-% končnih terminalov kot iz spremeljivk. Morda bi milo smiselno označevati ene z
-% grškimi črkami in druge z latinico.
 
 \begin{definicija}
     
@@ -297,7 +293,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 
 \begin{primer}
     
-    Formalizirajmo gramatiko iz Primera~\refeq{Kompresija}, ki smo jo generirali z besede
+    Formalizirajmo gramatiko iz Primera~\refeq{Kompresija}, ki smo jo generirali z nizom
     $ w = cababcccababcccab $. Označimo jo z $ G_w = (\, V, \Sigma, P, S \,) $, kjer je 
 
     \begin{gather*}
