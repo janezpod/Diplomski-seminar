@@ -61,7 +61,7 @@ potrebno besedil pretvoriti v električni signal. Spreminjanje zapisa sporočila
 pravimo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi,
 pa \textit{kod}. 
 
-\begin{primer}
+\begin{primer}\label{Morse}
 
     \textit{Morsejeva abeceda} je kodiranje črk, števil in ločil s pomočjo zaporedja kratkih
     in dolgih signalov:
@@ -78,104 +78,170 @@ pa \textit{kod}.
         \centering
         \includegraphics[width=4.3cm]{International_Morse_Code.svg.png}
         \caption{Mednarodna Morsejeva abeceda}
+        \label{fig:Morse}
     \end{figure}
 
     Prvotni namen Morsejeve abecede je komunikacija preko telegrama, saj komunikacijski
     kanal dovoljuje le električne signale in tišino med njimi. Kodiranje črk je takšno,
     da imajo črke z višjo frekvenco (v angleškem jeziku) krajši zapis, s tem se dolžina
-     kodiranega sporočila skrajša in posledično tudi čas prenosa.
+    kodiranega sporočila skrajša in posledično tudi čas prenosa.
 
 \end{primer}
 
 \begin{definicija}
 
-    \textit{Abeceda} je neprazna množica $ \Sigma $. \textit{Množica vseh končnih besed na 
-    abecedi} $ \Sigma $ je
+    \textit{Abeceda} je neprazna množica $ \Sigma $. Elementom abecede pravimo \textit{črke}.
+    \textit{Množica vseh končnih besed abecede} $ \Sigma $ je
 
-    \begin{equation*}
-        \Sigma^* = \{\, a_1 a_2 a_3 \cdots a_n \mid n \in \N \land \forall i: a_i \in \Sigma \,\} \cup \{ \varepsilon \}, 
-    \end{equation*}
-
-    kjer $ \varepsilon $ prazna beseda. Jezik na abecedi $ \Sigma $ je poljubna podmnožica množice vseh 
-    besed $ \Sigma^* $.
+    \[
+        \Sigma^* = \{\, a_1 a_2 a_3 \cdots a_n \mid n \in \N_0 \land \forall i: a_i \in \Sigma \,\}, 
+    \]
+    kjer za $ n = 0 $ dobimo prazno besedo, ki jo označimo z $ \varepsilon $.
+    \textit{Dolžina besede w} označimo z $ |w| $ in je enaka številu črk v besedi $ w \in \Sigma^* $.
+    \textit{Jezik na abecedi} $ \Sigma $ je poljubna podmnožica množice vseh besed $ \Sigma^* $. 
 
 \end{definicija}
 
 \begin{opomba}
     
-    V splošnem ima lahko abeceda poljubno kardinalnost, v diplomski nalogi se bomo srečali le z končnimi abecedami.
+    V splošnem ima lahko abeceda poljubno kardinalnost, v diplomski nalogi se bomo srečali le
+    s končnimi abecedami.
+    
+\end{opomba}
+
+\begin{opomba}
+    
+    \textit{Kleenejeva zvezdica} ali \textit{Kleenejevo zaprtje} je operacija, ki
+    abecedi $ \Sigma $ priredi najmanjšo nadmnožico $ \Sigma^* $, ki vsebuje
+    \textit{prazno besedo} $ \varepsilon $ in je zaprta za konkatenacijo oziroma veriženje.
+    Z drugimi besedami, $ \Sigma^* $ je množica vseh končnih besed oziroma končnih nizov, ki
+    jih lahko generiramo z veriženjem črk abecede $ \Sigma $.  \\
+    Za abecedo $ \Sigma $ definirajmo
+    \begin{align*}
+        & \Sigma^0 = \{ \varepsilon \} \\
+        & \Sigma^1 = \Sigma \\
+    \end{align*}
+    ter za vsak $ i > 0 $ rekurzivno
+    \[
+        \Sigma^{i+1} = \{\, wa \mid w \in \Sigma^i \text{ in } a \in \Sigma \,\},
+    \]
+    potem je Kleenejeva zvezdico na $ \Sigma $ enaka
+    \[
+        \Sigma^* = \bigcup_{i \geq 0} \Sigma^i
+    \]
 
 \end{opomba}
 
 \begin{primer}
     
     Naj bo $ \Sigma = \{\, a,b,c \,\} $ abeceda, potem je
-
-    \begin{align*} 
+    \begin{gather*} 
         ab \in \Sigma^* \\
         ccc \in \Sigma^* \\
         cababcccababcccab \in \Sigma^*
-    \end{align*}
+    \end{gather*}
+
+\end{primer}
+
+\begin{definicija}
+    
+    \textit{Kodiranje besed abecede} $ \Sigma $ je obrnljiva funkcija $ K \colon \Sigma^* \to \Sigma_c^* $,
+    kjer je $ \Sigma_c $ \textit{kodirna abeceda}. $ K(w) $ imenujemo \textit{koda besede} $ w $.
+    \textit{Dekodiranje} je obraten postopek, ki za podano kodo $ c \in \Sigma_c^* $ vrne prvotno besedo
+    $ w \in \Sigma^* $, ki smo jo kodirali.
+
+\end{definicija}
+
+% Po zgorjni definiciji je kodiranje vedno obrnljivo? Torej je vsako kodiranje brez izgube?
+
+\begin{primer}
+    
+    Formalizirajmo Morsejevo abecedo iz Primera~\refeq{Morse}. Abecedi sta
+    \begin{gather*}
+        \Sigma = \{\, \text{A},  \text{B}, \ldots, \text{Z} \,\} \, \cup \, \{\, 0, 1, \ldots, 9 \,\} \, \cup \, \{\, \_ \,\} \\
+        \Sigma_c = \{\, ., -, \_, \_\_\_ \,\} \\
+    \end{gather*}
+    Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsakei črki iz abecede
+    priredi besedo iz črk kodirne abecede. Funkcija je definirana s tabelo iz Slike~\refeq{fig:Morse},
+    dodatno $ \kappa(\_) = \_\_\_ $ . Za besedo $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodirno 
+    funkcijo $ K $ po črkah
+    \[
+        K(w) = \kappa(a_1)\kappa(a_2)\cdots\kappa(a_n)
+    \]
+    Opazimo, da je Morsejeva abeceda kodiranja brez izgube.
 
 \end{primer}
 
 \section{Stiskanje podatkov}
 
-Namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Želimo, da bi bilo naše sporočilo čim
- krajše. Kodiranje, ki skrajša zapis podatkov, imenujemo \textit{stiskanje podatkov}.
+Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Želimo, da bi bilo naše sporočilo
+čim krajše. Kodiranje, ki skrajša zapis podatkov, imenujemo \textit{stiskanje podatkov}.
 
-\begin{primer}\label{p1}
+\begin{definicija}
     
-    Ponovno za abecedo vzemimo $ \Sigma = \{\, a,b,c \,\} $ in poglejmo besedo
+    \textit{Stiskanje} je kodiranje $ K $ za katerega velja 
+    \[ 
+    \forall w \in \Sigma^* \colon \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert
+    \]
 
-    \begin{equation*}
-        \mathbf{x} = cababcccababcccab
-    \end{equation*}
+\end{definicija}
 
-    Opazimo, da se nam v besedi $ \mathbf{x} $ večkrat ponovita vzorca $ ab $ in $ ccc $. Zato uvedemo
-    novi spremenljivki $ A_1 = ab $ in $ A_2 = ccc $. Sedaj lahko zapišemo $ \mathbf{x} $ kot
+% \begin{opomba}
+    
+%     Za \textit{kodiranje brez izgube} velja
+%     \[
+%         \forall w \in \Sigma^*: K^{-1}(K(w)) = w
+%     \]
+%     Za \textit{kodiranje z izgubo} velja
+%     \[
+%         \exists w \in \Sigma^*: K^{-1}(K(w)) \approx w
+%     \]
 
-    \begin{equation*}
-        \mathbf{x} = cA_1A_1A_2A_1A_1A_2A_1
-    \end{equation*}
+% \end{opomba}
 
+\begin{primer}\label{Kompresija}
+    
+    Za abecedo vzemimo $ \Sigma = \{\, a,b,c \,\} $ in poglejmo besedo
+    \[
+        w = cababcccababcccab
+    \]
+    Opazimo, da se nam v besedi $ w $ večkrat ponovita vzorca $ ab $ in $ ccc $. Zato
+    uvedemo novi spremenljivki $ A_1 = ab $ in $ A_2 = ccc $. Sedaj lahko zapišemo $ w $ kot
+    \[
+        w = cA_1A_1A_2A_1A_1A_2A_1
+    \]
     Ponovno se nam pojavi vzorec, tokrat $ A_1A_1A_2 $. Uvedemo novo spremeljivko $ A_3 = A_1A_1A_2 $
-    in zapišemo $ \mathbf{x} $ kot
-
-    \begin{equation*}
-        \mathbf{x} = cA_3A_3A_1
-    \end{equation*}
-    
-    Prvotno besedilo smo z novimi spremeljivkami uspešno skrajšali. Kot bomo videli kmalu, smo
-    pretvorili besedo $ \mathbf{x} $ v kontekstno neodvisno gramatiko $ \mathbf{G_x} $ z 
+    in zapišemo $ w $ kot
+    \[
+        w = cA_3A_3A_1
+    \]
+    Prvotno besedilo smo z novimi spremeljivkami uspešno skrajšali. Kot bomo videli, smo
+    pretvorili besedo $ w $ v kontekstno neodvisno gramatiko $ G_w $ s
     produkcijskimi pravili
-
     \begin{align*}
         & A_0 \, \rightarrow \, cA_3A_3A_1, \\
         & A_1 \, \rightarrow \, ab, \\
         & A_2 \, \rightarrow \, ccc, \\
-        & A_3 \, \rightarrow \, A_1A_1A_2.
+        & A_3 \, \rightarrow \, A_1A_1A_2
     \end{align*}
 
 \end{primer}
 
 \section{Kontekstno-neodvisne gramatike}
 
-
-
 \begin{definicija}
 
     \textit{Formalna gramatika} $ G $ so pravila, ki nam iz abecede $ \Sigma $ tvorijo jezik
-    $ \mathbf{L}(G) $
+    $ L(G) $
 
 \end{definicija}
 
 \begin{definicija}
 
     \textit{Kontektsno-neodvisna gramatika} je četverica $ G = (\, V, \Sigma, P, S \,) $, kjer je
-    $ V $ končna množica \textit{spremenljivk}, $ \Sigma $ množica \textit{končnih simbolov} tako,
+    $ V $ končna množica \textit{spremenljivk}, abeceda $ \Sigma $ množica \textit{končnih simbolov} tako,
     da $ \Sigma \cap V = \emptyset $, $ P \subseteq V \times (\, V \cup \Sigma \,)^* $ množica 
-    \textit{produkcijskih pravil}, $ S \in V $ \textit{začetna spremenljivka}.
+    \textit{produkcijskih pravil} in $ S \in V $ \textit{začetna spremenljivka}.
 
 \end{definicija}
 
@@ -185,66 +251,67 @@ Namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Želimo, da 
 
 \begin{definicija}
     
-    Naj bo $ G = (\, V, \Sigma, P, S \,) $ kontekstno-neodvisna gramatika. Naj bodo $ \mathbf{x} $,
-    $ \mathbf{y} $, $ \mathbf{z} \in (\, V \cup \Sigma \,)^* $ nizi spremenljivk in končnih simbolov,
-    $ A \in V $ spremenljivka ter naj bo $ ( A, \mathbf{y} ) \in P $ produkcijsko pravilo,
-    označimo ga z $ A \rightarrow \mathbf{y} $. Pravimo, da $ \mathbf{x}A\mathbf{z} $ 
-    \textit{pridela} $ \mathbf{x}\mathbf{y}\mathbf{z} $, pišemo
-    $ \mathbf{x}A\mathbf{z} \, \Rightarrow \, \mathbf{x}\mathbf{y}\mathbf{z} $. Pravimo, da
-    $ \mathbf{x} $ \textit{porodi} $ \mathbf{y} $, če je $ \mathbf{x} = \mathbf{y} $ ali če
-    za $ k \geq 0 $ obstaja zaporedje nizov $ \mathbf{x_1}, \mathbf{x_2}, \ldots \mathbf{x_n}
+    Naj bo $ G = (\, V, \Sigma, P, S \,) $ kontekstno-neodvisna gramatika. Naj bodo $ \alpha $,
+    $ \beta $, $ \gamma \in (\, V \cup \Sigma \,)^* $ nizi spremenljivk in končnih simbolov,
+    $ A \in V $ spremenljivka ter naj bo $ ( A, \beta ) \in P $ produkcijsko pravilo,
+    označimo ga z $ A \rightarrow \beta $. Pravimo, da se $ \alpha A \gamma $ 
+    \textit{prepiše s pravilom} $ A $ v $ \alpha\beta\gamma $, pišemo $ \alpha A \gamma \, \Rightarrow \,
+    \alpha\beta\gamma $. Pravimo, da $ \alpha $ \textit{porodi} $ \beta $, če je $ \alpha = \beta $ ali če
+    za $ k \geq 0 $ obstaja zaporedje $ \alpha_1, \alpha_2, \ldots \alpha_n
     \in (\, V \cup \Sigma \,)^* $ tako, da 
-
-    \begin{equation*}
-        \mathbf{x} \Rightarrow \mathbf{x} \Rightarrow \mathbf{x_1} \Rightarrow \ldots \Rightarrow \mathbf{x_n}
-        \Rightarrow \mathbf{y}
-    \end{equation*}
-    in pišemo $ \mathbf{x} \xRightarrow{*} \mathbf{y} $.
+    \[
+        \alpha \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \ldots \Rightarrow \alpha_n
+        \Rightarrow \beta
+    \]
+    in pišemo $ \alpha \xRightarrow{*} \beta $.
 
 \end{definicija}
 
 \begin{posledica}
 
-    Jezik kontekstno neodvisne gramatike $ G $ je 
-
-    \begin{equation*}
-        \mathbf{L}(G) = \{\, \mathbf{u} \in \Sigma^* \mid S \xRightarrow{*} \mathbf{u} \,\}.
-    \end{equation*}
+    Jezik kontekstno neodvisne gramatike $ G $ je
+    \[
+        L(G) = \{\, w \in \Sigma^* \mid S \xRightarrow{*} w \,\}
+    \]
 
 \end{posledica}
 
 \begin{opomba}
     
-    Ime kontekstno-neodvisna gramatika izvira iz oblike produkcijskih pravil. Na levi strani produkcijskega
-    pravila mora vedno stati samo spremenljika. Torej, ne sme vsebovati pravila oblike
-
-    \begin{equation*}
-        A\mathbf{u} \rightarrow \mathbf{v},
-    \end{equation*}
-    kjer je $ A \in V $ in $ \mathbf{u} $, $ \mathbf{v} \in \Sigma $, saj bo pravilo pridelalo 
-    $ \mathbf{v} $ saj samo, če se niz končana $ \mathbf{u} $. Torej je odvisno od predhodnega
-    konteksta.
+    Ime kontekstno-neodvisna gramatika izvira iz oblike produkcijskih pravil. Na levi
+    strani produkcijskega pravila mora vedno stati samo spremenljika. Torej vsebuje samo
+    pravila oblike
+    \[
+        A \rightarrow \alpha,
+    \]
+    kjer je  $ A \in V $ in $ \alpha \in (\, V \cup \Sigma \,)^* $. Ne sme pa vsebovati
+    pravila oblike
+    \[
+        \alpha A \gamma \rightarrow \alpha\beta\gamma,
+    \]
+    kjer je $ A \in V $ in so $ \alpha, \beta, \gamma \in (\, V \cup \Sigma \,)^* $, saj je
+    pravilo odvisno od predhodnega konteksta. Odvisno je od tega ali pred njim stoji $ \alpha $
+    in za njim $ \beta $.
 
 \end{opomba}
 
 \begin{primer}
     
-    Formalizirajmo gramatiko iz Primera~\refeq{p1}, ki smo jo generirali iz $ \mathbf{x} $
-    Označimo jo z $ \mathbf{G_x} = (\, V, \Sigma, P, S \,) $, kjer je 
+    Formalizirajmo gramatiko iz Primera~\refeq{Kompresija}, ki smo jo generirali z besede
+    $ w = cababcccababcccab $. Označimo jo z $ G_w = (\, V, \Sigma, P, S \,) $, kjer je 
 
-    \begin{align*}
-        & V = \{\, A_0, A_1, A_2, A_3 \,\}, \\
-        & \Sigma = \{\, a, b, c \,\}, \\
-        & P = \{\, A_0 \, \rightarrow \, cA_3A_3A_1, A_1 \, \rightarrow \,
-          ab, A_2 \, \rightarrow \, ccc, A_3 \, \rightarrow \, A_1A_1A_2 \,\}, \\
-        & S = A_0.
-    \end{align*}
-    Vidimo, da $ \mathbf{G_x} $ ustreza naši definiciji kontekstno-neodvisne gramatike
-    in res kodira $ \mathbf{x} $, saj je 
-
-    \begin{equation*}
-        \mathbf{L}(\mathbf{G_x}) = \mathbf{x} 
-    \end{equation*}
+    \begin{gather*}
+         V = \{\, A_0, A_1, A_2, A_3 \,\}, \\
+         \Sigma = \{\, a, b, c \,\}, \\
+         P = \{\, A_0 \, \rightarrow \, cA_3A_3A_1, A_1 \, \rightarrow \, ab, A_2 \, 
+        \rightarrow \, ccc, A_3 \, \rightarrow \, A_1A_1A_2 \,\}, \\
+         S = A_0
+    \end{gather*}
+    Vidimo, da $ G_w $ ustreza naši definiciji kontekstno-neodvisne gramatike
+    in res kodira $ w $, saj je 
+    \[
+        L(G_w) = w
+    \]
 
 \end{primer}
 
