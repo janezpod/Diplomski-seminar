@@ -200,10 +200,25 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     
     \textit{Stiskanje} je kodiranje $ K $ za katerega velja 
     \[ 
-    \forall w \in \Sigma^* \colon \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert
+    \exists n \in \N \ \forall w \in \Sigma^* \colon |w| \geq n \implies
+    \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert
     \]
 
 \end{definicija}
+
+\begin{opomba}
+    
+    Kompresija z gramatikami je \textit{kodiranje brez izgube}, kjer velja
+    \[
+        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) = w
+    \]
+    Obstaja tudi \textit{kodiranje z izgubo}, kjer kodiranje ni reverzibilen proces
+    in v grobem velja
+    \[
+        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) \approx w
+    \]
+
+\end{opomba}
 
 \begin{primer}\label{Kompresija}
     
