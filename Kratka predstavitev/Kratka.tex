@@ -42,7 +42,7 @@
 
 \begin{abstract}
 
-    V delu predstavimo definicije in ilustritivne primere, ki motivirajo kodiranje in
+    V delu predstavimo definicije in primere, ki motivirajo kodiranje in
     stiskanje podatkov s kontekstno-neodvisnimi gramatikami.
 
 \end{abstract}
@@ -92,7 +92,6 @@ pa \textit{kod}.
 
     \textit{Abeceda} je končna neprazna množica $ \Sigma $. Elementom abecede pravimo \textit{črke}.
     \textit{Množica vseh končnih nizov abecede} $ \Sigma $ je
-
     \[
         \Sigma^* = \{ a_1 a_2 a_3 \cdots a_n \mid n \in \N_0 \land \forall i: a_i \in \Sigma \}, 
     \]
@@ -112,7 +111,7 @@ pa \textit{kod}.
     Za abecedo $ \Sigma $ definirajmo
     \begin{align*}
         & \Sigma^0 = \{ \varepsilon \} \\
-        & \Sigma^1 = \Sigma \\
+        & \Sigma^1 = \Sigma
     \end{align*}
     ter za vsak $ i > 0 $ rekurzivno
     \[
@@ -162,8 +161,8 @@ pa \textit{kod}.
         \Sigma_c = \{ \cdot ,-, \_ \} \\
     \end{gather*}
     Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsakei črki iz abecede
-    priredi niz črk kodirne abecede. Funkcija je definirana s tabelo iz Slike~\refeq{fig:Morse},
-    dodatno presledek med besedami \_  kodiramo v sedem kratkih enot tišine 
+    $ \Sigma $ priredi niz črk kodirne abecede $ \Sigma_c $. Vrednosti funkcije $ \kappa $ so določene s
+    tabelo iz Slike~\refeq{fig:Morse}, dodatno presledek med besedami \_  kodiramo v sedem kratkih enot tišine 
     \[
         \kappa(\_) = \_\_\_
     \]
@@ -213,23 +212,23 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
         w = cababcccababcccab
     \]
     Opazimo, da se nam v nizu $ w $ večkrat ponovita vzorca $ ab $ in $ ccc $. Zato
-    uvedemo novi spremenljivki $ A_1 = ab $ in $ A_2 = ccc $. Sedaj lahko zapišemo $ w $ kot
+    uvedemo novi spremenljivki $ A = ab $ in $ B = ccc $. Sedaj lahko zapišemo $ w $ kot
     \[
-        w = cA_1A_1A_2A_1A_1A_2A_1
+        w = cAABAABA
     \]
-    Ponovno se nam pojavi vzorec, tokrat $ A_1A_1A_2 $. Uvedemo novo spremeljivko $ A_3 = A_1A_1A_2 $
+    Ponovno se nam pojavi vzorec, tokrat $ AAB $. Uvedemo novo spremeljivko $ C = AAB $
     in zapišemo $ w $ kot
     \[
-        w = cA_3A_3A_1
+        w = cCCA
     \]
     Prvotni niz smo z novimi spremeljivkami skrajšali. Kot bomo videli, smo
     pretvorili niz $ w $ v kontekstno neodvisno gramatiko $ G_w $ s
     produkcijskimi pravili
     \begin{align*}
-        & A_0  \rightarrow  cA_3A_3A_1, \\
-        & A_1  \rightarrow  ab, \\
-        & A_2  \rightarrow  ccc, \\
-        & A_3  \rightarrow  A_1A_1A_2
+        & S  \rightarrow  cCCA, \\
+        & A  \rightarrow  ab, \\
+        & B  \rightarrow  ccc, \\
+        & C  \rightarrow  AAB
     \end{align*}
 
 \end{primer}
@@ -248,7 +247,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
     $ V $ končna množica \textit{spremenljivk}, abeceda $ \Sigma $ množica \textit{končnih simbolov} tako,
     da $ \Sigma \cap V = \emptyset $, $ P \subseteq V \times ( V \cup \Sigma )^* $ relacija, ki ji
-    pravimo \textit{produkcijsko pravio} in $ S \in V $ \textit{začetna spremenljivka}.
+    pravimo \textit{produkcijsko pravilo} in $ S \in V $ \textit{začetna spremenljivka}.
 
 \end{definicija}
 
@@ -302,26 +301,32 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     
     Formalizirajmo gramatiko iz Primera~\refeq{Kompresija}, ki smo jo generirali z nizom
     $ w = cababcccababcccab $. Označimo jo z $ G_w = ( V, \Sigma, P, S ) $, kjer je 
-
     \begin{gather*}
-         V = \{ A_0, A_1, A_2, A_3 \}, \\
-         \Sigma = \{ a, b, c \}, \\
-         P = \{ A_0  \rightarrow  cA_3A_3A_1, A_1  \rightarrow  ab, A_2  
-        \rightarrow  ccc, A_3  \rightarrow  A_1A_1A_2 \}, \\
-         S = A_0
+        V = \{ S, A, B, C \}, \\
+        \Sigma = \{ a, b, c \}, \\
+        P = \{ S  \rightarrow  cCCA, A  \rightarrow  ab, B  
+        \rightarrow  ccc, C  \rightarrow  AAB \}, \\
+        S = S
     \end{gather*}
     Vidimo, da $ G_w $ ustreza naši definiciji kontekstno-neodvisne gramatike
     in res kodira $ w $, saj je 
     \[
         L(G_w) = \{w\}
     \]
+    Dolžina gramatike $ G_w $ je enaka številu črk abecede $ \{ S, A, B, C, \rightarrow \} $,
+    ki smo jih porabili za opis gramatike in je enaka $ |P| = 20 $. Vidimo, da niza $ w $ 
+    nismo zares skrajšali, saj je $ |w| = 17 $ prekratke, da bi niz lahko zares stisnili.
+    Naj bo sedaj
+    \[
+        w =   cababcccababcccabababccc
+    \]
+    Gramatika, ki jo generira novi niz se od prejšnje gramatike razlikuje le v
+    \[
+        P = \{ S  \rightarrow  cCCAC, A  \rightarrow  ab, B  
+        \rightarrow  ccc, C  \rightarrow  AAB \}  
+    \]
+    Sedaj je $ |w| = 24 $ in $ |P| = 21 $.
 
 \end{primer}
-
-
-
-\[
-    x \rightarrow G_x \rightarrow B(G_x)
-\]
 
 \end{document} 
