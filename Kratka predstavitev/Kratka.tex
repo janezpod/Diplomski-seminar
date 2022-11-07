@@ -94,7 +94,7 @@ pa \textit{kod}.
     \textit{Množica vseh končnih nizov abecede} $ \Sigma $ je
 
     \[
-        \Sigma^* = \{\, a_1 a_2 a_3 \cdots a_n \mid n \in \N_0 \land \forall i: a_i \in \Sigma \,\}, 
+        \Sigma^* = \{ a_1 a_2 a_3 \cdots a_n \mid n \in \N_0 \land \forall i: a_i \in \Sigma \}, 
     \]
     kjer za $ n = 0 $ dobimo prazen niz, ki jo označimo z $ \varepsilon $.
     \textit{Dolžino niza w} označimo z $ |w| $ in je enaka številu črk v nizu $ w \in \Sigma^* $.
@@ -123,7 +123,7 @@ pa \textit{kod}.
     \end{align*}
     ter za vsak $ i > 0 $ rekurzivno
     \[
-        \Sigma^{i+1} = \{\, wa \mid w \in \Sigma^i \text{ in } a \in \Sigma \,\},
+        \Sigma^{i+1} = \{ wa \mid w \in \Sigma^i \text{ in } a \in \Sigma \},
     \]
     potem je Kleenejeva zvezdico na $ \Sigma $ enaka
     \[
@@ -132,9 +132,11 @@ pa \textit{kod}.
 
 \end{opomba}
 
+
+
 \begin{primer}
     
-    Naj bo $ \Sigma = \{\, a,b,c \,\} $ abeceda, potem je
+    Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem je
     \begin{gather*} 
         ab \in \Sigma^* \\
         ccc \in \Sigma^* \\
@@ -156,8 +158,8 @@ pa \textit{kod}.
     
     Formalizirajmo Morsejevo abecedo iz Primera~\refeq{Morse}. Abecedi sta
     \begin{gather*}
-        \Sigma = \{\, \text{A},  \text{B}, \ldots, \text{Z} \,\} \, \cup \, \{\, 0, 1, \ldots, 9 \,\} \, \cup \, \{\, \_ \,\} \\
-        \Sigma_c = \{\, ., -, \_, \_\_\_ \,\} \\
+        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \, \cup \, \{ 0, 1, \ldots, 9 \} \, \cup \, \{ \_ \} \\
+        \Sigma_c = \{ ., -, \_, \_\_\_ \} \\
     \end{gather*}
     Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsakei črki iz abecede
     priredi niz črk kodirne abecede. Funkcija je definirana s tabelo iz Slike~\refeq{fig:Morse},
@@ -199,7 +201,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 
 \begin{primer}\label{Kompresija}
     
-    Za abecedo vzemimo $ \Sigma = \{\, a,b,c \,\} $ in poglejmo niz
+    Za abecedo vzemimo $ \Sigma = \{ a,b,c \} $ in poglejmo niz
     \[
         w = cababcccababcccab
     \]
@@ -213,14 +215,14 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     \[
         w = cA_3A_3A_1
     \]
-    Prvotni niz smo z novimi spremeljivkami uspešno skrajšali. Kot bomo videli, smo
+    Prvotni niz smo z novimi spremeljivkami skrajšali. Kot bomo videli, smo
     pretvorili niz $ w $ v kontekstno neodvisno gramatiko $ G_w $ s
     produkcijskimi pravili
     \begin{align*}
-        & A_0 \, \rightarrow \, cA_3A_3A_1, \\
-        & A_1 \, \rightarrow \, ab, \\
-        & A_2 \, \rightarrow \, ccc, \\
-        & A_3 \, \rightarrow \, A_1A_1A_2
+        & A_0  \rightarrow  cA_3A_3A_1, \\
+        & A_1  \rightarrow  ab, \\
+        & A_2  \rightarrow  ccc, \\
+        & A_3  \rightarrow  A_1A_1A_2
     \end{align*}
 
 \end{primer}
@@ -236,23 +238,23 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 
 \begin{definicija}
 
-    \textit{Kontektsno-neodvisna gramatika} je četverica $ G = (\, V, \Sigma, P, S \,) $, kjer je
+    \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
     $ V $ končna množica \textit{spremenljivk}, abeceda $ \Sigma $ množica \textit{končnih simbolov} tako,
-    da $ \Sigma \cap V = \emptyset $, $ P \subseteq V \times (\, V \cup \Sigma \,)^* $ množica 
-    \textit{produkcijskih pravil} in $ S \in V $ \textit{začetna spremenljivka}.
+    da $ \Sigma \cap V = \emptyset $, $ P \subseteq V \times ( V \cup \Sigma )^* $ relacija, ki ji
+    pravimo \textit{produkcijsko pravio} in $ S \in V $ \textit{začetna spremenljivka}.
 
 \end{definicija}
 
 \begin{definicija}
     
-    Naj bo $ G = (\, V, \Sigma, P, S \,) $ kontekstno-neodvisna gramatika. Naj bodo $ \alpha $,
-    $ \beta $, $ \gamma \in (\, V \cup \Sigma \,)^* $ nizi spremenljivk in končnih simbolov,
+    Naj bo $ G = ( V, \Sigma, P, S ) $ kontekstno-neodvisna gramatika. Naj bodo $ \alpha $,
+    $ \beta $, $ \gamma \in ( V \cup \Sigma )^* $ nizi spremenljivk in končnih simbolov,
     $ A \in V $ spremenljivka ter naj bo $ ( A, \beta ) \in P $ produkcijsko pravilo,
     označimo ga z $ A \rightarrow \beta $. Pravimo, da se $ \alpha A \gamma $ 
-    \textit{prepiše s pravilom} $ A $ v $ \alpha\beta\gamma $, pišemo $ \alpha A \gamma \, \Rightarrow \,
+    \textit{prepiše s pravilom} $ A $ v $ \alpha\beta\gamma $, pišemo $ \alpha A \gamma  \Rightarrow 
     \alpha\beta\gamma $. Pravimo, da $ \alpha $ \textit{porodi} $ \beta $, če je $ \alpha = \beta $ ali če
     za $ k \geq 0 $ obstaja zaporedje $ \alpha_1, \alpha_2, \ldots \alpha_n
-    \in (\, V \cup \Sigma \,)^* $ tako, da 
+    \in ( V \cup \Sigma )^* $ tako, da 
     \[
         \alpha \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \ldots \Rightarrow \alpha_n
         \Rightarrow \beta
@@ -265,7 +267,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 
     Jezik kontekstno neodvisne gramatike $ G $ je
     \[
-        L(G) = \{\, w \in \Sigma^* \mid S \xRightarrow{*} w \,\}
+        L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}
     \]
 
 \end{posledica}
@@ -278,12 +280,12 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     \[
         A \rightarrow \alpha,
     \]
-    kjer je  $ A \in V $ in $ \alpha \in (\, V \cup \Sigma \,)^* $. Ne sme pa vsebovati
+    kjer je  $ A \in V $ in $ \alpha \in ( V \cup \Sigma )^* $. Ne sme pa vsebovati
     pravila oblike
     \[
         \alpha A \gamma \rightarrow \alpha\beta\gamma,
     \]
-    kjer je $ A \in V $ in so $ \alpha, \beta, \gamma \in (\, V \cup \Sigma \,)^* $, saj je
+    kjer je $ A \in V $ in so $ \alpha, \beta, \gamma \in ( V \cup \Sigma )^* $, saj je
     pravilo odvisno od predhodnega konteksta. Odvisno je od tega ali pred njim stoji $ \alpha $
     in za njim $ \beta $.
 
@@ -292,13 +294,13 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 \begin{primer}
     
     Formalizirajmo gramatiko iz Primera~\refeq{Kompresija}, ki smo jo generirali z nizom
-    $ w = cababcccababcccab $. Označimo jo z $ G_w = (\, V, \Sigma, P, S \,) $, kjer je 
+    $ w = cababcccababcccab $. Označimo jo z $ G_w = ( V, \Sigma, P, S ) $, kjer je 
 
     \begin{gather*}
-         V = \{\, A_0, A_1, A_2, A_3 \,\}, \\
-         \Sigma = \{\, a, b, c \,\}, \\
-         P = \{\, A_0 \, \rightarrow \, cA_3A_3A_1, A_1 \, \rightarrow \, ab, A_2 \, 
-        \rightarrow \, ccc, A_3 \, \rightarrow \, A_1A_1A_2 \,\}, \\
+         V = \{ A_0, A_1, A_2, A_3 \}, \\
+         \Sigma = \{ a, b, c \}, \\
+         P = \{ A_0  \rightarrow  cA_3A_3A_1, A_1  \rightarrow  ab, A_2  
+        \rightarrow  ccc, A_3  \rightarrow  A_1A_1A_2 \}, \\
          S = A_0
     \end{gather*}
     Vidimo, da $ G_w $ ustreza naši definiciji kontekstno-neodvisne gramatike
@@ -308,5 +310,11 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     \]
 
 \end{primer}
+
+
+
+\[
+    x \rightarrow G_x \rightarrow B(G_x)
+\]
 
 \end{document} 
