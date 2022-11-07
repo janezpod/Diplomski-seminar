@@ -69,9 +69,9 @@ pa \textit{kod}.
     \begin{itemize}
         \item Dolžina kratkega signala je ena enota.
         \item Dolgi signal je trikrat daljši od kratkega signala.
-        \item Razmiki med signali znotraj znaka so dolžine kratkega signala.
-        \item Presledki med znaki so dolgi tri kratke signale oz. en dolgi signal.
-        \item Presledki med besedami so dolgi sedem kratkih signalov.
+        \item Razmik med signali znotraj črke je tišina dolžine kratkega signala.
+        \item Razmik med črkami je tišina dolga tri kratke signale oz. en dolgi signal.
+        \item Presledek med besedami je tišina dolga sedmih kratkih signalov.
     \end{itemize}
 
     \begin{figure}[h]
@@ -96,7 +96,7 @@ pa \textit{kod}.
     \[
         \Sigma^* = \{ a_1 a_2 a_3 \cdots a_n \mid n \in \N_0 \land \forall i: a_i \in \Sigma \}, 
     \]
-    kjer za $ n = 0 $ dobimo prazen niz, ki jo označimo z $ \varepsilon $.
+    kjer za $ n = 0 $ dobimo prazen niz, ki ga označimo z $ \varepsilon $.
     \textit{Dolžino niza w} označimo z $ |w| $ in je enaka številu črk v nizu $ w \in \Sigma^* $.
     \textit{Jezik na abecedi} $ \Sigma $ je poljubna podmnožica množice $ \Sigma^* $. 
 
@@ -148,21 +148,47 @@ pa \textit{kod}.
 
 \end{definicija}
 
+\begin{opomba}
+    
+    Zožitev kodomene kodirne funkcije $ \kappa $ na $ C \subseteq \Sigma^*_c $ je bijektivna funkcija.
+
+\end{opomba}
+
 \begin{primer}
     
     Formalizirajmo Morsejevo abecedo iz Primera~\refeq{Morse}. Abecedi sta
     \begin{gather*}
-        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \, \cup \, \{ 0, 1, \ldots, 9 \} \, \cup \, \{ \_ \} \\
-        \Sigma_c = \{ ., -, \_, \_\_\_ \} \\
+        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \} \cup \{ \_ \} \\
+        \Sigma_c = \{ \cdot ,-, \_ \} \\
     \end{gather*}
     Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsakei črki iz abecede
     priredi niz črk kodirne abecede. Funkcija je definirana s tabelo iz Slike~\refeq{fig:Morse},
-    dodatno $ \kappa(\_) = \_\_\_ $ . Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodirno 
+    dodatno presledek med besedami \_  kodiramo v sedem kratkih enot tišine 
+    \[
+        \kappa(\_) = \_\_\_
+    \]
+    Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodirno 
     funkcijo $ K $ po črkah
     \[
-        K(w) = \kappa(a_1)\kappa(a_2)\cdots\kappa(a_n)
+        K(w) = \kappa(a_1)\_\kappa(a_2)\_\cdots\kappa(a_n)
     \]
-    Opazimo, da je Morsejeva abeceda kodiranja brez izgube.
+    Poglejmo si dva primera kodiranja in v Morsejevi abecedi
+    % Za tišino med črkami uporabimo presledek \;\;, za tišino med besedami uporabimo presledek \qquad
+    \begin{gather*}
+        K(\text{SOS}) = \cdot\cdot\cdot \;\; --- \;\; \cdot\cdot\cdot \\
+        K(\text{AD HOC}) = \cdot- \;\; -\cdot\cdot \qquad \cdot\cdot\cdot\cdot \;\; --- \;\; -\cdot-\cdot \\
+    \end{gather*}
+    Recimo, da smo dobili sporočilo, a se je pošiljatelj zmotil in je namesto kode 
+    $ --\cdot- \,\, \cdot \,\, -\cdot\cdot $, ki bi se dekodirala v
+    \[
+        K^{-1}(--\cdot- \,\, \cdot \,\, -\cdot\cdot) = \text{QED},
+        \]
+    poslali kodo
+    \[
+        --\cdot-- \,\, \cdot \,\, -\cdot\cdot
+    \]
+    Sporočila ne znamo dekodirati, saj se ne nahaja v domeni $ C $ dekodirne funkcije $ K^{-1} $,
+    natančneje ne obstaja dekodiranje $ \kappa^{-1}(--\cdot--) $.
 
 \end{primer}
 
@@ -179,19 +205,6 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     \]
 
 \end{definicija}
-
-% \begin{opomba}
-    
-%     Za \textit{kodiranje brez izgube} velja
-%     \[
-%         \forall w \in \Sigma^*: K^{-1}(K(w)) = w
-%     \]
-%     Za \textit{kodiranje z izgubo} velja
-%     \[
-%         \exists w \in \Sigma^*: K^{-1}(K(w)) \approx w
-%     \]
-
-% \end{opomba}
 
 \begin{primer}\label{Kompresija}
     
