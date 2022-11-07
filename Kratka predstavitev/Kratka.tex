@@ -125,8 +125,6 @@ pa \textit{kod}.
 
 \end{opomba}
 
-
-
 \begin{primer}
     
     Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem je
@@ -140,10 +138,13 @@ pa \textit{kod}.
 
 \begin{definicija}
     
-    \textit{Kodiranje nizov abecede} $ \Sigma $ je obrnljiva funkcija $ K \colon \Sigma^* \to \Sigma_c^* $,
-    kjer je $ \Sigma_c $ \textit{kodirna abeceda}. $ K(w) $ imenujemo \textit{koda niza} $ w $.
-    \textit{Dekodiranje} je obraten postopek, ki za podano kodo $ c \in \Sigma_c^* $ vrne prvoten niz
-    $ w \in \Sigma^* $, ki smo ga kodirali.
+    \textit{Kodiranje nizov abecede} $ \Sigma $ je injektivna funkcija $ \kappa \colon \Sigma^* 
+    \to \Sigma_c^* $, kjer je $ \Sigma_c $ \textit{kodirna abeceda} in $ \kappa(w) $ imenujemo
+    \textit{koda niza} $ w $. \textit{Dokodiranje kodiranja} $ \kappa $ je funkcija 
+    $ \kappa^{-1} \colon C \subseteq \Sigma^*_c \to \Sigma^* $, da velja
+    \[
+        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) = w
+    \]
 
 \end{definicija}
 
