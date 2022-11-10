@@ -11,7 +11,7 @@
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 
-\linespread{1.1}
+\linespread{1.15}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -41,8 +41,8 @@
 
 \begin{abstract}
 
-    V delu definiramo kodiranje, dekodiranje in stiskanja podtakov ter predstavimo
-    primer, ki motivirajo stiskanje podatkov s kontekstno-neodvisnimi gramatikami.
+    V delu podamo definicje kodiranja, dekodiranja in stiskanja podtakov ter predstavimo
+    primere, ki motivirajo stiskanje podatkov s kontekstno-neodvisnimi gramatikami.
 
 \end{abstract}
 
@@ -52,12 +52,12 @@
 
 Zapis informacije v neki obliki ni primeren za vsakršno rabo. Besedilo, zapisano z 
 pismenkami, je neberljivo za slepe osebe, saj je komunikacijski kanal v tem primeru
-vid. Prav tako pisanega besedila v pravotni obliki ni moč poslati z telegrafom. V tem
+vid. Prav tako pisanega besedila v pravotni obliki ni mogoče poslati s telegrafom. V tem
 primeru je komunikacijski kanal žica in pismenke se po njej ne morejo sprehoditi. V obeh 
 primerih je informacija, ki bi jo radi prenesli v neprimerni obliki. V prvem 
-primeru je potrebno besedilo zapisati z Braillovo pisavo. V drugem primeru pa je 
+primeru je potrebno besedilo zapisati z Braillovo pisavo. V drugem primeru pa je
 potrebno besedil pretvoriti v električni signal. Spreminjanje zapisa sporočila
-pravimo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi,
+imenujemo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi,
 pa \textit{kod}. 
 
 \begin{primer}\label{Morse}
@@ -82,7 +82,7 @@ pa \textit{kod}.
 
     Prvotni namen Morsejeve abecede je komunikacija preko telegrama, saj komunikacijski
     kanal dovoljuje le električne signale in tišino med njimi. Kodiranje črk je takšno,
-    da imajo črke z višjo frekvenco (v angleškem jeziku) krajši zapis, s tem se dolžina
+    da imajo črke z višjo frekvenco (v angleškem jeziku) krajši zapis. Tako se dolžina
     kodiranega sporočila skrajša in posledično tudi čas prenosa.
 
 \end{primer}
@@ -108,17 +108,16 @@ pa \textit{kod}.
     Z drugimi besedami, $ \Sigma^* $ je množica vseh končnih nizov, ki
     jih lahko generiramo z veriženjem črk abecede $ \Sigma $. \\
     Za abecedo $ \Sigma $ definirajmo
-    \begin{align*}
-        & \Sigma^0 = \{ \varepsilon \} \\
-        & \Sigma^1 = \Sigma
-    \end{align*}
+    \[
+        \Sigma^0 = \{ \varepsilon \}, \quad \Sigma^1 = \Sigma
+    \]
     ter za vsak $ i > 0 $ rekurzivno
     \[
-        \Sigma^{i+1} = \{ wa \mid w \in \Sigma^i \text{ in } a \in \Sigma \},
+        \Sigma^{i+1} = \{ wa \mid w \in \Sigma^i \text{ in } a \in \Sigma \}.
     \]
-    potem je Kleenejeva zvezdico na $ \Sigma $ enaka
+    Potem je Kleenejeva zvezdico na $ \Sigma $ enaka
     \[
-        \Sigma^* = \bigcup_{i \geq 0} \Sigma^i
+        \Sigma^* = \bigcup_{i \geq 0} \Sigma^i.
     \]
 
 \end{opomba}
@@ -126,11 +125,9 @@ pa \textit{kod}.
 \begin{primer}
     
     Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem je
-    \begin{gather*} 
-        ab \in \Sigma^* \\
-        ccc \in \Sigma^* \\
-        cababcccababcccab \in \Sigma^*
-    \end{gather*}
+    \[
+        ab \in \Sigma^*, \quad ccc \in \Sigma^*, \quad cababcccababcccab \in \Sigma^*.
+    \]
 
 \end{primer}
 
@@ -141,7 +138,7 @@ pa \textit{kod}.
     \textit{koda niza} $ w $. \textit{Dokodiranje kodiranja} $ \kappa $ je funkcija 
     $ \kappa^{-1} \colon C \subseteq \Sigma^*_c \to \Sigma^* $, da velja
     \[
-        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) = w
+        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) = w.
     \]
 
 \end{definicija}
@@ -155,26 +152,26 @@ pa \textit{kod}.
 \begin{primer}
     
     Formalizirajmo Morsejevo abecedo iz Primera~\refeq{Morse}. Abecedi sta
-    \begin{gather*}
-        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \} \cup \{ \_ \} \\
-        \Sigma_c = \{ \cdot ,-, \_ \}
-    \end{gather*}
-    Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsakei črki iz abecede
+    \[
+        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \} \cup \{ \_ \}, \quad
+        \Sigma_c = \{ \cdot ,-, \_ \}.
+    \]
+    Definirajmo kodirno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsaki črki iz abecede
     $ \Sigma $ priredi niz črk kodirne abecede $ \Sigma_c $. Vrednosti funkcije $ \kappa $ so določene s
     tabelo iz Slike~\refeq{fig:Morse}, dodatno presledek med besedami \_  kodiramo v šest kratkih enot tišine 
     \[
-        \kappa(\_) = \_\_\_
+        \kappa(\_) = \_\_\_.
     \]
     Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodirno 
     funkcijo $ K $ po črkah
     \[
-        K(w) = \kappa(a_1)\_\kappa(a_2)\_\cdots\kappa(a_n)
+        K(w) = \kappa(a_1)\_\kappa(a_2)\_\cdots\kappa(a_n).
     \]
     Poglejmo si dva primera kodiranja in v Morsejevi abecedi
     % Za tišino med črkami uporabimo presledek \;\;, za tišino med besedami uporabimo presledek \qquad
     \begin{gather*}
-        K(\text{SOS}) = \cdot\cdot\cdot \;\; --- \;\; \cdot\cdot\cdot \\
-        K(\text{AD HOC}) = \cdot- \;\; -\cdot\cdot \qquad \cdot\cdot\cdot\cdot \;\; --- \;\; -\cdot-\cdot \\
+        K(\text{SOS}) = \cdot\cdot\cdot \;\; --- \;\; \cdot\cdot\cdot, \\
+        K(\text{AD HOC}) = \cdot- \;\; -\cdot\cdot \qquad \cdot\cdot\cdot\cdot \;\; --- \;\; -\cdot-\cdot.
     \end{gather*}
     Recimo, da smo dobili sporočilo, a se je pošiljatelj zmotil in je namesto kode 
     $ --\cdot- \,\, \cdot \,\, -\cdot\cdot $, ki bi se dekodirala v
@@ -183,10 +180,10 @@ pa \textit{kod}.
         \]
     poslali kodo
     \[
-        --\cdot-- \,\, \cdot \,\, -\cdot\cdot
+        --\cdot-- \,\, \cdot \,\, -\cdot\cdot.
     \]
-    Sporočila ne znamo dekodirati, saj se ne nahaja v domeni $ C $ dekodirne funkcije $ K^{-1} $,
-    natančneje ne obstaja dekodiranje signala $ \kappa^{-1}(--\cdot--) $.
+    Sporočila ne znamo dekodirati, saj se ne nahaja v domeni $ C $ dekodirne funkcije $ K^{-1} $.
+    Natančneje ne obstaja dekodiranje signala $ \kappa^{-1}(--\cdot--) $.
 
 \end{primer}
 
@@ -200,7 +197,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     \textit{Stiskanje} je kodiranje $ K $ za katerega velja 
     \[ 
     \exists n \in \N \ \forall w \in \Sigma^* \colon |w| \geq n \implies
-    \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert
+    \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert.
     \]
 
 \end{definicija}
@@ -214,7 +211,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     in \textit{kodiranje z izgubo}, kjer kodiranje ni reverzibilen proces
     in v grobem velja
     \[
-        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) \approx w
+        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) \approx w.
     \]
 
 \end{opomba}
@@ -223,17 +220,17 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
     
     Za abecedo vzemimo $ \Sigma = \{ a,b,c \} $ in poglejmo niz
     \[
-        w = cababcccababcccab
+        w = cababcccababcccab.
     \]
     Opazimo, da se nam v nizu $ w $ večkrat ponovita vzorca $ ab $ in $ ccc $. Zato
     uvedemo novi spremenljivki $ A = ab $ in $ B = ccc $. Sedaj lahko zapišemo $ w $ kot
     \[
-        w = cAABAABA
+        w = cAABAABA.
     \]
     Ponovno se nam pojavi vzorec, tokrat $ AAB $. Uvedemo novo spremeljivko $ C = AAB $
     in zapišemo $ w $ kot
     \[
-        w = cCCA
+        w = cCCA.
     \]
     Prvotni niz smo z novimi spremeljivkami skrajšali. Kot bomo videli, smo
     pretvorili niz $ w $ v kontekstno neodvisno gramatiko $ G_w $ s
@@ -242,7 +239,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
         & S  \rightarrow  cCCA, \\
         & A  \rightarrow  ab, \\
         & B  \rightarrow  ccc, \\
-        & C  \rightarrow  AAB
+        & C  \rightarrow  AAB.
     \end{align*}
 
 \end{primer}
@@ -252,7 +249,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 \begin{definicija}
 
     \textit{Formalna gramatika} $ G $ so pravila, ki nam iz abecede $ \Sigma $ tvorijo jezik,
-    označimo ga z $ L(G) $
+    označimo ga z $ L(G) $.
 
 \end{definicija}
 
@@ -287,7 +284,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 
     Jezik kontekstno neodvisne gramatike $ G $ je
     \[
-        L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}
+        L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}.
     \]
 
 \end{posledica}
@@ -295,7 +292,7 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
 \begin{opomba}
     
     Ime kontekstno-neodvisna gramatika izvira iz oblike produkcijskih pravil. Na levi
-    strani produkcijskega pravila mora vedno stati samo spremenljika. Torej vsebuje samo
+    strani produkcijskega pravila mora vedno stati samo spremenljivka. Torej vsebuje samo
     pravila oblike
     \[
         A \rightarrow \alpha,
@@ -320,36 +317,36 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
         \Sigma = \{ a, b, c \}, \\
         P = \{ S  \rightarrow  cCCA, A  \rightarrow  ab, B  
         \rightarrow  ccc, C  \rightarrow  AAB \}, \\
-        S = S
+        S = S.
     \end{gather*}
     Vidimo, da $ G_w $ ustreza naši definiciji kontekstno-neodvisne gramatike
     in res kodira $ w $, saj je 
     \[
-        L(G_w) = \{w\}
+        L(G_w) = \{w\}.
     \]
     Dolžina gramatike $ G_w $ je enaka številu črk abecede $ \{ S, A, B, C, \rightarrow \} $,
     ki smo jih porabili za opis gramatike in je enaka $ |P| = 20 $. Vidimo, da niza $ w $ 
-    nismo zares skrajšali, saj je $ |w| = 17 $ prekratke, da bi niz lahko zares stisnili.
-    Naj bo sedaj
+    nismo skrajšali, saj je $ |w| = 17 $. Niz $ w $ je bil prekratek, da bi ga lahko
+    zares stisnili. Naj bo sedaj
     \[
-        w =   cababcccababcccabababccc
+        w =   cababcccababcccabababccc.
     \]
     Gramatika, ki jo generira novi niz se od prejšnje gramatike razlikuje le v
     \[
         P = \{ S  \rightarrow  cCCAC, A  \rightarrow  ab, B  
-        \rightarrow  ccc, C  \rightarrow  AAB \}  
+        \rightarrow  ccc, C  \rightarrow  AAB \}.
     \]
     Sedaj smo stisnili $ w $ z $ G_w $, saj je
     \[
-        |w| = 24 > 21 = |P|
+        |w| = 24 > 21 = |P|.
     \]
 
 \end{primer}
 
 Za razliko od klasičnih metod stiskanja, naša metoda ne izvaja procesa stiskanja
 direktno na nizu $ w $, temveč poiščemo gramatiko $ G_w $, ki generira 
-le enojec $ \{ w \} $ za svoj jezik. Med njimi poiščemo "najmanjšo" in jo kodiramo.
-Ker gramatike $ G_w $ generira $ w $ in ker je gramatika "majhna", bomo dobili
-dobro stisnjen niz $ w $.
+enojec $ \{ w \} $ za svoj jezik. Med njimi poiščemo ``najmanjšo'', ki jo nato kodiramo.
+Ker gramatike $ G_w $ generira $ w $ in ker je gramatika ``majhna'' jo bomo kodirali v 
+``kratko'' kodo. Tako bomo preko gramatike ``dobro'' stisnili niz $ w $.
 
 \end{document} 
