@@ -47,7 +47,7 @@
 \begin{frame}{Kodiranje in kod}
     
     Zapis informacije v neki obliki ni primeren za vsakršno rabo. Spreminjanje zapisa sporočila
-    pravimo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi, pa \textit{kod}.
+    imenujemo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi, pa \textit{kod}. 
 
 \end{frame}
 
@@ -93,10 +93,9 @@
     \begin{primer}
 
     Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem je
-    \begin{gather*} 
-        ab \in \Sigma^* \\
-        cababcccababcccab \in \Sigma^*
-    \end{gather*}
+    \[ 
+        ab \in \Sigma^* , \quad cababcccababcccab \in \Sigma^*.
+    \]
 
     \end{primer}
 
@@ -122,14 +121,14 @@
 
     Abecedi sta
     \begin{gather*}
-        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \} \cup \{ \_ \} \\
-        \Sigma_c = \{ \cdot ,-, \_ \}
+        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \} \cup \{ \_ \}, \\
+        \Sigma_c = \{ \cdot ,-, \_ \}.
     \end{gather*}
     Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsakei črki iz abecede
     $ \Sigma $ priredi niz črk kodirne abecede $ \Sigma_c $. Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $
     definiramo kodirno funkcijo $ K $ po črkah
     \[
-        K(w) = \kappa(a_1)\_\kappa(a_2)\_\cdots\kappa(a_n)
+        K(w) = \kappa(a_1)\_\kappa(a_2)\_\cdots\kappa(a_n).
     \]
 
 \end{frame}
@@ -142,7 +141,7 @@
         \centering
         \includegraphics[width=3cm]{International_Morse_Code.svg.png}
     \end{figure}
-    Dodatno presledek med besedami \_  kodiramo v sedem kratkih enot tišine 
+    Dodatno presledek med besedami \_  kodiramo v šest kratkih enot tišine 
     \[
         \kappa(\_) = \_\_\_
     \]
@@ -158,7 +157,7 @@
         \textit{Stiskanje} je kodiranje $ K $ za katerega velja 
         \[ 
         \exists n \in \N \ \forall w \in \Sigma^* \colon |w| \geq n \implies
-        \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert
+        \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert.
         \]
     
     \end{definicija}
@@ -169,17 +168,21 @@
 
     Za abecedo vzemimo $ \Sigma = \{ a,b,c \} $ in poglejmo niz
     \[
-        w = cababcccababcccab
+        w = cababcccababcccab.
     \]
     \pause
     Uvedemo novi spremenljivki $ A = ab $ in $ B = ccc $.
+    \pause
+    Potem je
     \[
-        w = cAABAABA
+        w = cAABAABA.
     \]
     \pause
-    Uvedemo novo spremeljivko $ C = AAB $.    
+    Uvedemo novo spremeljivko $ C = AAB $.
+    \pause
+    Potem je    
     \[
-        w = cCCA
+        w = cCCA.
     \]
 
 \end{frame}
@@ -191,7 +194,7 @@
         & S  \rightarrow  cCCA, \\
         & A  \rightarrow  ab, \\
         & B  \rightarrow  ccc, \\
-        & C  \rightarrow  AAB
+        & C  \rightarrow  AAB.
     \end{align*}
 
 \end{frame}
@@ -203,7 +206,7 @@
     \begin{definicija}
 
         \textit{Formalna gramatika} $ G $ so pravila, ki nam iz abecede $ \Sigma $ tvorijo jezik,
-        označimo ga z $ L(G) $
+        označimo ga z $ L(G) $.
     
     \end{definicija}
     
@@ -248,7 +251,7 @@
     
         Jezik kontekstno neodvisne gramatike $ G $ je
         \[
-            L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}
+            L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}.
         \]
     
     \end{posledica}
@@ -260,13 +263,13 @@
     Formalizirajmo gramatiko iz prejšnjega primera. Gramatiko smo generirali z nizom
     $ w = cababcccababcccab $.
     \pause
-    Označimo jo z $ G_w = ( V, \Sigma, P, S ) $, kjer je 
+    Dobimo $ G_w = ( V, \Sigma, P, S ) $, kjer je 
     \begin{gather*}
         V = \{ S, A, B, C \}, \\
         \Sigma = \{ a, b, c \}, \\
         P = \{ S  \rightarrow  cCCA, A  \rightarrow  ab, B  
         \rightarrow  ccc, C  \rightarrow  AAB \}, \\
-        S = S
+        S = S.
     \end{gather*}
     \pause
     Vidimo, da $ G_w $ ustreza naši definiciji kontekstno-neodvisne gramatike
