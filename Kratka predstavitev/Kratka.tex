@@ -87,8 +87,8 @@ pa \textit{kod}.
 
     Prvotni namen Morsejeve abecede je komunikacija preko telegrama, saj komunikacijski
     kanal dovoljuje le električne signale in tišino med njimi. Kodiranje črk je takšno,
-    da imajo črke z višjo frekvenco (v angleškem jeziku) krajši zapis. Tako se dolžina
-    kodiranega sporočila skrajša in posledično tudi čas njegovega prenosa.
+    da imajo črke z višjo frekvenco (v angleškem jeziku) krajši zapis. Tako se koda
+    sporočila skrajša in posledično tudi čas njegovega prenosa.
 
 \end{primer}
 
@@ -137,18 +137,25 @@ pa \textit{kod}.
 \begin{definicija}
     
     \textit{Kodiranje nizov abecede} $ \Sigma $ je injektivna funkcija $ \kappa \colon \Sigma^* 
-    \to \Sigma_c^* $, kjer je $ \Sigma_c $ \textit{kodirna abeceda} in $ \kappa(w) $ imenujemo
+    \to \Sigma_c^* $, kjer imenujemo $ \Sigma_c $ \textit{kodna abeceda} in $ \kappa(w) $ 
     \textit{koda niza} $ w $. \textit{Dokodiranje kodiranja} $ \kappa $ je funkcija 
-    $ \kappa^{-1} \colon C \subseteq \Sigma^*_c \to \Sigma^* $, da velja
+    $ \delta \colon C \subseteq \Sigma^*_c \to \Sigma^* $, da velja
     \[
-        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) = w.
+        \forall w \in \Sigma^* \colon \delta(\kappa(w)) = w.
     \]
 
 \end{definicija}
 
 \begin{opomba}
     
-    Zožitev kodomene kodirne funkcije $ \kappa $ na $ C \subseteq \Sigma^*_c $ je bijektivna funkcija.
+    Funkcijo $ \kappa $ imenujemo \textit{kodna funkcija}, funkcijo $ \delta $ pa
+    \textit{dekodna funckija}.
+
+\end{opomba}
+
+\begin{opomba}
+    
+    Zožitev kodomene kodne funkcije $ \kappa $ na $ C \subseteq \Sigma^*_c $ je bijektivna funkcija.
 
 \end{opomba}
 
@@ -159,24 +166,23 @@ pa \textit{kod}.
         \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \} \cup \{ \_ \}, \quad
         \Sigma_c = \{ \cdot ,-, \_ \}.
     \]
-    Definirajmo kodirno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsaki črki iz abecede
-    $ \Sigma $ priredi niz črk kodirne abecede $ \Sigma_c $. Vrednosti funkcije $ \kappa $ so določene s
+    Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsaki črki iz abecede
+    $ \Sigma $ priredi niz črk kodne abecede $ \Sigma_c $. Vrednosti funkcije $ \kappa $ so določene s
     tabelo iz Slike~\refeq{fig:Morse}, dodatno presledek med besedami \_  kodiramo v šest kratkih enot tišine 
     \[
         \kappa(\_) = \_\_\_
     \]
-    Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodirno 
+    Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodno 
     funkcijo $ K $ po črkah
     \[
         K(w) = \kappa(a_1)\_\kappa(a_2)\_\cdots\kappa(a_n).
     \]
-    Poglejmo si dva primera kodiranja in v Morsejevi abecedi
-    % Za tišino med črkami uporabimo presledek \;\;, za tišino med besedami uporabimo presledek \qquad
+    Poglejmo si dva primera kodiranja v Morsejevi abecedi
     \begin{gather*}
         K(\text{SOS}) = \cdot\cdot\cdot \;\; --- \;\; \cdot\cdot\cdot, \\
         K(\text{AD HOC}) = \cdot- \;\; -\cdot\cdot \qquad \cdot\cdot\cdot\cdot \;\; --- \;\; -\cdot-\cdot.
     \end{gather*}
-    Recimo, da smo dobili sporočilo, a se je pošiljatelj zmotil in je namesto kode 
+    Recimo, da smo prejeli sporočilo, a se je pošiljatelj zmotil in je namesto kode 
     $ --\cdot- \,\, \cdot \,\, -\cdot\cdot $, ki bi se dekodirala v
     \[
         K^{-1}(--\cdot- \,\, \cdot \,\, -\cdot\cdot) = \text{QED},
@@ -185,7 +191,7 @@ pa \textit{kod}.
     \[
         --\cdot-- \,\, \cdot \,\, -\cdot\cdot.
     \]
-    Sporočila ne znamo dekodirati, saj se ne nahaja v domeni $ C $ dekodirne funkcije $ K^{-1} $.
+    Sporočila ne znamo dekodirati, saj se ne nahaja v domeni $ C $ dekodne funkcije $ K^{-1} $.
     Natančneje ne obstaja dekodiranje signala $ \kappa^{-1}(--\cdot--) $.
 
 \end{primer}
@@ -193,14 +199,14 @@ pa \textit{kod}.
 \section{Stiskanje podatkov}
 
 Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Želimo, da bi bilo naše sporočilo
-čim krajše. Kodiranje, ki skrajša zapis podatkov, imenujemo \textit{stiskanje podatkov}.
+čim krajše. Kodiranje, ki skrajša kodo, imenujemo \textit{stiskanje podatkov}.
 
 \begin{definicija}
     
-    \textit{Stiskanje} je kodiranje $ K $ za katerega velja 
+    \textit{Stiskanje} je kodiranje $ \kappa $ za katerega velja 
     \[ 
     \exists n \in \N \ \forall w \in \Sigma^* \colon |w| \geq n \implies
-    \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert.
+    \left\lvert \kappa(w)\right\rvert \ll \left\lvert w \right\rvert.
     \]
 
 \end{definicija}
@@ -211,7 +217,7 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
     \[
         \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) = w
     \]
-    in \textit{kodiranje z izgubo}, kjer kodiranje ni reverzibilen proces
+    in \textit{kodiranje z izgubo}, kjer kodiranje ni levo obrnljiv proces
     in v grobem velja
     \[
         \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) \approx w.
@@ -223,14 +229,15 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
     
     Za abecedo vzemimo $ \Sigma = \{ a,b,c \} $ in poglejmo niz
     \[
-        w = cababcccababcccab.
+        w = \mathit{cababcccababcccab}.
     \]
-    Opazimo, da se nam v nizu $ w $ večkrat ponovita vzorca $ ab $ in $ ccc $. Zato
-    uvedemo novi oznaki $ A = ab $ in $ B = ccc $. Sedaj lahko zapišemo $ w $ kot
+    Opazimo, da se nam v nizu $ w $ večkrat ponovita vzorca $ \mathit{ab} $ in $ \mathit{ccc} $.
+    Zato uvedemo novi oznaki $ A = \mathit{ab} $ in $ B = \mathit{ccc} $. Sedaj lahko zapišemo
+    $ w $ kot
     \[
         w = \mathit{cAABAABA}.
     \]
-    Ponovno se nam pojavi vzorec, tokrat $ AAB $. Uvedemo novo oznako $ C = AAB $
+    Ponovno se nam pojavi vzorec, tokrat $ \mathit{AAB} $. Uvedemo novo oznako $ C = \mathit{AAB} $
     in zapišemo $ w $ kot
     \[
         w = \mathit{cCCA}.
@@ -314,12 +321,12 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
 \begin{primer}
     
     Formalizirajmo gramatiko iz Primera~\refeq{Stiskanje}, ki smo jo generirali z nizom
-    $ w = cababcccababcccab $. Označimo jo z $ G_w = ( V, \Sigma, P, S ) $, kjer je 
+    $ w = \mathit{cababcccababcccab} $. Označimo jo z $ G_w = ( V, \Sigma, P, S ) $, kjer je 
     \begin{gather*}
         V = \{ S, A, B, C \}, \\
         \Sigma = \{ a, b, c \}, \\
-        P = \{ S  \rightarrow  cCCA, A  \rightarrow  ab, B  
-        \rightarrow  ccc, C  \rightarrow  AAB \}, \\
+        P = \{ S  \rightarrow  \mathit{cCCA}, A  \rightarrow  \mathit{ab}, B  
+        \rightarrow  \mathit{ccc}, C  \rightarrow  \mathit{AAB} \}, \\
         S = S.
     \end{gather*}
     Vidimo, da $ G_w $ ustreza naši definiciji kontekstno-neodvisne gramatike
@@ -332,7 +339,7 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
     nismo skrajšali, saj je $ |w| = 17 $. Niz $ w $ je bil prekratek, da bi ga lahko
     zares stisnili. Naj bo sedaj
     \[
-        w =   cababcccababcccabababccc.
+        w =   \mathit{cababcccababcccabababccc}.
     \]
     Gramatika, ki jo generira novi niz se od prejšnje gramatike razlikuje le v
     \[
