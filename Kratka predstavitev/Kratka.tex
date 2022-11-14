@@ -52,9 +52,9 @@
 
 Zapis informacije v neki obliki ni primeren za vsakršno rabo. Besedilo, zapisano z 
 pismenkami, je neberljivo za slepe osebe, saj je komunikacijski kanal v tem primeru
-vid. Prav tako pisanega besedila v pravotni obliki ni mogoče poslati s telegrafom. V tem
+vid. Prav tako pisanega besedila v prvotni obliki ni mogoče poslati s telegrafom. V tem
 primeru je komunikacijski kanal žica in pismenke se po njej ne morejo sprehoditi. V obeh 
-primerih je informacija, ki bi jo radi prenesli v neprimerni obliki. V prvem 
+primerih je informacija, ki bi jo radi prenesli, zapisana v neprimerni obliki. V prvem 
 primeru je potrebno besedilo zapisati z Braillovo pisavo. V drugem primeru pa je
 potrebno besedil pretvoriti v električni signal. Spreminjanje zapisa sporočila
 imenujemo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi,
@@ -83,7 +83,7 @@ pa \textit{kod}.
     Prvotni namen Morsejeve abecede je komunikacija preko telegrama, saj komunikacijski
     kanal dovoljuje le električne signale in tišino med njimi. Kodiranje črk je takšno,
     da imajo črke z višjo frekvenco (v angleškem jeziku) krajši zapis. Tako se dolžina
-    kodiranega sporočila skrajša in posledično tudi čas prenosa.
+    kodiranega sporočila skrajša in posledično tudi čas njegovega prenosa.
 
 \end{primer}
 
@@ -189,7 +189,7 @@ pa \textit{kod}.
 
 \section{Stiskanje podatkov}
 
-Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Želimo, da bi bilo naše sporočilo
+Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Želimo, da bi bilo naše sporočilo
 čim krajše. Kodiranje, ki skrajša zapis podatkov, imenujemo \textit{stiskanje podatkov}.
 
 \begin{definicija}
@@ -223,23 +223,23 @@ Eden izmed namen kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Že
         w = cababcccababcccab.
     \]
     Opazimo, da se nam v nizu $ w $ večkrat ponovita vzorca $ ab $ in $ ccc $. Zato
-    uvedemo novi spremenljivki $ A = ab $ in $ B = ccc $. Sedaj lahko zapišemo $ w $ kot
+    uvedemo novi oznaki $ A = ab $ in $ B = ccc $. Sedaj lahko zapišemo $ w $ kot
     \[
-        w = cAABAABA.
+        w = \mathit{cAABAABA}.
     \]
-    Ponovno se nam pojavi vzorec, tokrat $ AAB $. Uvedemo novo spremeljivko $ C = AAB $
+    Ponovno se nam pojavi vzorec, tokrat $ AAB $. Uvedemo novo oznako $ C = AAB $
     in zapišemo $ w $ kot
     \[
-        w = cCCA.
+        w = \mathit{cCCA}.
     \]
-    Prvotni niz smo z novimi spremeljivkami skrajšali. Kot bomo videli, smo
+    Prvotni niz smo z novimi oznakami skrajšali. Kot bomo videli, smo
     pretvorili niz $ w $ v kontekstno neodvisno gramatiko $ G_w $ s
     produkcijskimi pravili
     \begin{align*}
-        & S  \rightarrow  cCCA, \\
-        & A  \rightarrow  ab, \\
-        & B  \rightarrow  ccc, \\
-        & C  \rightarrow  AAB.
+        & S  \rightarrow  \mathit{cCCA}, \\
+        & A  \rightarrow  \mathit{ab}, \\
+        & B  \rightarrow  \mathit{ccc}, \\
+        & C  \rightarrow  \mathit{AAB}.
     \end{align*}
 
 \end{primer}
