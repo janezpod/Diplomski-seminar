@@ -109,21 +109,23 @@ pa \textit{kod}.
     
     \textit{Kleenejeva zvezdica} ali \textit{Kleenejevo zaprtje} je operacija, ki
     abecedi $ \Sigma $ priredi najmanjšo nadmnožico $ \Sigma^* $, ki vsebuje
-    \textit{prazen niz} $ \varepsilon $ in je zaprta za konkatenacijo oziroma veriženje.
-    Z drugimi besedami, $ \Sigma^* $ je množica vseh končnih nizov, ki
-    jih lahko generiramo z veriženjem črk abecede $ \Sigma $. \\
+    \textit{prazen niz} $ \varepsilon $ in je zaprta za operacijo stikanje, ki ji
+    pravimo tudi konkatenacijo oziroma veriženje. Element $ \varepsilon $ je
+    nevtralni element za stikanje. Z drugimi besedami, $ \Sigma^* $ je množica vseh
+    končnih nizov, ki jih lahko generiramo z veriženjem črk abecede $ \Sigma $. \\
     Za abecedo $ \Sigma $ definirajmo
     \[
-        \Sigma^0 = \{ \varepsilon \}, \quad \Sigma^1 = \Sigma
+        \Sigma^0 = \{ \varepsilon \}
     \]
-    ter za vsak $ i > 0 $ rekurzivno
+    ter za vsak $ \ell > 0 $ rekurzivno
     \[
-        \Sigma^{i+1} = \{ wa \mid w \in \Sigma^i \text{ in } a \in \Sigma \}.
+        \Sigma^{\ell+1} = \{ wa \mid w \in \Sigma^{\ell} \text{ in } a \in \Sigma \}.
     \]
     Potem je Kleenejeva zvezdico na $ \Sigma $ enaka
     \[
-        \Sigma^* = \bigcup_{i \geq 0} \Sigma^i.
+        \Sigma^* = \bigcup_{\ell \geq 0} \Sigma^\ell.
     \]
+    Omenimo še, da je $ \Sigma^{\ell} $ množica vseh nizov abecede $ \Sigma $ dolžine $ \ell $.
 
 \end{opomba}
 
