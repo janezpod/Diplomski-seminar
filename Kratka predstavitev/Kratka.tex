@@ -206,8 +206,8 @@ pa \textit{kod}.
 
 \section{Stiskanje podatkov}
 
-Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Želimo, da bi bilo naše sporočilo
-čim krajše. Kodiranje, ki skrajša kodo, imenujemo \textit{stiskanje podatkov}.
+Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. Želimo, da bi bil zapis
+sporočila čim krajšo. Kodiranje z namenom krajšanja kode imenujemo \textit{stiskanje}.
 
 \begin{definicija}
     
@@ -223,12 +223,12 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
     
     Ločimo \textit{kodiranje brez izgube}, kjer velja
     \[
-        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) = w
+        \forall w \in \Sigma^* \colon \delta(\kappa(w)) = w
     \]
     in \textit{kodiranje z izgubo}, kjer kodiranje ni levo obrnljiv proces
     in v grobem velja
     \[
-        \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) \approx w.
+        \forall w \in \Sigma^* \colon \delta(\kappa(w)) \approx w.
     \]
 
 \end{opomba}
@@ -271,37 +271,39 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
 
 \section{Kontekstno-neodvisne gramatike}
 
-\begin{definicija}
-
-    \textit{Formalna gramatika} $ G $ so pravila, ki nam iz abecede $ \Sigma $ tvorijo jezik,
-    označimo ga z $ L(G) $.
-
-\end{definicija}
-
-\begin{definicija}
+\begin{definicija}f
 
     \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
-    $ V $ končna množica \textit{spremenljivk}, abeceda $ \Sigma $ množica \textit{končnih simbolov} tako,
-    da $ \Sigma \cap V = \emptyset $, $ P \subseteq V \times ( V \cup \Sigma )^* $ relacija, ki ji
-    pravimo \textit{produkcijsko pravilo} in $ S \in V $ \textit{začetna spremenljivka}.
+    $ V $ končna množica \textit{nekončnih simbolov}; abeceda $ \Sigma $ množica \textit{končnih simbolov}
+    tako, da $ \Sigma \cap V = \emptyset $; $ P \subseteq V \times ( V \cup \Sigma )^* $ celovita relacija,
+    elementu relacije pravimo \textit{produkcijsko pravilo}; in $ S \in V $ \textit{začetni simbol}.
 
 \end{definicija}
+
+\begin{opomba}
+    
+    Relacija $ P \subseteq A \times B $ je celovita, če velja
+    \[
+        \forall x \in A \ \exists y \in B \colon (x,y) \in P
+    \]
+
+\end{opomba}
 
 \begin{definicija}
     
     Naj bo $ G = ( V, \Sigma, P, S ) $ kontekstno-neodvisna gramatika. Naj bodo $ \alpha $,
-    $ \beta $, $ \gamma \in ( V \cup \Sigma )^* $ nizi spremenljivk in končnih simbolov,
-    $ A \in V $ spremenljivka ter naj bo $ ( A, \beta ) \in P $ produkcijsko pravilo,
+    $ \beta $, $ \gamma \in ( V \cup \Sigma )^* $ nizi nekončnih in končnih simbolov,
+    $ A \in V $ nekončni simbol ter naj bo $ ( A, \beta ) \in P $ produkcijsko pravilo,
     označimo ga z $ A \rightarrow \beta $. Pravimo, da se $ \alpha A \gamma $ 
     \textit{prepiše s pravilom} $ A $ v $ \alpha\beta\gamma $, pišemo $ \alpha A \gamma  \Rightarrow 
-    \alpha\beta\gamma $. Pravimo, da $ \alpha $ \textit{porodi} $ \beta $, če je $ \alpha = \beta $ ali če
+    \alpha\beta\gamma $. Pravimo, da $ \alpha $ \textit{izpelje} $ \beta $, če je $ \alpha = \beta $ ali če
     za $ k \geq 0 $ obstaja zaporedje $ \alpha_1, \alpha_2, \ldots \alpha_n
     \in ( V \cup \Sigma )^* $ tako, da 
     \[
         \alpha \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \ldots \Rightarrow \alpha_n
-        \Rightarrow \beta
+        \Rightarrow \beta,
     \]
-    in pišemo $ \alpha \xRightarrow{*} \beta $.
+    pišemo $ \alpha \xRightarrow{*} \beta $.
 
 \end{definicija}
 
@@ -327,9 +329,9 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
     \[
         \alpha A \gamma \rightarrow \alpha\beta\gamma,
     \]
-    kjer je $ A \in V $ in so $ \alpha, \beta, \gamma \in ( V \cup \Sigma )^* $, saj je
-    pravilo odvisno od predhodnega konteksta. Odvisno je od tega ali pred njim stoji $ \alpha $
-    in za njim $ \beta $.
+    kjer je $ A \in V $ in so $ \alpha, \beta, \gamma \in ( V \cup \Sigma )^* $, saj je možnost uporabe
+    pravila odvisno od konteksta nekončnega simbola $ A $. Kontekst določa niza $ \alpha $ in $ \beta $,
+    ki se nahajata neposredno pred in po nekončnim simbolom $ A $.
 
 \end{opomba}
 
@@ -349,7 +351,7 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
     \[
         L(G_w) = \{w\}.
     \]
-    Dolžina gramatike $ G_w $ je enaka številu črk abecede $ \{ S, A, B, C, \rightarrow \} $,
+    Dolžina gramatike $ G_w $ je enaka številu črk kodne abecede $ \Sigma_c = \{ S, A, B, C, \rightarrow \} $,
     ki smo jih porabili za opis gramatike in je enaka $ |P| = 20 $. Vidimo, da niza $ w $ 
     nismo skrajšali, saj je $ |w| = 17 $. Niz $ w $ je bil prekratek, da bi ga lahko
     zares stisnili. Naj bo sedaj
@@ -358,8 +360,8 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
     \]
     Gramatika, ki jo generira novi niz se od prejšnje gramatike razlikuje le v
     \[
-        P = \{ S  \rightarrow  cCCAC, A  \rightarrow  ab, B  
-        \rightarrow  ccc, C  \rightarrow  AAB \}.
+        P = \{ S  \rightarrow  \mathit{cCCAC}, A  \rightarrow  mathit{ab}, B  
+        \rightarrow  \mathit{ccc}, C  \rightarrow  mathit{AAB} \}.
     \]
     Sedaj smo stisnili $ w $ z $ G_w $, saj je
     \[
@@ -368,10 +370,9 @@ Eden izmed namenov kodiranja je tudi doseči čim večjo ekonomičnost zapisa. �
 
 \end{primer}
 
-Za razliko od klasičnih metod stiskanja, naša metoda ne izvaja procesa stiskanja
-direktno na nizu $ w $, temveč poiščemo gramatiko $ G_w $, ki generira 
-enojec $ \{ w \} $ za svoj jezik. Med njimi poiščemo ``najmanjšo'', ki jo nato kodiramo.
-Ker gramatike $ G_w $ generira $ w $ in ker je gramatika ``majhna'' jo bomo kodirali v 
-``kratko'' kodo. Tako bomo preko gramatike ``dobro'' stisnili niz $ w $.
+Pri stiskanju z kontekstno-neodvisnimi gramatikami poiščemo gramatiko $ G_w $, ki generira
+enojec $ \{ w \} $ za svoj jezik. Med njimi poiščemo ``najmanjšo''in jo kodiramo.
+Ker gramatike $ G_w $ generira $ w $ in je ``majhna'' jo bomo kodirali v ``kratko'' kodo.
+Tako bomo preko gramatike ``dobro'' stisnili niz $ w $.
 
 \end{document} 
