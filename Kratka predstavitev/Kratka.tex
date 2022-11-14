@@ -11,7 +11,7 @@
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 
-\linespread{1.15}
+\linespread{1.2}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -33,10 +33,10 @@
 \newtheorem{trditev}[definicija]{Trditev}
 \newtheorem{posledica}[definicija]{Posledica}
 
-  \newcommand\Vtextvisiblespace[1][.3em]{%
-  \mbox{\kern.06em\vrule height.3ex}%
-  \vbox{\hrule width#1}%
-  \hbox{\vrule height.3ex}}
+\newcommand\Vtextvisiblespace[1][.3em]{%
+\mbox{\kern.06em\vrule height.3ex}%
+\vbox{\hrule width#1}%
+\hbox{\vrule height.3ex}}
 
 \title{Kontekstno-neodvisne gramatike za kodiranje in stiskanje podatkov}
 \author{Janez Podlogar}
@@ -165,36 +165,42 @@ pa \textit{kod}.
     
     Formalizirajmo Morsejevo abecedo iz Primera~\refeq{Morse}. Abecedi sta
     \[
-        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \} \cup \{ \_ \}, \quad
-        \Sigma_c = \{ \cdot ,-, \_ \}.
+        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \}
+        \cup \{ \Vtextvisiblespace[5pt] \}, \quad
+        \Sigma_c = \{ \cdot ,-, \Box \},
     \]
-    Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsaki črki iz abecede
-    $ \Sigma $ priredi niz črk kodne abecede $ \Sigma_c $. Vrednosti funkcije $ \kappa $ so določene s
-    tabelo iz Slike~\refeq{fig:Morse}, dodatno presledek med besedami \_  kodiramo v šest kratkih enot tišine 
+    kjer je \Vtextvisiblespace[5pt] presledek in $ \Box $ ena kratka enota tišine. Definirajmo kodno
+    funkcijo črk abecede $ \kappa_s \colon \Sigma \to \Sigma_c^* $, ki vsaki črki iz abecede $ \Sigma_s $
+    priredi niz črk kodne abecede $ \Sigma_c $. Predpis funkcije $ \kappa_s $ je določen s tabelo iz 
+    Slike~\refeq{fig:Morse}, dodatno presledek \Vtextvisiblespace[5pt] kodiramo v štiri kratkih enot tišine
     \[
-        \kappa(\_) = \_\_\_
+        \kappa_s(\Vtextvisiblespace[5pt]) = \Box\Box\Box\Box.
     \]
     Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodno 
     funkcijo $ K $ po črkah
     \[
-        K(w) = \kappa(a_1)\_\kappa(a_2)\_\cdots\kappa(a_n).
+        \kappa(w) = \kappa_s(a_1) \Box\Box\Box \kappa_s(a_2) \Box\Box\Box \cdots \kappa_s(a_n).
     \]
     Poglejmo si dva primera kodiranja v Morsejevi abecedi
     \begin{gather*}
-        K(\text{SOS}) = \cdot\cdot\cdot \;\; --- \;\; \cdot\cdot\cdot, \\
-        K(\text{AD HOC}) = \cdot- \;\; -\cdot\cdot \qquad \cdot\cdot\cdot\cdot \;\; --- \;\; -\cdot-\cdot.
+        \kappa(\text{SOS}) = \cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box \cdot\Box\cdot\Box\cdot, \\
+        \kappa(\text{AD\Vtextvisiblespace[5pt]HOC}) = \cdot\Box- \Box\Box\Box -\Box\cdot\Box\cdot
+        \Box\Box\Box\Box\Box\Box\Box
+        \cdot\Box\cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box -\Box\cdot\Box-\Box\cdot.
     \end{gather*}
-    Recimo, da smo prejeli sporočilo, a se je pošiljatelj zmotil in je namesto kode 
-    $ --\cdot- \,\, \cdot \,\, -\cdot\cdot $, ki bi se dekodirala v
+    Recimo, da smo prejeli sporočilo, a se je pošiljatelj zmotil in je namesto kode
     \[
-        K^{-1}(--\cdot- \,\, \cdot \,\, -\cdot\cdot) = \text{QED},
-        \]
+        -\Box-\Box\cdot\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot,
+    \]
+    ki bi se dekodirala v
+    \[
+        \delta(-\Box-\Box\cdot\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot) = \text{QED},
+    \]
     poslali kodo
     \[
-        --\cdot-- \,\, \cdot \,\, -\cdot\cdot.
+        -\Box-\Box\cdot\Box-\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot.
     \]
-    Sporočila ne znamo dekodirati, saj se ne nahaja v domeni $ C $ dekodne funkcije $ K^{-1} $.
-    Natančneje ne obstaja dekodiranje signala $ \kappa^{-1}(--\cdot--) $.
+    Sporočila ne znamo dekodirati, saj se ne nahaja v domeni $ C $ dekodne funkcije $ \delta $.
 
 \end{primer}
 
