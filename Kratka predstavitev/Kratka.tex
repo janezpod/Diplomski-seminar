@@ -19,8 +19,8 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 
-% ukazi za matematicna okolja
-\theoremstyle{definition} % tekst napisan pokoncno
+% tekst napisan pokoncno
+\theoremstyle{definition}
 \newtheorem{definicija}{Definicija}[section]
 \newtheorem{primer}[definicija]{Primer}
 \newtheorem{opomba}[definicija]{Opomba}
@@ -32,6 +32,11 @@
 \newtheorem{izrek}[definicija]{Izrek}
 \newtheorem{trditev}[definicija]{Trditev}
 \newtheorem{posledica}[definicija]{Posledica}
+
+  \newcommand\Vtextvisiblespace[1][.3em]{%
+  \mbox{\kern.06em\vrule height.3ex}%
+  \vbox{\hrule width#1}%
+  \hbox{\vrule height.3ex}}
 
 \title{Kontekstno-neodvisne gramatike za kodiranje in stiskanje podatkov}
 \author{Janez Podlogar}
@@ -58,7 +63,7 @@ primerih je informacija, ki bi jo radi prenesli, zapisana v neprimerni obliki. V
 primeru je potrebno besedilo zapisati z Braillovo pisavo. V drugem primeru pa je
 potrebno besedil pretvoriti v električni signal. Spreminjanje zapisa sporočila
 imenujemo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi,
-pa \textit{kod}. 
+pa \textit{kod}.
 
 \begin{primer}\label{Morse}
 
@@ -69,7 +74,7 @@ pa \textit{kod}.
         \item Dolžina kratkega signala je ena enota.
         \item Dolgi signal je trikrat daljši od kratkega signala.
         \item Razmik med signali znotraj črke je tišina dolžine kratkega signala.
-        \item Razmik med črkami je tišina dolga tri kratke signale oz. en dolgi signal.
+        \item Razmik med črkami je tišina dolga tri kratke signale oziroma en dolgi signal.
         \item Presledek med besedami je tišina dolga sedmih kratkih signalov.
     \end{itemize}
 
@@ -124,10 +129,8 @@ pa \textit{kod}.
 
 \begin{primer}
     
-    Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem je
-    \[
-        ab \in \Sigma^*, \quad ccc \in \Sigma^*, \quad cababcccababcccab \in \Sigma^*.
-    \]
+    Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem so $ \mathit{ab}, \mathit{ccc} \text{ in }
+    \mathit{cababcccababcccab} $ končni nizi abecede $ \Sigma $ in potemtakem elementi $ \Sigma^* $.
 
 \end{primer}
 
