@@ -11,7 +11,7 @@
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 
-\linespread{1.2}
+\linespread{1.18}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -183,22 +183,22 @@ pa \textit{kod}.
     \]
     Poglejmo si dva primera kodiranja v Morsejevi abecedi
     \begin{gather*}
-        \kappa(\text{SOS}) = \cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box \cdot\Box\cdot\Box\cdot, \\
-        \kappa(\text{AD\Vtextvisiblespace[5pt]HOC}) = \cdot\Box- \Box\Box\Box -\Box\cdot\Box\cdot
+        \kappa(\text{SOS}) = \phantom{} \cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box \cdot\Box\cdot\Box\cdot \phantom{}, \\
+        \kappa(\text{AD\Vtextvisiblespace[5pt]HOC}) = \phantom{} \cdot\Box- \Box\Box\Box -\Box\cdot\Box\cdot 
         \Box\Box\Box\Box\Box\Box\Box
-        \cdot\Box\cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box -\Box\cdot\Box-\Box\cdot.
+        \cdot\Box\cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box -\Box\cdot\Box-\Box\cdot \phantom{}.
     \end{gather*}
     Recimo, da smo prejeli sporočilo, a se je pošiljatelj zmotil in je namesto kode
     \[
-        -\Box-\Box\cdot\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot,
+        \phantom{} -\Box-\Box\cdot\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot \phantom{},
     \]
     ki bi se dekodirala v
     \[
-        \delta(-\Box-\Box\cdot\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot) = \text{QED},
+        \delta(\phantom{} -\Box-\Box\cdot\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot \phantom{}) = \text{QED},
     \]
     poslali kodo
     \[
-        -\Box-\Box\cdot\Box-\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot.
+        \phantom{} -\Box-\Box\cdot\Box-\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot \phantom{}.
     \]
     Sporočila ne znamo dekodirati, saj se ne nahaja v domeni $ C $ dekodne funkcije $ \delta $.
 
@@ -271,7 +271,9 @@ sporočila čim krajšo. Kodiranje z namenom krajšanja kode imenujemo \textit{s
 
 \section{Kontekstno-neodvisne gramatike}
 
-\begin{definicija}f
+
+
+\begin{definicija}
 
     \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
     $ V $ končna množica \textit{nekončnih simbolov}; abeceda $ \Sigma $ množica \textit{končnih simbolov}
