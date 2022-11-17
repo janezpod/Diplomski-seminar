@@ -22,14 +22,11 @@
 
 \theoremstyle{definition} % tekst napisan pokoncno
 \newtheorem{definicija}{Definicija}[section]
-\newtheorem{primer}[definicija]{Primer}
-\newtheorem{opomba}[definicija]{Opomba}
 
-\theoremstyle{plain} % tekst napisan posevno
-\newtheorem{lema}[definicija]{Lema}
-\newtheorem{izrek}[definicija]{Izrek}
-\newtheorem{trditev}[definicija]{Trditev}
-\newtheorem{posledica}[definicija]{Posledica}
+\newcommand\Vtextvisiblespace[1][.3em]{%
+\mbox{\kern.06em\vrule height.3ex}%
+\vbox{\hrule width#1}%
+\hbox{\vrule height.3ex}}
 
 \title[Gramatike za kodiranje podatkov]{Kontekstno-neodvisne gramatike za kodiranje in stiskanje podatkov}
 \author{Janez Podlogar}
@@ -45,239 +42,195 @@
 \section{Kodiranje podatkov}
 
 \begin{frame}{Kodiranje in kod}
-    
-    Zapis informacije v neki obliki ni primeren za vsakršno rabo. Spreminjanje zapisa sporočila
-    imenujemo \textit{kodiranje}, sistemu pravil, po katerem se kodiranje opravi, pa \textit{kod}. 
+
+\begin{columns}[c]
+    \begin{column}{.5\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{Key_Sounder.jpg}
+            \caption{Telegrafska tipka in zvočnik.}
+        \end{figure}
+    \end{column}
+
+    \begin{column}{.5\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{Braillova_pisava.jpg}
+            \caption{Braillova pisava.}
+        \end{figure}
+    \end{column}
+\end{columns}
 
 \end{frame}
 
-\begin{frame}{Morsejeva abeceda}
-
-    \textit{Morsejeva abeceda} je kodiranje črk, števil in ločil s pomočjo zaporedja kratkih
-    in dolgih signalov:
-
+\begin{frame}{Kodiranje in kod}
     \begin{itemize}
-        \item Dolžina kratkega signala je ena enota.
-        \item Dolgi signal je trikrat daljši od kratkega signala.
-        \item Razmik med signali znotraj črke je tišina dolžine kratkega signala.
-        \item Razmik med črkami je tišina dolga tri kratke signale oz. en dolgi signal.
-        \item Presledek med besedami je tišina dolga sedmih kratkih signalov.
+        \item<1-> Spreminjanje zapisa sporočila imenujemo \textit{kodiranje}.
+        \item<2-> Sistem pravil po katerem se kodiranje opravi imenujemo \textit{kod}.
     \end{itemize}
-
 \end{frame}
 
 \begin{frame}{Morsejeva abeceda}
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=4.3cm]{International_Morse_Code.svg.png}
-        \caption{Mednarodna Morsejeva abeceda}
-    \end{figure}
-    
+    \textit{Morsejeva abeceda} je kodiranje črk, števil in ločil s pomočjo zaporedja signalov:
+    \begin{itemize}
+        \item<2-> Dolžina kratkega signala je ena enota.
+        \item<3-> Dolgi signal je trikrat daljši od kratkega signala.
+        \item<4-> Razmik med signali znotraj črke je tišina dolžine kratkega signala.
+        \item<5-> Razmik med črkami je tišina dolga tri kratke signale oz. en dolgi signal.
+        \item<6-> Presledek med besedami je tišina dolga sedmih kratkih signalov.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Abeceda in nizi na abecedi}
-    
     \begin{definicija}
-
-        \textit{Abeceda} je končna neprazna množica $ \Sigma $. Elementom abecede pravimo \textit{črke}.
-        \textit{Množica vseh končnih nizov abecede} $ \Sigma $ označimo z $ \Sigma^* $ in vključuje tudi
-        prazen niz, ki ga označimo z $ \varepsilon $. \textit{Dolžino niza w} označimo z $ |w| $ in je 
-        enaka številu črk v nizu $ w \in \Sigma^* $. \textit{Jezik na abecedi} $ \Sigma $ je poljubna
-        podmnožica množice $ \Sigma^* $. 
-    
-    \end{definicija}
-
-    \pause
-    
-    \begin{primer}
-
-    Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem je
+        \begin{itemize}
+            \item \textit{Abeceda} je končna neprazna množica $ \Sigma $.
+            \item \textit{Množica vseh končnih nizov abecede} $ \Sigma $ označimo z $ \Sigma^* $.
+        \end{itemize}
+    \end{definicija}    
+    \begin{exampleblock}{Primer nizov abecede}<2->
+    Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem sta niza
     \[ 
         ab \in \Sigma^* , \quad cababcccababcccab \in \Sigma^*.
     \]
-
-    \end{primer}
-
+    \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Kodiranje in dekodiranje}
-    
     \begin{definicija}
-    
-        \textit{Kodiranje nizov abecede} $ \Sigma $ je injektivna funkcija $ \kappa \colon \Sigma^* 
-        \to \Sigma_c^* $, kjer je $ \Sigma_c $ \textit{kodirna abeceda} in $ \kappa(w) $ imenujemo
-        \textit{koda niza} $ w $. \textit{Dokodiranje kodiranja} $ \kappa $ je funkcija 
-        $ \kappa^{-1} \colon C \subseteq \Sigma^*_c \to \Sigma^* $, da velja
-        \[
-            \forall w \in \Sigma^* \colon \kappa^{-1}(\kappa(w)) = w
-        \]
-    
+        \begin{itemize}
+            \item \textit{Kodiranje nizov abecede} $ \Sigma $ je injektivna funkcija $ \kappa \colon \Sigma^* 
+            \to \Sigma_c^* $.
+            \item<2-> \textit{Dokodiranje kodiranja} $ \kappa $ je funkcija 
+            $ \delta \colon C \subseteq \Sigma^*_c \to \Sigma^* $, da velja
+            \[
+                \forall w \in \Sigma^* \colon \delta(\kappa(w)) = w.
+            \]
+        \end{itemize}
     \end{definicija}
-
 \end{frame}
 
-\begin{frame}{Formalizacija Morsejeve abecede}
-
-    Abecedi sta
-    \begin{gather*}
-        \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \} \cup \{ \_ \}, \\
-        \Sigma_c = \{ \cdot ,-, \_ \}.
-    \end{gather*}
-    Definirajmo kodno funkcijo črk abecede $ \kappa \colon \Sigma \to \Sigma_c^* $, ki vsakei črki iz abecede
-    $ \Sigma $ priredi niz črk kodirne abecede $ \Sigma_c $. Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $
-    definiramo kodirno funkcijo $ K $ po črkah
-    \[
-        K(w) = \kappa(a_1)\_\kappa(a_2)\_\cdots\kappa(a_n).
-    \]
-
+\begin{frame}{Morsejeva abeceda}
+    \begin{block}{Morsov kod}
+        \begin{itemize}
+            \item<2->  $ \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \}
+            \cup \{ \Vtextvisiblespace[5pt] \} $
+            \item<3-> $ \Sigma_c = \{ \cdot ,-, \Box \} $
+            \item<4-> $ \kappa_s \colon \Sigma \to \Sigma_c^* $ \\ \phantom{}
+        \end{itemize}
+    \end{block}
 \end{frame}
 
-\begin{frame}{Formalizacija Morsejeve abecede}
-    
-    Vrednosti funkcije $ \kappa $ so določene s
-    tabelo
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=3cm]{International_Morse_Code.svg.png}
-    \end{figure}
-    Dodatno presledek med besedami \_  kodiramo v šest kratkih enot tišine 
-    \[
-        \kappa(\_) = \_\_\_
-    \]
+\begin{frame}
+    \begin{block}{Kodna funkcija črk $ \kappa_s $}
+        \begin{itemize}
+            \item Vrednosti funkcije so določene s tabelo
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=3.5cm]{International_Morse_Code.svg.png}
+            \end{figure}
+            \item Dodatno $ \kappa_s(\Vtextvisiblespace[5pt]) = \Box\Box\Box $
+        \end{itemize}
+    \end{block}
+\end{frame}
 
+\begin{frame}{Morsejeva abeceda}
+    \begin{block}{Morsov kod}
+        \begin{itemize}
+            \item  $ \Sigma = \{ \text{A},  \text{B}, \ldots, \text{Z} \} \cup \{ 0, 1, \ldots, 9 \}
+            \cup \{ \Vtextvisiblespace[5pt] \} $
+            \item $ \Sigma_c = \{ \cdot ,-, \Box \} $
+            \item $ \kappa_s \colon \Sigma \to \Sigma_c^* $
+            \item $ \kappa(w) = \kappa_s(a_1) \Box\Box\Box\Box  \kappa_s(a_2) \Box \Box\Box\Box \cdots \kappa_s(a_n) $
+        \end{itemize}
+    \end{block}
+    \begin{exampleblock}{Primer kodiranja z Morsejevo abecedo}<2->
+        \[
+        \begin{split}
+            \kappa(\text{SOS}) & = \kappa_s(S) \Box\Box\Box\Box \kappa_s(O) \Box\Box\Box\Box \kappa_s(S)\\
+            & = \phantom{} \cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box \cdot\Box\cdot\Box\cdot \phantom{}  
+        \end{split}
+        \]
+    \end{exampleblock}
 \end{frame}
 
 \section*{Stiskanje podatkov}
 
-\begin{frame}{Stiskanje podatkov}
-    
+\begin{frame}{Stiskanje podatkov}    
     \begin{definicija}
-    
         \textit{Stiskanje} je kodiranje $ K $ za katerega velja 
         \[ 
         \exists n \in \N \ \forall w \in \Sigma^* \colon |w| \geq n \implies
-        \left\lvert K(w)\right\rvert \ll \left\lvert w \right\rvert.
+        \left\lvert \kappa(w)\right\rvert \ll \left\lvert w \right\rvert.
         \]
-    
     \end{definicija}
-
 \end{frame}
 
-\begin{frame}{Zgled stiskanja niza $ w $}
-
-    Za abecedo vzemimo $ \Sigma = \{ a,b,c \} $ in poglejmo niz
-    \[
-        w = cababcccababcccab.
-    \]
-    \pause
-    Uvedemo novi spremenljivki $ A = ab $ in $ B = ccc $.
-    \pause
-    Potem je
-    \[
-        w = cAABAABA.
-    \]
-    \pause
-    Uvedemo novo spremeljivko $ C = AAB $.
-    \pause
-    Potem je    
-    \[
-        w = cCCA.
-    \]
-
+\begin{frame}{Stiskanje podatkov}
+    \begin{exampleblock}{Primer stiskanja niza}
+        \begin{itemize}
+            \item Za abecedo vzemimo $ \Sigma = \{ a,b,c \} $ in stisnimo niz
+            \[
+                w = \mathit{cababcccababcccab}
+            \]
+            \item<2-> Uvedemo oznaki $ A = \mathit{ab} $ in $ B = \mathit{ccc} $ 
+            \[
+                w = \mathit{cAABAABA}
+            \]
+            \item<3-> Uvedemo novo spremeljivko $ C = \mathit{AAB} $
+            \[
+                w = \mathit{cCCA}
+            \]    
+        \end{itemize}
+    \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Zgled stiskanja niza $ w $}
-    
-    Prešnji postopek napišemo na sledeč način s pomočjo produkcijskih pravil
-    \begin{align*}
-        & S  \rightarrow  cCCA, \\
-        & A  \rightarrow  ab, \\
-        & B  \rightarrow  ccc, \\
-        & C  \rightarrow  AAB.
-    \end{align*}
-
+\begin{frame}{Stiskanje podatkov}
+    \begin{exampleblock}{Primer stiskanja niza}
+        Prešnji postopek zapišemo na sledeč način
+        \begin{align*}
+            & S  \rightarrow  \mathit{cCCA}, \\
+            & A  \rightarrow  \mathit{ab}, \\
+            & B  \rightarrow  \mathit{ccc}, \\
+            & C  \rightarrow  \mathit{AAB}.
+        \end{align*}
+    \end{exampleblock}
 \end{frame}
 
 \section*{Kontekstno-neodvisne gramatike}
 
 \begin{frame}{Kontekstno-neodvisne gramatike}
-    
     \begin{definicija}
-
-        \textit{Formalna gramatika} $ G $ so pravila, ki nam iz abecede $ \Sigma $ tvorijo jezik,
-        označimo ga z $ L(G) $.
-    
-    \end{definicija}
-    
-    \pause
-
-    \begin{definicija}
-    
         \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
-        $ V $ končna množica \textit{spremenljivk}, abeceda $ \Sigma $ množica \textit{končnih simbolov} tako,
-        da $ \Sigma \cap V = \emptyset $, $ P \subseteq V \times ( V \cup \Sigma )^* $ relacija, ki ji
-        pravimo \textit{produkcijsko pravilo} in $ S \in V $ \textit{začetna spremenljivka}.
-    
+        \begin{itemize}
+            \item<2-> $ V $ končna množica \textit{nekončnih simbolov}
+            \item<3-> abeceda $ \Sigma $ množica \textit{končnih simbolov}
+            \item<4-> $ P \subseteq V \times ( V \cup \Sigma )^* $ celovita relacija
+            \item<5-> $ S \in V $ \textit{začetni simbol}
+        \end{itemize}
     \end{definicija}
-
-\end{frame}
-
-\begin{frame}{Kontekstno-neodvisne gramatike}
-    
-    \begin{definicija}
-    
-        Naj bo $ G = ( V, \Sigma, P, S ) $ kontekstno-neodvisna gramatika. Naj bodo $ \alpha $,
-        $ \beta $, $ \gamma \in ( V \cup \Sigma )^* $ nizi spremenljivk in končnih simbolov,
-        $ A \in V $ spremenljivka ter naj bo $ ( A, \beta ) \in P $ produkcijsko pravilo,
-        označimo ga z $ A \rightarrow \beta $. Pravimo, da se $ \alpha A \gamma $ 
-        \textit{prepiše s pravilom} $ A $ v $ \alpha\beta\gamma $, pišemo $ \alpha A \gamma  \Rightarrow 
-        \alpha\beta\gamma $. Pravimo, da $ \alpha $ \textit{porodi} $ \beta $, če je $ \alpha = \beta $ ali če
-        za $ k \geq 0 $ obstaja zaporedje $ \alpha_1, \alpha_2, \ldots \alpha_n
-        \in ( V \cup \Sigma )^* $ tako, da 
-        \[
-            \alpha \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \ldots \Rightarrow \alpha_n
-            \Rightarrow \beta
-        \]
-        in pišemo $ \alpha \xRightarrow{*} \beta $.
-    
+    \begin{definicija}<6->
+        Jezik kontekstno neodvisne gramatike $ G $ je množica vseh nizov, ki jih lahko izpeljemo
+        z gramatiko $ G $, označimo ga z $ L(G) $.
     \end{definicija}
-
 \end{frame}
 
-\begin{frame}{Kontekstno-neodvisne gramatike}
-    
-    \begin{posledica}
-    
-        Jezik kontekstno neodvisne gramatike $ G $ je
+\begin{frame}{Stiskanja niza z kontekstno-neodvisno gramatiko}
+    \begin{exampleblock}{Stiskanje niza $ w = \mathit{cababcccababcccab} $}
+        Naj bo $ G_w = ( V, \Sigma, P, S ) $, kjer je 
+        \begin{itemize}
+            \item $ V = \{ S, A, B, C \} $
+            \item $ \Sigma = \{ a, b, c \} $
+            \item $ P = \{ S  \rightarrow  \mathit{cCCA}, A  \rightarrow  \mathit{ab}, B  
+            \rightarrow  \mathit{ccc}, C  \rightarrow  \mathit{AAB} \} $
+            \item $ S = S $
+        \end{itemize}
+        \pause
+        Velja, da je 
         \[
-            L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}.
+            L(G) = \{ w \}
         \]
-    
-    \end{posledica}
-
-\end{frame}
-
-\begin{frame}{Zgled stiskanja niza $ w $ z gramatiko}
-    
-    Formalizirajmo gramatiko iz prejšnjega primera. Gramatiko smo generirali z nizom
-    $ w = cababcccababcccab $.
-    \pause
-    Dobimo $ G_w = ( V, \Sigma, P, S ) $, kjer je 
-    \begin{gather*}
-        V = \{ S, A, B, C \}, \\
-        \Sigma = \{ a, b, c \}, \\
-        P = \{ S  \rightarrow  cCCA, A  \rightarrow  ab, B  
-        \rightarrow  ccc, C  \rightarrow  AAB \}, \\
-        S = S.
-    \end{gather*}
-    \pause
-    Vidimo, da $ G_w $ ustreza naši definiciji kontekstno-neodvisne gramatike
-    in res kodira $ w $, saj je 
-    \[
-        L(G_w) = \{w\}
-    \]
-
+    \end{exampleblock}
 \end{frame}
 
 \end{document}
