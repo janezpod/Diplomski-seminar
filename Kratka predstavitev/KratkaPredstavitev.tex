@@ -47,16 +47,16 @@
     \begin{column}{.5\textwidth}
         \begin{figure}
             \centering
-            \includegraphics[width=0.8\textwidth]{Key_Sounder.jpg}
-            \caption{Telegrafska tipka in zvočnik.}
+            \includegraphics[width=0.8\textwidth]{Braillova_pisava.jpg}
+            \caption{Telegrafska tipka in zvočnik}
         \end{figure}
     \end{column}
 
     \begin{column}{.5\textwidth}
         \begin{figure}
             \centering
-            \includegraphics[width=0.8\textwidth]{Braillova_pisava.jpg}
-            \caption{Braillova pisava.}
+            \includegraphics[width=0.8\textwidth]{Key_Sounder.jpg}
+            \caption{Braillova pisava}
         \end{figure}
     \end{column}
 \end{columns}
@@ -65,33 +65,33 @@
 
 \begin{frame}{Kodiranje in kod}
     \begin{itemize}
-        \item<1-> Spreminjanje zapisa sporočila imenujemo \textit{kodiranje}.
-        \item<2-> Sistem pravil po katerem se kodiranje opravi imenujemo \textit{kod}.
+        \item<1-> Spreminjanje zapisa sporočila imenujemo \textit{kodiranje}
+        \item<2-> Sistem pravil po katerem se kodiranje opravi imenujemo \textit{kod}
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Morsejeva abeceda}
     \textit{Morsejeva abeceda} je kodiranje črk, števil in ločil s pomočjo zaporedja signalov:
     \begin{itemize}
-        \item<2-> Dolžina kratkega signala je ena enota.
-        \item<3-> Dolgi signal je trikrat daljši od kratkega signala.
-        \item<4-> Razmik med signali znotraj črke je tišina dolžine kratkega signala.
-        \item<5-> Razmik med črkami je tišina dolga tri kratke signale oz. en dolgi signal.
-        \item<6-> Presledek med besedami je tišina dolga sedmih kratkih signalov.
+        \item<2-> Dolžina kratkega signala je ena enota
+        \item<3-> Dolgi signal je trikrat daljši od kratkega signala
+        \item<4-> Razmik med signali znotraj črke je tišina dolžine kratkega signala
+        \item<5-> Razmik med črkami je tišina dolga tri kratke signale oz. en dolgi signal
+        \item<6-> Presledek med besedami je tišina dolga sedmih kratkih signalov
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Abeceda in nizi na abecedi}
     \begin{definicija}
         \begin{itemize}
-            \item \textit{Abeceda} je končna neprazna množica $ \Sigma $.
-            \item \textit{Množica vseh končnih nizov abecede} $ \Sigma $ označimo z $ \Sigma^* $.
+            \item \textit{Abeceda} je končna neprazna množica $ \Sigma $
+            \item \textit{Množica vseh končnih nizov abecede} $ \Sigma $ označimo z $ \Sigma^* $
         \end{itemize}
     \end{definicija}    
     \begin{exampleblock}{Primer nizov abecede}<2->
     Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem sta niza
     \[ 
-        ab \in \Sigma^* , \quad cababcccababcccab \in \Sigma^*.
+        ab \in \Sigma^* , \quad cababcccababcccab \in \Sigma^*
     \]
     \end{exampleblock}
 \end{frame}
@@ -100,11 +100,11 @@
     \begin{definicija}
         \begin{itemize}
             \item \textit{Kodiranje nizov abecede} $ \Sigma $ je injektivna funkcija $ \kappa \colon \Sigma^* 
-            \to \Sigma_c^* $.
+            \to \Sigma_c^* $
             \item<2-> \textit{Dokodiranje kodiranja} $ \kappa $ je funkcija 
             $ \delta \colon C \subseteq \Sigma^*_c \to \Sigma^* $, da velja
             \[
-                \forall w \in \Sigma^* \colon \delta(\kappa(w)) = w.
+                \forall w \in \Sigma^* \colon \delta(\kappa(w)) = w
             \]
         \end{itemize}
     \end{definicija}
@@ -147,7 +147,7 @@
     \begin{exampleblock}{Primer kodiranja z Morsejevo abecedo}<2->
         \[
         \begin{split}
-            \kappa(\text{SOS}) & = \kappa_s(S) \Box\Box\Box\Box \kappa_s(O) \Box\Box\Box\Box \kappa_s(S)\\
+            \kappa(\text{SOS}) & = \kappa_s(\text{S}) \Box\Box\Box\Box \kappa_s(\text{O}) \Box\Box\Box\Box \kappa_s(\text{S})\\
             & = \phantom{} \cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box \cdot\Box\cdot\Box\cdot \phantom{}  
         \end{split}
         \]
@@ -161,7 +161,7 @@
         \textit{Stiskanje} je kodiranje $ K $ za katerega velja 
         \[ 
         \exists n \in \N \ \forall w \in \Sigma^* \colon |w| \geq n \implies
-        \left\lvert \kappa(w)\right\rvert \ll \left\lvert w \right\rvert.
+        \left\lvert \kappa(w)\right\rvert \ll \left\lvert w \right\rvert
         \]
     \end{definicija}
 \end{frame}
@@ -192,7 +192,7 @@
             & S  \rightarrow  \mathit{cCCA}, \\
             & A  \rightarrow  \mathit{ab}, \\
             & B  \rightarrow  \mathit{ccc}, \\
-            & C  \rightarrow  \mathit{AAB}.
+            & C  \rightarrow  \mathit{AAB}
         \end{align*}
     \end{exampleblock}
 \end{frame}
@@ -210,7 +210,7 @@
         \end{itemize}
     \end{definicija}
     \begin{definicija}<6->
-        Jezik kontekstno neodvisne gramatike $ G $ je množica vseh nizov, ki jih lahko izpeljemo
+        Jezik kontekstno-neodvisne gramatike $ G $ je množica vseh nizov, ki jih lahko izpeljemo
         z gramatiko $ G $, označimo ga z $ L(G) $.
     \end{definicija}
 \end{frame}
@@ -219,11 +219,11 @@
     \begin{exampleblock}{Stiskanje niza $ w = \mathit{cababcccababcccab} $}
         Naj bo $ G_w = ( V, \Sigma, P, S ) $, kjer je 
         \begin{itemize}
-            \item $ V = \{ S, A, B, C \} $
-            \item $ \Sigma = \{ a, b, c \} $
-            \item $ P = \{ S  \rightarrow  \mathit{cCCA}, A  \rightarrow  \mathit{ab}, B  
+            \item<2-> $ V = \{ S, A, B, C \} $
+            \item<3-> $ \Sigma = \{ a, b, c \} $
+            \item<4-> $ P = \{ S  \rightarrow  \mathit{cCCA}, A  \rightarrow  \mathit{ab}, B  
             \rightarrow  \mathit{ccc}, C  \rightarrow  \mathit{AAB} \} $
-            \item $ S = S $
+            \item<5-> $ S = S $
         \end{itemize}
         \pause
         Velja, da je 
