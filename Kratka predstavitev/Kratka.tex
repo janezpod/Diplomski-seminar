@@ -11,7 +11,7 @@
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 
-\linespread{1.18}
+\linespread{1.2}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -172,14 +172,14 @@ pa \textit{kod}.
     kjer je \Vtextvisiblespace[5pt] presledek in $ \Box $ ena kratka enota tišine. Definirajmo kodno
     funkcijo črk abecede $ \kappa_s \colon \Sigma \to \Sigma_c^* $, ki vsaki črki iz abecede $ \Sigma_s $
     priredi niz črk kodne abecede $ \Sigma_c $. Predpis funkcije $ \kappa_s $ je določen s tabelo iz 
-    Slike~\refeq{fig:Morse}, dodatno presledek \Vtextvisiblespace[5pt] kodiramo v štiri kratkih enot tišine
+    Slike~\refeq{fig:Morse}, dodatno presledek \Vtextvisiblespace[5pt] kodiramo v tri kratkih enot tišine
     \[
-        \kappa_s(\Vtextvisiblespace[5pt]) = \Box\Box\Box\Box.
+        \kappa_s(\Vtextvisiblespace[5pt]) = \Box\Box\Box.
     \]
     Za niz $ w = a_1a_2 \ldots a_n \in \Sigma^* $ definiramo kodno 
     funkcijo $ K $ po črkah
     \[
-        \kappa(w) = \kappa_s(a_1) \Box\Box\Box \kappa_s(a_2) \Box\Box\Box \cdots \kappa_s(a_n).
+        \kappa(w) = \kappa_s(a_1) \Box\Box\Box\Box \kappa_s(a_2) \Box\Box\Box\Box \cdots \kappa_s(a_n).
     \]
     Poglejmo si dva primera kodiranja v Morsejevi abecedi
     \begin{gather*}
@@ -188,10 +188,7 @@ pa \textit{kod}.
         \Box\Box\Box\Box\Box\Box\Box
         \cdot\Box\cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- \Box\Box\Box -\Box\cdot\Box-\Box\cdot \phantom{}.
     \end{gather*}
-    Recimo, da smo prejeli sporočilo, a se je pošiljatelj zmotil in je namesto kode
-    \[
-        \phantom{} -\Box-\Box\cdot\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot \phantom{},
-    \]
+    Recimo, da smo prejeli sporočilo, a se je pošiljatelj zmotil in je namesto kode,
     ki bi se dekodirala v
     \[
         \delta(\phantom{} -\Box-\Box\cdot\Box- \Box\Box\Box \cdot \Box\Box\Box -\Box\cdot\Box\cdot \phantom{}) = \text{QED},
