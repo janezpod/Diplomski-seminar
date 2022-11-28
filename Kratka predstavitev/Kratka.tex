@@ -140,7 +140,7 @@ pa \textit{kod}.
     
     \textit{Kodiranje nizov abecede} $ \Sigma $ je injektivna funkcija $ \kappa \colon \Sigma^* 
     \to \Sigma_c^* $, kjer imenujemo $ \Sigma_c $ \textit{kodna abeceda} in $ \kappa(w) $ 
-    \textit{koda niza} $ w $. \textit{Dokodiranje kodiranja} $ \kappa $ je funkcija 
+    \textit{koda niza} $ w $. \textit{Dekodiranje kodiranja} $ \kappa $ je funkcija 
     $ \delta \colon C \subseteq \Sigma^*_c \to \Sigma^* $, da velja
     \[
         \forall w \in \Sigma^* \colon \delta(\kappa(w)) = w.
@@ -377,7 +377,7 @@ sisteme aksiomov ter se uporabljajo tudi za kompresijo podatkov.
 
 \end{primer}
 
-Pri stiskanju z kontekstno-neodvisnimi gramatikami poiščemo gramatiko $ G_w $, ki generira
+Pri stiskanju s kontekstno-neodvisnimi gramatikami poiščemo gramatiko $ G_w $, ki generira
 enojec $ \{ w \} $ za svoj jezik. Med njimi poiščemo ``najmanjšo''in jo kodiramo.
 Ker gramatike $ G_w $ generira $ w $ in je ``majhna'' jo bomo kodirali v ``kratko'' kodo.
 Tako bomo preko gramatike ``dobro'' stisnili niz $ w $.
