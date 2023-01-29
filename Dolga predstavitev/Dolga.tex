@@ -1,0 +1,177 @@
+\documentclass{amsart}
+\usepackage{fullpage}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage{lmodern}
+\usepackage[slovene]{babel}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb,amsfonts, mathtools}
+\usepackage{bbm}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+
+\linespread{1.2}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+% tekst napisan pokoncno
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+
+\renewcommand\endprimer{\hfill$\diamondsuit$}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+\newcommand\Vtextvisiblespace[1][.3em]{%
+\mbox{\kern.06em\vrule height.3ex}%
+\vbox{\hrule width#1}%
+\hbox{\vrule height.3ex}}
+
+\title{Kontekstno-neodvisne gramatike za kodiranje in stiskanje podatkov}
+\author{Janez Podlogar}
+\date{\today}
+
+\begin{document}
+
+% \begin{abstract}
+
+
+
+% \end{abstract}
+
+\maketitle
+
+\section{Kontekstno-neodvisne gramatike}
+
+V jezikoslovju pravopis določa pravila o rabi črk in ločil. S slovnico poimenujemo sistem pravil za tvorjenje
+povedi in sestavljanje besedil. Slovenska slovnica, Slovenski pravopis in Slovar slovenskega knjižnega jezika
+natančno določajo Slovenski knjižni jezik, ki je poglavitno sredstvo javnega in uradnega sporazumevanja v Sloveniji.
+
+
+Podobno je formalna gramatika sistem pravil, ki nam pove kako iz dane abecede tvorimo nize. Gramatika nam torej določa
+neko podmnožico nizev, ki jo imenujemo formalni jezik. Gramatike in formalni jeziki imajo široko teoretični in praktično
+uporabo. Uporabljajo se za modeliranje naravnih jezikov, so osnova programskih jezikov, formalizirajo matematično logiko in
+sisteme aksiomov ter se uporabljajo tudi za kompresijo podatkov.
+
+\begin{definicija}
+
+    \textit{Abeceda} je končna neprazna množica $ \Sigma $. Elementom abecede pravimo \textit{črke}.
+    \textit{Množica vseh končnih nizov abecede} $ \Sigma $ je
+    \[
+        \Sigma^* = \{ a_1 a_2 a_3 \cdots a_n \mid n \in \N_0 \land \forall i: a_i \in \Sigma \}, 
+    \]
+    kjer za $ n = 0 $ dobimo prazen niz, ki ga označimo z $ \varepsilon $.
+    \textit{Množica vseh končnih nizov abecede brez praznega niza} označimo s $ \Sigma^+ $.
+    \textit{Dolžino niza w} označimo z $ |w| $ in je enaka številu črk v nizu $ w \in \Sigma^* $.
+    \textit{Množico vseh nizov dolžine $ \ell $}, kjer je $ \ell $ pozitivno celo število, označimo s $ \Sigma^\ell $.
+    \textit{Jezik na abecedi} $ \Sigma $ je poljubna podmnožica množice $ \Sigma^* $.
+    
+
+\end{definicija}
+
+\begin{definicija}
+    
+    Naj bo $ \Sigma $ abeceda. Naj bo $ * $ asociatna binarna operacija ma množici vseh končnih nizov $ \Sigma^* $
+    tako, da je prazen niz $ \epsilon $ nevtralen element in za niza $ w, u \in \Sigma^* $ velja
+    \[
+        w*u = w_1w_2 \cdots w_nu_1u_2 \cdots u_m,
+    \]
+    kjer sta $ w_1w_2 \cdots w_n $ in $ u_1u_2 \cdots u_m $ predstavitvi nizov $ w $ in $ u $ z črkami abecede $ \Sigma $.
+    $ (\Sigma^*, *) $ je prost monoid nad $ \Sigma $.
+
+\end{definicija}
+
+\begin{opomba}
+    
+    Dvočlena operacija $ \circ $ na množici $ A $ je preslikava
+    \begin{gather*}
+        A \times A \rightarrow A, \\
+        (x,y) \mapsto x \circ y.
+    \end{gather*}
+    Monoid $ (A, \circ) $ je neprazna množica $ A $ z dvočleno asociativno operacijo $ \circ $,
+    ki ima nevtralni element. Ime prosti monoid izhaja iz Teorije kategorij.
+
+\end{opomba}
+
+\begin{definicija}
+
+    \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
+    $ V $ končna množica \textit{nekončnih simbolov}; abeceda $ \Sigma $ množica \textit{končnih simbolov}
+    tako, da $ \Sigma \cap V = \emptyset $; $ P \subseteq V \times ( V \cup \Sigma )^* $ celovita relacija,
+    elementom relacije pravimo \textit{produkcijska pravila}; in $ S \in V $ \textit{začetni simbol}.
+
+\end{definicija}
+
+\begin{opomba}
+    
+    Relacija $ P \subseteq A \times B $ je celovita, če velja
+    \[
+        \forall x \in A \ \exists y \in B \colon (x,y) \in P.
+    \]
+    Naj bo $ G = ( V, \Sigma, P, S ) $ kontekstno-neodvisna gramatika. Ker je relacija $ P $ celovita,
+    za vsak nekončni simbol $ A \in V $ obstaja končen niz nekončnih in končnih simbolov $ \alpha \in 
+    ( V \cup \Sigma )^* $, da je $ (A, \alpha) $ produkcijsko pravilo. Torej $ (A, \alpha) \in P $, kar pišemo
+    \[
+        A \rightarrow \alpha.
+    \]
+
+\end{opomba}
+
+\begin{definicija}
+    
+    Naj bo $ G = ( V, \Sigma, P, S ) $ kontekstno-neodvisna gramatika. Naj bodo $ \alpha $,
+    $ \beta $, $ \gamma \in ( V \cup \Sigma )^* $ nizi nekončnih in končnih simbolov,
+    $ A \in V $ nekončni simbol ter naj bo $ ( A, \beta ) \in P $ produkcijsko pravilo,
+    označimo ga z $ A \rightarrow \beta $. Pravimo, da se $ \alpha A \gamma $ 
+    \textit{prepiše s pravilom} $ A $ v $ \alpha\beta\gamma $, pišemo $ \alpha A \gamma  \Rightarrow 
+    \alpha\beta\gamma $. Pravimo, da $ \alpha $ \textit{izpelje} $ \beta $, če je $ \alpha = \beta $ ali če
+    za $ n \geq 0 $ obstaja zaporedje $ \alpha_1, \alpha_2, \ldots \alpha_n
+    \in ( V \cup \Sigma )^* $ tako, da 
+    \[
+        \alpha \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \ldots \Rightarrow \alpha_n
+        \Rightarrow \beta,
+    \]
+    pišemo $ \alpha \xRightarrow{*} \beta $.
+
+\end{definicija}
+
+\begin{posledica}
+
+    Jezik kontekstno neodvisne gramatike $ G $ je
+    \[
+        L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}.
+    \]
+
+\end{posledica}
+
+\begin{opomba}
+    
+    Ime kontekstno-neodvisna gramatika izvira iz oblike produkcijskih pravil. Na levi
+    strani produkcijskega pravila mora vedno stati samo spremenljivka. Torej vsebuje samo
+    pravila oblike
+    \[
+        A \rightarrow \alpha,
+    \]
+    kjer je  $ A \in V $ in $ \alpha \in ( V \cup \Sigma )^* $. Ne sme pa vsebovati
+    pravila oblike
+    \[
+        \alpha A \gamma \rightarrow \alpha\beta\gamma,
+    \]
+    kjer je $ A \in V $ in so $ \alpha, \beta, \gamma \in ( V \cup \Sigma )^* $, saj je možnost uporabe
+    pravila odvisno od konteksta nekončnega simbola $ A $. Kontekst določa niza $ \alpha $ in $ \beta $,
+    ki se nahajata neposredno pred in po nekončnim simbolom $ A $.
+
+\end{opomba}
+
+\end{document} 
