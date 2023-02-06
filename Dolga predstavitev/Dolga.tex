@@ -11,6 +11,10 @@
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\usetikzlibrary{shapes.geometric}
+
 \linespread{1.2}
 
 \newcommand{\N}{\mathbb{N}}
@@ -59,7 +63,7 @@ povedi in sestavljanje besedil. Slovenska slovnica, Slovenski pravopis in Slovar
 natančno določajo Slovenski knjižni jezik, ki je poglavitno sredstvo javnega in uradnega sporazumevanja v Sloveniji.
 
 
-Podobno je formalna gramatika sistem pravil, ki nam pove kako iz dane abecede tvorimo nize. Gramatika nam torej določa
+Podobno je v teoriji formalnih jezikov gramatika sistem pravil, ki nam pove kako iz dane abecede tvorimo nize. Gramatika nam torej določa
 neko podmnožico nizev, ki jo imenujemo formalni jezik. Gramatike in formalni jeziki imajo široko teoretični in praktično
 uporabo. Uporabljajo se za modeliranje naravnih jezikov, so osnova programskih jezikov, formalizirajo matematično logiko in
 sisteme aksiomov ter se uporabljajo tudi za kompresijo podatkov.
@@ -83,23 +87,13 @@ sisteme aksiomov ter se uporabljajo tudi za kompresijo podatkov.
 \begin{definicija}
     
     Naj bo $ \Sigma $ abeceda. Naj bo $ * $ asociatna binarna operacija ma množici vseh končnih nizov $ \Sigma^* $
-    tako, da je prazen niz $ \epsilon $ nevtralen element in za niza $ w, u \in \Sigma^* $ velja
+    tako, da je prazen niz $ \varepsilon $ nevtralen element in za niza $ w, u \in \Sigma^* $ velja
     \[
         w*u = w_1w_2 \cdots w_nu_1u_2 \cdots u_m,
     \]
-    kjer sta $ w_1w_2 \cdots w_n $ in $ u_1u_2 \cdots u_m $ predstavitev nizov $ w $ in $ u $ s črkami abecede $ \Sigma $.
-    Znak za operacijo $ * $ pogosto spustimo in krajše pišemo $ wu $. Monoid $ (\Sigma^*, *) $ imenujemo 
+    kjer sta $ w_1w_2 \cdots w_n $ in $ u_1u_2 \cdots u_m $ predstavitvi nizov $ w $ in $ u $ s črkami abecede $ \Sigma $.
+    Znak za operacijo $ * $ spustimo in krajše pišemo $ wu $. Monoid $ (\Sigma^*, *) $ imenujemo 
     \textit{prost monoid nad $ \Sigma $}.
-
-\end{definicija}
-
-\begin{definicija}
-
-Naj bo $ \Sigma $ abeceda. \textit{Členitev niza $ w \in \Sigma^*$} je vsako zaporedje $ (w_1, w_2, \ldots w_m ) $ tako,
-da so $ w_1, w_2, \ldots w_m \in \Sigma^* $ in je
-\[
-    w_1*w_2
-\]
 
 \end{definicija}
 
@@ -117,8 +111,18 @@ da so $ w_1, w_2, \ldots w_m \in \Sigma^* $ in je
 
 \begin{definicija}
 
+    Naj bo $ \Sigma $ abeceda. \textit{Členitev niza $ w \in \Sigma^*$} je vsako zaporedje $ (w_1, w_2, \ldots, w_m ) $ tako,
+    da so $ w_1, w_2, \ldots, w_m \in \Sigma^* $ in je
+    \[
+        w_1w_2 \cdots w_n = w.
+    \]
+
+\end{definicija}
+
+\begin{definicija}
+
     \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
-    $ V $ končna množica \textit{nekončnih simbolov}; abeceda $ \Sigma $ množica \textit{končnih simbolov}
+    $ V $ končna množica \textit{nekončnih simbolov}; $ \Sigma $ množica \textit{končnih simbolov}
     tako, da $ \Sigma \cap V = \emptyset $; $ P \subseteq V \times ( V \cup \Sigma )^* $ celovita relacija,
     elementom relacije pravimo \textit{produkcijska pravila}; in $ S \in V $ \textit{začetni simbol}.
 
@@ -130,9 +134,9 @@ da so $ w_1, w_2, \ldots w_m \in \Sigma^* $ in je
     \[
         \forall x \in A \ \exists y \in B \colon (x,y) \in P.
     \]
-    Naj bo $ G = ( V, \Sigma, P, S ) $ kontekstno-neodvisna gramatika. Ker je relacija $ P $ celovita,
+    Naj bo $ G $ kontekstno-neodvisna gramatika. Ker je relacija $ P $ celovita,
     za vsak nekončni simbol $ A \in V $ obstaja končen niz nekončnih in končnih simbolov $ \alpha \in 
-    ( V \cup \Sigma )^* $, da je $ (A, \alpha) $ produkcijsko pravilo. Torej $ (A, \alpha) \in P $, kar pišemo
+    ( V \cup \Sigma )^* $, da je $ (A, \alpha) $ produkcijsko pravilo. Torej $ (A, \alpha) \in P $, pišemo
     \[
         A \rightarrow \alpha.
     \]
@@ -144,16 +148,18 @@ da so $ w_1, w_2, \ldots w_m \in \Sigma^* $ in je
     Naj bo $ G = ( V, \Sigma, P, S ) $ kontekstno-neodvisna gramatika. Naj bodo $ \alpha $,
     $ \beta $, $ \gamma \in ( V \cup \Sigma )^* $ nizi nekončnih in končnih simbolov,
     $ A \in V $ nekončni simbol ter naj bo $ ( A, \beta ) \in P $ produkcijsko pravilo,
-    označimo ga z $ A \rightarrow \beta $. Pravimo, da se $ \alpha A \gamma $ 
+    označimo ga z $ A \rightarrow \beta $, $ A $ imenujemo \textit{levi član produkcijskega pravila} in $ \beta $
+    imenujemo \textit{desni član produkcijska pravila}. Pravimo, da se $ \alpha A \gamma $ 
     \textit{prepiše s pravilom} $ A $ v $ \alpha\beta\gamma $, pišemo $ \alpha A \gamma  \Rightarrow 
     \alpha\beta\gamma $. Pravimo, da $ \alpha $ \textit{izpelje} $ \beta $, če je $ \alpha = \beta $ ali če
     za $ n \geq 0 $ obstaja zaporedje $ \alpha_1, \alpha_2, \ldots \alpha_n
     \in ( V \cup \Sigma )^* $ tako, da 
     \[
-        \alpha \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \ldots \Rightarrow \alpha_n
+        \alpha \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \cdots \Rightarrow \alpha_n
         \Rightarrow \beta,
     \]
-    pišemo $ \alpha \xRightarrow{*} \beta $.
+    pišemo $ \alpha \xRightarrow{*} \beta $. \textit{Jezik kontekstno-neodvisne gramatike $ G $} je množica vseh nizov končnih simobolov,
+    ki jih lahko izpeljemo z uporabo produkcijskih pravil gramatike, označimo ga z $ L(G) $.
 
 \end{definicija}
 
@@ -179,10 +185,226 @@ da so $ w_1, w_2, \ldots w_m \in \Sigma^* $ in je
     \[
         \alpha A \gamma \rightarrow \alpha\beta\gamma,
     \]
-    kjer je $ A \in V $ in so $ \alpha, \beta, \gamma \in ( V \cup \Sigma )^* $, saj je možnost uporabe
+    kjer je $ A \in V $ in so $ \alpha, \beta, \gamma \in ( V \cup \Sigma )^* $, saj je uporaba
     pravila odvisno od konteksta nekončnega simbola $ A $. Kontekst določa niza $ \alpha $ in $ \beta $,
     ki se nahajata neposredno pred in po nekončnim simbolom $ A $.
 
+    Pripomnimo, da so vse gramatike v delu kontekstno-neodvisne gramatike, zato jih bomo pogosto imenovali
+    samo gramatike.
+
 \end{opomba}
+
+\section{Dopustne gramatike}
+
+Recimo, da želimo stisniti niz $ w $. Ideja je, da poiščemo gramatiko $ G_w $, ki generira
+enojec $ \{ w \} $ za svoj jezik. Med njimi poiščemo ``najmanjšo'' in jo kodiramo.
+Ker gramatike $ G_w $ generira $ w $ in je ``majhna'', je kodirana v ``kratko'' kodo.
+Tako bomo posredno preko gramatike ``dobro'' stisnili niz $ w $.
+
+V razdelku definiramo podmnožico kontekstno-neodvisnih gramatik, ki za svoj jezik generirajo le
+enojec, in jih imenujemo \textit{dopustne gramatike}.
+
+Pri določanju ali je dana gramatika dopustna in kaj je jezik te gramatike si bomo pomagali še z dvema konceptoma iz
+teorije formalnih jezikov in sicer z \textit{Izpeljevalnim grafom gramatike $ G $ } in \textit{$ D0L $- sistemom gramatike $ G $}.
+
+
+\subsection*{Deterministične gramatike}
+
+\begin{definicija}
+    
+    Za kontekstno-neodvisna gramatika $ G $ označimo z $ V(G) $ množico nekončnih simbolov, s $ \Sigma(G) $
+    množico končnih simbolo, s $ P(G) $ množico produkcijskih pravil in z $ S(G) $ začetni simbol.
+
+\end{definicija}
+
+\begin{definicija}
+    
+    Kontekstno-neodvisna gramatika $ G $ je \textit{deterministična}, če za vsak nekončen simbol $ A \in V(G) $,
+    nastopa natanko enkrat kot levi član nekega produkcijskega pravila $ P(G) $, oziroma
+    \[
+        \forall A \in V(G) \ \exists! \alpha \in ( V \cup \Sigma )^*  \colon (A,\alpha) \in P.
+    \]
+    Kontekstno-neodvisna gramatika, ki ni deterministična, je \textit{nedertiministična}.
+
+\end{definicija}
+
+Determinističnost gramatike nam zagotovijo, da ko preberemo vhodni stanje in se odločimo, da uporabimo produkcijsko 
+pravilo, katerega levi član je $ A \in T(G) $, je niz, ki prepišemo s pravilom, točno določen - naslednje stanje je determinirano.
+V nedertiministični gramatiki naslednji niz ni nujno že določen, saj obstaja več pravil, ki imajo $ A $ za levega člana, med 
+katerimi lahko izbiramo.
+
+\begin{trditev}
+
+    Naj bo $ G $ deterministična kontekstno-neodvisna gramatika. Potem je jezik gramatike $ G $ enojec ali prazni niz.
+
+\end{trditev}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{primer}\label{nedeterministicna}
+
+    Naj bo G kontekstno-neodvisna gramatika in 
+    \begin{gather*}
+        V(G) = \{ S, A, B, C \}, \\
+        \Sigma(G) = \{ a, b, c \}, \\
+        P(G) = \{ S \rightarrow \mathit{Ac}, A \rightarrow \mathit{Bc}, A \rightarrow \mathit{Ac},
+        B \rightarrow \mathit{bb}, B \rightarrow \mathit{cc}, C \rightarrow \mathit{B}, C \rightarrow \mathit{b} \}, \\
+        S(G) = S.
+    \end{gather*}
+    Podana gramatika ni deterministična, saj imamo dve produkcijski pravili, katerih levi član je $ A $. 
+    
+\end{primer}
+
+\begin{definicija}
+    
+    Pravimo, da kontekstno-neodvisna gramatika $ G $ \textit{ne vsebuje neuporabnih simbolov}, ko za vsak simbol
+    $ T \in V(G) \cup \Sigma(G), \ T \neq S $ obstaja končno mnogo nizov $ \alpha_1, \alpha_2, \ldots, \alpha_n \in 
+    (V \cup \Sigma)^* $ tako, da je T vsebovan vsaj v enem izmed nizov in velja
+    \[
+        S = \alpha_1 \Rightarrow \alpha_2 \Rightarrow \cdots \alpha_n \in L(G).
+    \]
+
+\end{definicija}
+
+Ker bomo gramatiko stiskali, želimo da je čim ``manjša'' - ne želimo odvečnih simbolov. Gramatika, ki ne vsebuje neuporabnih
+simbolov, nam zagotavlja, da je vsak nekončni in vsak končni simbol prisoten vsaj v eni izpeljavi niza, ki je v jeziku gramatike.
+
+\begin{definicija}
+    
+    Kontekstno-neodvisna gramatika $ G $ je \textit{dopustna}, če je deterministična, ne vsebuje neuporabnih simbolov,
+    $ L(G) \neq \emptyset $ in prazen niz ne nastopa kot desni član kateregakoli produkcijska pravila v $ P(G) $.
+
+\end{definicija}
+
+\begin{opomba}
+    
+    Naj bo $ G $ kontekstno-neodvisna gramatika. Prazen niz ne nastopa kot desni član kateregakoli produkcijska pravila v $ P(G) $, ko
+    \[
+        \nexists A \in V(G) \colon (A, \varepsilon) \in P(G).
+    \]
+
+\end{opomba}
+
+\begin{posledica}
+    
+    Jezik dopustne kontekstno-neodvisne gramatike je enojec.
+
+\end{posledica}
+
+Da določimo dopustno kontekstno-neodvisno gramatiko je dovolj, da podamo le produkcijska pravila,
+saj lahko iz njih enoločno določimo $ V(G) $, $ \Sigma(G) $ in $ S(G) $. Nekončni simboli gramatike
+so levi člani produkcijskih pravil, končni simboli gramatike so desni člani produkcijski pravil, ki
+niso tudi levi člani kateregakoli produkcijska pravila in začetni simbol je nekončni simbol, ki 
+ne nastopa kot desni član kateregakoli produkcijskega pravila.
+
+\begin{primer}\label{dopustna}
+
+    Podana imamo produkcijska pravila
+    \begin{gather*}
+        A_0 \rightarrow aA_1A_2A_3 \\
+        A_1 \rightarrow ab \\
+        A_2 \rightarrow A_1b \\
+        A_3 \rightarrow A_2b
+    \end{gather*}
+    Levi člani produkcijskih pravil so nekončni simboli gramatike,
+    \[
+        V(G) = \{ A_0, A_1, A_2, A_3 \}.
+    \]
+    Desni člani produkcijskih pravil, ki niso tudi levi člani, so končni simboli gramatike,
+    \[
+        \Sigma(G) = \{ a, b \}.
+    \]
+    Izmed nekončnih simbolov je $ A_0 $ edini, ki ne nastopa kot desni član kateregakoli
+    produkcijskega pravila, torej je začetni simbol,
+    \[
+        S(G) = A_0.
+    \]
+    Pripomnimo, da je gramatika podana s temi produkcijskimi pravili dopustna kontekstno-neodvisna
+    gramatika, kar bomo preverili kasneje, in da je $ L(G) = \{ aababbabbb \} $.
+
+\end{primer}
+
+\subsection*{D0L-sistem}
+
+Podobno kot nas je pri uvedbi gramatike motivirala slovnica, nas sedaj motivira biologija. Procesi v biologiji
+potekajo istočasno, recimo proces razmnoževanja bakterij ali rast rastlin. Poizkušamo opisati dinamičen proces, ki je odvisen od časa.
+Takšne procese opišemo z \textit{Lindenmayerjevim sistemom}, krajše \textit{$ L $-sistemom}, ki posveča pozornost zaporedju nizov,
+oziroma prepisovanju niza z produkcijskimi pravili, kot statičnim množicam nizov. V matematičnem smislu se bomo posvetili endomorfizmu
+definiranem na prostem monoidu.
+
+Spoznali bomo poseben primer determinstičnega kontekstno-neodvisnega $ L $-sistema, ki se imenuje \textit{$ D0L $ sistem}.
+
+\begin{definicija}
+    
+    Naj bo $ \Sigma $ abeceda. \textit{Endomofizem množice $ \Sigma^* $} je preslikava $ f \colon \Sigma^* \rightarrow \Sigma^* $
+    tako, da 
+    \begin{gather*}
+        f(\varepsilon) = \varepsilon, \\
+        \forall w,u \in \Sigma^* \colon f(w)f(u).
+    \end{gather*}
+    Za endomorfizem $ f $ množice $ \Sigma^* $ induktivno definiramo
+    \begin{gather*}
+        f^0(w) = w, \\
+        f^1(w) = f(w), \\
+        f^k = f(f^{k1}(w)),
+    \end{gather*}
+    kjer je $ w \in \Sigma^* $ in $ k \geq 2 $ celo število.
+
+\end{definicija}
+
+\begin{opomba}
+    
+    Endomorfizem $ f $ na $ \Sigma^* $ je natančno določen ko za vsako črko $ a \in \Sigma $ podamo njeno preslikao $ f(a) \in \Sigma^* $.
+
+\end{opomba}
+
+\begin{definicija}
+    
+    \textit{$ D0L $ sistem} je je trojica $ D = (\Sigma, f, w) $, kjer je $ \Sigma $ abeceda; $ f $ endomorfizem množice $ \Sigma^* $;
+    in $ w \in \Sigma^* $ imneujemo \textit{aksiom}. Sistem generira zaporedje nizov $ \{ f^k(w) \mid k = 0, 1,2 \ldots \} $, 
+    ki ima fiksno točko $ w^* $, če velja
+    \begin{gather*}
+        w^* \in \{ f^k(w) \mid k = 0, 1,2 \ldots \}, \\
+        f(w^*)= w^*.
+    \end{gather*}
+
+\end{definicija}
+
+\begin{opomba}
+    
+    Za splošni $ L $-sistem v zgornji definiciji zamenjamo homomorfizem $ f $ z množico produkcijskih pravil $ P $ in predpostavimo,
+    da vsebuje produkcijsko pravilo identitete. Kontekstna-neodvisnost in determinstičnost $ L $-sistema je definirana enako kot pri gramatikah. 
+    
+    $ L $-sistemi se uporabljajo za modeliranje morfologije bitji prav tako z njimi generiramo fraktale. Za generirane realističnih modelov
+    so zanimivi stohastični $ L $-sistemi, ki v vsakem koraku zaporedja nizov z neko verjetnostjo uporabijo produkcijsko pravilo.
+
+\end{opomba}
+
+S pomočjo naslednjega endomorfizma bomo jezik deterministične kontekstno-neodvisne gramatike karakterzirali preko fiksne točke pripadajočega 
+$ D0L $-sistema.
+
+\begin{definicija}
+    
+    Naj bo G deterministična kontekstno-neodvisna gramatika v kateri prazen niz ne nastopa kot desni član kateregakoli
+    produkcijska pravila. Na $ (V(G) \cup \Sigma(G))^* $ definiramo endomorfizem $ f_G $ tako, da 
+    \begin{gather*}
+        \forall a \in \Sigma \colon f_G(a) = a; \\
+        \text{če je } A \rightarrow \alpha \text{ produkcijsko pravilo, potem je } f_G(A) = \alpha.
+    \end{gather*}
+    $ D0L $-sistem $ (V(G) \cup \Sigma(G), f_G, S) $ označimo z $ D(G) $ in ga imenujemo \textit{$ D0L $-sistem prirejen gramatiki $ G $}.
+
+\end{definicija}
+
+\begin{izrek}
+
+    Naj bo $ G $ dopustna kontekstno-neodvisna gramatika. Potem jezik gramatike $ G $ ustreza fiksni točki $ D0L $-sistema prirejenga gramatiki $ G $.
+
+\end{izrek}
+
+\begin{proof}
+
+\end{proof}
 
 \end{document} 
