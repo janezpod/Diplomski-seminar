@@ -274,3 +274,6 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+.vscode/ltex.dictionary.sl-SI.txt
+.vscode/ltex.disabledRules.sl-SI.txt
+.vscode/ltex.hiddenFalsePositives.sl-SI.txt
