@@ -21,6 +21,9 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\A}{\mathcal{A}}
+
 
 % tekst napisan pokoncno
 \theoremstyle{definition}
@@ -618,8 +621,51 @@ Naslednji izrek je posplošitev izreka [1] label
     
 \end{izrek}
 
+% Resetiramo stevilcenje
+\setcounter{equation}{0}
+
 \begin{proof}
     
 \end{proof}
+
+\section{Gramatična preobrazba}
+
+Od sedaj naprej s $\A$ označimo poljubno abecedo z vsaj dvema črk
+in fiksiramo končno mnogo množico simbolov
+\[
+    \{A_0, A_1, A_2, \ldots \},
+\]
+ki jih bomo uporabljali pri preobrazvi niza sestavljenega
+iz črk abecede $\Sigma$ v gramatiko. Predpostavimo, da nobeden
+od simbolov $ A_0, A_1, A_2, \ldots $ ne nastopa v abecedi $\Sigma$.
+
+\begin{definicija}
+    
+    Naj bo $\A$ abeceda. S $ \G(\A) $ označimo podmnožico vseh gramatik
+    $G$, ki izpolnjujejo naslednje pogoje:
+    \begin{align}
+        & G \text{ je dopustna kontekstno-neodvisna gramatika}. \\
+        & \Sigma(G) \subset \A. \\ % Zakaj prava podmnozica??
+        & S(G) = A_0. \\
+        & V(G) = \{ A_0, A_1, A_2, \ldots, A_{|V(G)| - 1} \}. \\
+        & \text{Če naštejemo nekončne simbole } V(G) \text{ v vrstnem redu pojavitve v nizu } \\
+            \shortintertext{
+                \[ 
+                    f_G^0(A_0) f_G^1(A_0) f_G^2(A_0) \dots f_G^{|V(G)| - 1}(A_0),
+                \]
+            }
+        & \text{dobimo seznam}
+        \shortintertext{
+            \[ 
+                A_0, A_1, A_2, \ldots A_{|V(G)| - 1}.
+            \]
+        }
+    \end{align}
+
+\end{definicija}
+
+\subsection*{Asimptotično kompaktna preobrazba}
+
+\subsection*{Nerazcepna preobrazba}
 
 \end{document} 
