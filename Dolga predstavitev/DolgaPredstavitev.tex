@@ -1,0 +1,268 @@
+\documentclass{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[slovene]{babel}
+\usepackage{palatino}
+\usefonttheme{serif}
+\usepackage{amsmath,amssymb,amsfonts, mathtools}
+\graphicspath{{./images/}}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+\setbeamertemplate{navigation symbols}{}
+
+\linespread{1.2}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+\newcommand\Vtextvisiblespace[1][.3em]{%
+\mbox{\kern.06em\vrule height.3ex}%
+\vbox{\hrule width#1}%
+\hbox{\vrule height.3ex}}
+
+\title[Gramatike za kodiranje podatkov]{Kontekstno-neodvisne gramatike za kodiranje in stiskanje podatkov}
+\author{Janez Podlogar}
+\institute[UL-FMF]{Univerza v Ljubljani, Fakulteta za matematiko in fiziko}
+\date[Maj 2023]{5. 5. 2023}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\section{Ponovitev}
+
+\begin{frame}{Spomnimo se od prejšnjič}
+    S kontekstno-neodivsnih gramatik želimo stisniti poljuben niz.
+    \pause
+    \begin{definicija}
+        \begin{itemize}
+            \item \textit{Abeceda} je končna neprazna množica $ \Sigma $
+            \item \textit{Množica vseh končnih nizov abecede} $ \Sigma $ označimo s $ \Sigma^* $
+            \item \textit{Dolžina niza} $ w $ je število znakov abecede v $ w $, označimo z $ |w| $
+        \end{itemize}
+    \end{definicija}
+    \pause
+    \begin{exampleblock}{Primer nizov abecede}<2->
+    Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem sta niza
+    \[ 
+        ab \in \Sigma^* , \quad cababcccababcccab \in \Sigma^*
+    \]
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Kontekstno-neodvisne gramatike}
+    \begin{definicija}
+        \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
+        \begin{itemize}
+            \item<2-> $ V $ končna množica \textit{nekončnih simbolov}
+            \item<3-> abeceda $ \Sigma $ množica \textit{končnih simbolov}
+            \item<4-> $ P \subseteq V \times ( V \cup \Sigma )^* $ celovita relacija
+            \item<5-> $ S \in V $ \textit{začetni simbol}
+        \end{itemize}
+    \end{definicija}
+    \begin{definicija}<6->
+        Jezik kontekstno-neodvisne gramatike $ G $ je množica vseh nizov, ki jih lahko izpeljemo
+        z gramatiko $ G $, označimo ga z $ L(G) $.
+    \end{definicija}
+\end{frame}
+
+\begin{frame}{Stiskanja niza s kontekstno-neodvisno gramatiko}
+    \begin{exampleblock}{Stiskanje niza $ w = \mathit{cababcccababcccab} $}
+        Naj bo $ G_w = ( V, \Sigma, P, S ) $, kjer je 
+        \begin{itemize}
+            \item<2-> $ V = \{ S, A, B, C \} $
+            \item<3-> $ \Sigma = \{ a, b, c \} $
+            \item<4-> $ P = \{ S  \rightarrow  \mathit{cCCA}, A  \rightarrow  \mathit{ab}, B  
+            \rightarrow  \mathit{ccc}, C  \rightarrow  \mathit{AAB} \} $
+            \item<5-> $ S = S $
+        \end{itemize}
+        \pause
+        \onslide<6->{$ S = cCCA $}
+        \pause
+        \onslide<7->{$ \xRightarrow{C} cAABAAB $}
+        \pause
+        \onslide<8->{$ \xRightarrow{B} cAAcccAAccc $}
+        \pause
+        \onslide<9->{$ \xRightarrow{A} cababcccababccc $}
+        \onslide<10->{$ = w $}
+        \pause \\
+        \onslide<11->{Velja, da je 
+        \[
+            L(G_w) = \{ w \}.
+        \]
+        }
+    \end{exampleblock}
+\end{frame}
+
+\section{Dopustne gramatike}
+
+\begin{frame}{Deterministična kontekstno-neodvisna gramatika}
+    \begin{definicija}
+        Kontekstno-neodvisna gramatika $G$ je \textit{deterministična}, če vsak nekončen simbol $ A \in V $,
+        nastopa natanko enkrat kot levi član nekega produkcijskega pravila.
+        Kontekstno-neodvisna gramatika, ki ni deterministična, je \textit{nedeterministična}.
+    \end{definicija}
+    \pause
+    \begin{trditev}
+        Naj bo $G$ deterministična kontekstno-neodvisna gramatika. Potem je jezik gramatike $G$ enojec ali pa prazna množica.
+    \end{trditev}
+\end{frame}
+
+\begin{frame}{Deterministična kontekstno-neodvisna gramatika}
+    \begin{exampleblock}{Deterministična kontekstno-neodvisna gramatika z praznim jeziokm}
+        Naj bo $ G = ( V, \Sigma, P, S ) $, kjer je 
+        \begin{itemize}
+            \item<2-> $ V = \{ S \} $
+            \item<3-> $ \Sigma = \{ a \} $
+            \item<4-> $P = \{ S \rightarrow S \} $
+            \item<5-> $ S = S $
+        \end{itemize}
+        \pause
+        \onslide<6->{Gramatika je očitno deterministična in velja $ L(G) = \emptyset $.
+        }
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Deterministična kontekstno-neodvisna gramatika}
+    \begin{exampleblock}{Deterministična kontekstno-neodvisna gramatika z odvečnimi simboli}
+        Naj bo $ G = ( V, \Sigma, P, S ) $, kjer je 
+        \begin{itemize}
+            \item $ V = \{ S, A \} $
+            \item $ \Sigma = \{ a \} $
+            \item $P = \{ S \rightarrow a, A \rightarrow a \} $
+            \item $ S = S $
+        \end{itemize}
+        \pause
+        \onslide<2->{Gramatika je očitno deterministična in velja $ L(G) = a $.
+        }
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Neuporabni simboli in prazen jezik}
+    \begin{definicija}
+        Pravimo, da kontekstno-neodvisna gramatika $G$ \textit{ne vsebuje neuporabnih simbolov}, ko za vsak simbol
+        $ y \in V \cup \Sigma, \ y \neq S $, obstaja končno mnogo nizov $ \alpha_1, \alpha_2, \ldots, \alpha_n \in 
+        (V \cup \Sigma)^* $ tako, da je $y$ vsebovan vsaj v enem izmed nizov in velja
+        \[
+            S = \alpha_1 \Rightarrow \alpha_2 \Rightarrow \cdots \alpha_n \in L(G).
+        \] 
+    \end{definicija}
+\end{frame}
+
+\begin{frame}{Dopustne gramatike}
+    \begin{definicija}
+        Kontekstno-neodvisna gramatika $G$ je \textit{dopustna}, če je deterministična, ne vsebuje neuporabnih simbolov,
+        $ L(G) \neq \emptyset $ in prazen niz ne nastopa kot desni član kateregakoli produkcijska pravila v $ P $.
+    \end{definicija}
+    \pause
+    \begin{posledica}
+        Jezik dopustne kontekstno-neodvisne gramatike je enojec.
+    \end{posledica}
+\end{frame}
+
+\begin{frame}
+    \begin{exampleblock}{Za dopustno gramatiko je dovolj podati produkcijska pravila}
+        Podana imamo produckcijska pravila 
+        \begin{itemize}
+            \item $ P = \{ A_0 \rightarrow aA_1A_2A_3, A_1 \rightarrow ab, A_2 \rightarrow A_1b, A_3 \rightarrow A_2b \} $ 
+        \end{itemize}
+        \pause
+        \onslide<1->{Nekončni simboli gramatike so 
+        \[
+             V = \{ A_0, A_1, A_2, A_3 \}.
+        \] 
+        }
+        \pause
+        \onslide<2->{Končni simboli gramatike so
+        \[
+            \Sigma = \{ a, b \}.
+        \] 
+        }
+        \pause
+        \onslide<3->{Začetni simbol je
+        \[
+            S = A_0.
+        \]
+        }
+    \end{exampleblock}
+\end{frame}
+
+\section{D0L-sistem}
+
+\begin{frame}{Endomorfiem}
+    \begin{definicija}
+        Naj bo $ \Sigma $ abeceda. \textit{Endomorfizem množice $ \Sigma^* $} je preslikava $ f \colon \Sigma^* \to \Sigma^* $
+        tako, da je
+        \[
+            f(\varepsilon) = \varepsilon \text{ in } \forall w,u \in \Sigma^* \colon f(wu) = f(w)f(u).
+        \]
+        \pause
+        Za endomorfizem $ f $ množice $ \Sigma^* $ induktivno definiramo
+        \begin{align*}
+            f^0(w) &= w, \\
+            f^1(w) &= f(w), \\
+            f^k(w) &= f(f^{k-1}(w)),
+        \end{align*}
+        kjer je $ w \in \Sigma^* $ in $ k \geq 2 $ celo število.
+    \end{definicija}
+\end{frame}
+
+\begin{frame}{D0L sistem}
+    \begin{definicija}
+        \textit{D0L sistem} je trojica $ D = (\Sigma, \ f, \ w) $, kjer je
+        \begin{itemize}
+            \item<2-> $ \Sigma $ abeceda
+            \item<3-> $ f $ endomorfizem množice $ \Sigma^* $
+            \item<4-> $ w \in \Sigma^* $ \textit{aksiom}
+        \end{itemize}
+        \pause
+        \onslide<5->{Sistem generira zaporedje nizov $ \{ f^k(w) \mid k = 0, 1,2 \ldots \} $, 
+        ki ima \textit{fiksno točko $ w^* $}, če velja
+        \begin{gather*}
+            w^* \in \{ f^k(w) \mid k = 0, 1,2 \ldots \}, \\
+            f(w^*)= w^*.
+        \end{gather*}
+        }
+    \end{definicija}
+\end{frame}
+
+\begin{frame}{D0L sistem prirejen gramatiki}
+    \begin{definicija}
+        Naj bo G deterministična kontekstno-neodvisna gramatika v kateri prazen niz ne nastopa kot desni član kateregakoli
+        produkcijska pravila. Na $ (V \cup \Sigma)^* $ definiramo endomorfizem $ f_G $ tako, da 
+        \begin{gather*}
+            \forall a \in \Sigma \colon f_G(a) = a; \\
+            \text{če je } A \rightarrow \alpha \text{ produkcijsko pravilo, potem je } f_G(A) = \alpha.
+        \end{gather*}
+        \pause
+        D0L sistem $ (V \cup \Sigma, \ f_G, \ S) $ označimo z $ D(G) $ in ga imenujemo \textit{D0L sistem prirejen gramatiki $G$}.
+    \end{definicija}
+\end{frame}
+
+\begin{frame}{Karakterizacija dopustnih gramatik preko D0L sistema}
+    \begin{izrek}
+        Naj bo $G$ dopustna kontekstno-neodvisna gramatika.
+        Potem jezik gramatike $G$ ustreza fiksni točki D0L sistema prirejenega gramatiki $G$.
+    \end{izrek}
+    \pause
+    \begin{izrek}
+        Naj bo $G$ kontekstno-neodvisna gramatika v kateri prazen niz ne nastopa kot desni član kateregakoli
+        produkcijska pravila. Gramatika $G$ je dopustna natanko takrat, ko je $ f_G^{|V|}(S) \in \Sigma^+ $
+        in vsak simbol iz $ V \cup \Sigma $ nastopa v vsaj enem izmed nizov $ f_G^i(S) \text{, kjer je } i = 0, 1, \ldots, |V| $.
+    \end{izrek}
+\end{frame}
+
+\end{document}
