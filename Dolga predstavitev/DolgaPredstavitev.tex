@@ -19,6 +19,8 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\A}{\mathcal{A}}
 
 \theoremstyle{definition} % tekst napisan pokoncno
 \newtheorem{definicija}{Definicija}[section]
@@ -56,10 +58,10 @@
     \end{definicija}
     \pause
     \begin{exampleblock}{Primer nizov abecede}<2->
-    Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem sta niza
-    \[ 
-        ab \in \Sigma^* , \quad cababcccababcccab \in \Sigma^*
-    \]
+        Naj bo $ \Sigma = \{ a,b,c \} $ abeceda, potem sta niza
+        \[ 
+            ab \in \Sigma^* , \quad cababcccababcccab \in \Sigma^*
+        \]
     \end{exampleblock}
 \end{frame}
 
@@ -252,17 +254,132 @@
     \end{definicija}
 \end{frame}
 
-\begin{frame}{Karakterizacija dopustnih gramatik preko D0L sistema}
+\begin{frame}{D0L sistem prirejen gramatiki}
     \begin{izrek}
         Naj bo $G$ dopustna kontekstno-neodvisna gramatika.
-        Potem jezik gramatike $G$ ustreza fiksni točki D0L sistema prirejenega gramatiki $G$.
+        Potem jezik gramatike $G$ ustreza fiksni točki D0L sistema $ (V \cup \Sigma, \ f_G, \ S) $.
     \end{izrek}
     \pause
+    \begin{posledica}
+        Jezik dopustne kontekstno-neodvisna gramatike $G$ je
+        \[
+            L(G) = \{f_G^{|V|}(S) \}.
+        \]
+    \end{posledica}
+\end{frame}
+
+\begin{frame}{Karakterizacija dopustnih gramatik preko D0L sistema}
     \begin{izrek}
         Naj bo $G$ kontekstno-neodvisna gramatika v kateri prazen niz ne nastopa kot desni član kateregakoli
         produkcijska pravila. Gramatika $G$ je dopustna natanko takrat, ko je $ f_G^{|V|}(S) \in \Sigma^+ $
         in vsak simbol iz $ V \cup \Sigma $ nastopa v vsaj enem izmed nizov $ f_G^i(S) \text{, kjer je } i = 0, 1, \ldots, |V| $.
     \end{izrek}
+\end{frame}
+
+\begin{frame}
+    \begin{exampleblock}{Preverimo, da je gramatika dopustna in izračunajmo jezik}
+        Podana imamo produckcijska pravila 
+        \begin{itemize}
+            \item<1-> $ P = \{ A_0 \rightarrow aA_1A_2A_3, A_1 \rightarrow ab, A_2 \rightarrow A_1b, A_3 \rightarrow A_2b \} $
+            \item<2-> $ V = \{ A_0, A_1, A_2, A_3 \} $ in $ \Sigma = \{ a,b \} $
+        \end{itemize}
+        \pause
+        \begin{align*}
+            \uncover<3->{f_G(A_0) &= aA_1A_2A_3 \\}
+            \uncover<4->{f_G^2(A_0) &= aabA_1bA_2b \\}
+            \uncover<5->{f_G^3(A_0) &= aababbA_1bb \\}
+            \uncover<5->{f_G^4(A_0) &= aababbabbb }
+        \end{align*}
+        \pause
+        \onslide<6->{Vsak od simbolov $A_1, A_2, A_3, a, b$ se pojavi vsaj enkrat v zgoraj izračunanih nizih
+        }
+        \onslide<7->{in $ f_G^4(A_0) \in \Sigma^+ $.}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Posplošitev izreka}
+    \begin{izrek}
+            Naj bo $G$ dopustna kontekstno-neodvisna gramatika in naj bo $ \alpha \in (V \cup \Sigma)^+ $.
+    Potem ima D0L sistem $ (V \cup \Sigma, f_g, \alpha) $ fiksno točko $ w^* \in \Sigma^+ $. in velja formula
+    \[
+    w^* = f_G^{|V|}( \alpha ).
+    \]
+    \end{izrek}
+\end{frame}
+
+\begin{frame}{Uporaben endomorfizem}
+    \begin{definicija}
+        Naj bo $G$ dopustna kontekstno-neodvisna gramatika. Definiramo preslikavo
+        $ f_G^\infty \colon (V \cup \Sigma)^* \to (V \cup \Sigma)^* $, ki vsak 
+        $ \alpha \in (V \cup \Sigma)^* $ preslika v fiksno točko D0L sistema $ (V \cup \Sigma, \ f_G^\infty, \ \alpha) $.
+    \end{definicija}
+\end{frame}
+
+% \begin{frame}{Uporaben endomorfizem}
+%     \begin{izrek}
+%         Naj bo $G$ dopustna kontekstno-neodvisna gramatika. Potem veljajo naslednje trditve:
+%         \begin{itemize}
+%             \item<1-> f_G^\infty \text{ je endomorifzem na } (V \cup \Sigma)^* \\
+%             \item<2->\forall \alpha \in (V \cup \Sigma)^+ \colon f_G^\infty(\alpha) \in \Sigma^+ \\
+%             \item<3-> \forall \alpha \in (V \cup \Sigma)^+ \colon f_G^\infty(\alpha) = f_G^{|V|}(\alpha) \\
+%             \item<4->\text{Če je } A \rightarrow \beta \text{ produkcijsko pravilo, potem je } f_G^\infty(A) = f_G^\infty(\beta)
+%         \end{itemize}
+%     \end{izrek}
+% \end{frame}
+
+\section{Preobrazba niza}
+
+\begin{frame}{Preobrazba niza}
+    \pause
+    Z $\A$ označimo poljubno abecedo z vsaj dvema črk
+    in fiksiramo končno mnogo množico simbolov
+    \[
+        \{A_0, A_1, A_2, \ldots \},
+    \]
+    Predpostavimo, da nobeden
+    od simbolov $ A_0, A_1, A_2, \ldots $ ne nastopa v abecedi $\A$.
+\end{frame}
+
+\begin{frame}{Preobrazba niza}
+    \begin{definicija}
+        Naj bo $\A$ abeceda. S $ \G(\A) $ označimo pravo podmnožico vseh kontekstno neodivsnih gramatik
+        $G$, ki izpolnjujejo naslednje pogoje:
+        \begin{itemize}
+            \item<1-> $G$ je dopustna
+            \item<2-> $ V(G) = \{ A_0, A_1, A_2, \ldots, A_{|V(G)| - 1} \} $
+            \item<3-> $ \Sigma(G) \subset \A $; $ S(G) = A_0 $
+            \item<4-> Če naštejemo nekončne simbole $V(G)$ v vrstnem redu pojavitve v nizu
+            \[
+            f_G^0(A_0) f_G^1(A_0) f_G^2(A_0) \dots f_G^{|V(G)| - 1}(A_0),
+            \]
+            dobimo urejen seznam $ A_0, A_1, A_2, \ldots A_{|V(G)| - 1} $
+        \end{itemize}
+    \end{definicija}
+\end{frame}
+
+\begin{frame}{Preobrazba niza}
+    \begin{definicija}
+        Naj bo $\A$ abeceda. Z $\G^*(\A)$ označimo pravo podmnožico množice $\G(\A)$ za katero velja, da za vsaka nekončna simbola $ A,B \in V(G), \ A \neq B $ velja
+        \[
+            f_G^\infty(A) \neq f_G^\infty(B).
+        \]
+    \end{definicija}
+\end{frame}
+
+\begin{frame}{Preobrazba niza}
+    \begin{definicija}
+        Naj bo $\A$ abeceda in $G$ kontekstno-neodvisna gramatika. 
+        Preobrazba niza je preslikava
+        \begin{align*}
+            \A^+ &\rightarrow G^*(A), \\
+            x &\mapsto G_x.
+        \end{align*}
+        \pause
+        Z $|G|$ označimo skupno število vseh desnih članov produkcijskih pravil gramatike vključno s ponovitvami. Preobrazba niza je \textit{asimptotsko kompaktna}, če je
+        \[
+            \lim_{n \rightarrow \infty} \max_{x \in \A^n} \frac{|G_x|}{|x|} = 0.
+        \]
+    \end{definicija}
 \end{frame}
 
 \end{document}
