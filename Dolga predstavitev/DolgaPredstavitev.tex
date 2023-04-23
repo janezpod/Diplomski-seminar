@@ -21,6 +21,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\A}{\mathcal{A}}
+\newcommand{\x}{\textit{\textbf{x}}}
 
 \theoremstyle{definition} % tekst napisan pokoncno
 \newtheorem{definicija}{Definicija}[section]
@@ -46,7 +47,7 @@
 
 \section{Ponovitev}
 
-\begin{frame}{Spomnimo se od prejšnjič}
+\begin{frame}{Spomnimo se}
     S kontekstno-neodivsnih gramatik želimo stisniti poljuben niz.
     \pause
     \begin{definicija}
@@ -378,6 +379,18 @@
         Z $|G|$ označimo skupno število vseh desnih članov produkcijskih pravil gramatike vključno s ponovitvami. Preobrazba niza je \textit{asimptotsko kompaktna}, če je
         \[
             \lim_{n \rightarrow \infty} \max_{x \in \A^n} \frac{|G_x|}{|x|} = 0.
+        \]
+    \end{definicija}
+\end{frame}
+
+\section{Biskecijska preobrazba niza}
+
+\begin{frame}{Biskecijska preobrazba niza}
+    \begin{definicija}
+        Naj bo $ \x = x_1 x_2 \cdots x_n \in \A^+ $.
+        Vpeljemo \textit{biskecijsko členitev niza}
+        \[
+            S(\x) = \{ \x \} \cup \{ x_i \cdots x_j \mid \frac{i-1}{j-i+1} \text{ in }  \}.
         \]
     \end{definicija}
 \end{frame}
