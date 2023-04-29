@@ -7,6 +7,7 @@
 \usefonttheme{serif}
 \usepackage{amsmath,amssymb,amsfonts, mathtools}
 \graphicspath{{./images/}}
+\setbeamertemplate{enumerate items}[default]
 
 \usetheme{CambridgeUS}
 \usecolortheme{dolphin}
@@ -28,6 +29,8 @@
 \newtheorem{izrek}[definicija]{Izrek}
 \newtheorem{trditev}[definicija]{Trditev}
 \newtheorem{posledica}[definicija]{Posledica}
+\newtheorem{opomba}[definicija]{Opomba}
+
 
 \newcommand\Vtextvisiblespace[1][.3em]{%
 \mbox{\kern.06em\vrule height.3ex}%
@@ -52,9 +55,9 @@
     \pause
     \begin{definicija}
         \begin{itemize}
-            \item \textit{Abeceda} je končna neprazna množica $ \Sigma $
-            \item \textit{Množica vseh končnih nizov abecede} $ \Sigma $ označimo s $ \Sigma^* $
-            \item \textit{Dolžina niza} $ w $ je število znakov abecede v $ w $, označimo z $ |w| $
+            \item \textit{Abeceda} je končna neprazna množica $ \Sigma $,
+            \item \textit{Množico vseh končnih nizov abecede} $ \Sigma $ označimo s $ \Sigma^* $,
+            \item \textit{Dolžina niza} $ w $ je število znakov abecede v $ w $, označimo z $ |w| $.
         \end{itemize}
     \end{definicija}
     \pause
@@ -70,19 +73,19 @@
     \begin{definicija}
         \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
         \begin{itemize}
-            \item<2-> $ V $ končna množica \textit{nekončnih simbolov}
-            \item<3-> abeceda $ \Sigma $ množica \textit{končnih simbolov}
-            \item<4-> $ P \subseteq V \times ( V \cup \Sigma )^* $ celovita relacija
-            \item<5-> $ S \in V $ \textit{začetni simbol}
+            \item<2-> $ V $ končna množica \textit{nekončnih simbolov},
+            \item<3-> abeceda $ \Sigma $ množica \textit{končnih simbolov},
+            \item<4-> $ P \subseteq V \times ( V \cup \Sigma )^* $ celovita relacija,
+            \item<5-> $ S \in V $ \textit{začetni simbol}.
         \end{itemize}
     \end{definicija}
     \begin{definicija}<6->
-        Jezik kontekstno-neodvisne gramatike $ G $ je množica vseh nizov, ki jih lahko izpeljemo
+        \textit{Jezik kontekstno-neodvisne gramatike $ G $} je množica vseh nizov, ki jih lahko izpeljemo
         z gramatiko $ G $, označimo ga z $ L(G) $.
     \end{definicija}
 \end{frame}
 
-\begin{frame}{Stiskanja niza s kontekstno-neodvisno gramatiko}
+\begin{frame}{Stiskanje niza s kontekstno-neodvisno gramatiko}
     \begin{exampleblock}{Stiskanje niza $ w = \mathit{cababcccababcccab} $}
         Naj bo $ G_w = ( V, \Sigma, P, S ) $, kjer je 
         \begin{itemize}
@@ -125,7 +128,7 @@
 \end{frame}
 
 \begin{frame}{Deterministična kontekstno-neodvisna gramatika}
-    \begin{exampleblock}{Deterministična kontekstno-neodvisna gramatika z praznim jeziokm}
+    \begin{exampleblock}{Deterministična kontekstno-neodvisna gramatika z praznim jezikom}
         Naj bo $ G = ( V, \Sigma, P, S ) $, kjer je 
         \begin{itemize}
             \item<2-> $ V = \{ S \} $
@@ -149,7 +152,7 @@
             \item $ S = S $
         \end{itemize}
         \pause
-        \onslide<2->{Gramatika je očitno deterministična in velja $ L(G) = a $.
+        \onslide<2->{Gramatika je očitno deterministična in velja $ L(G) = \{ a \} $.
         }
     \end{exampleblock}
 \end{frame}
@@ -167,8 +170,12 @@
 
 \begin{frame}{Dopustne gramatike}
     \begin{definicija}
-        Kontekstno-neodvisna gramatika $G$ je \textit{dopustna}, če je deterministična, ne vsebuje neuporabnih simbolov,
-        $ L(G) \neq \emptyset $ in prazen niz ne nastopa kot desni član kateregakoli produkcijska pravila v $ P $.
+        Kontekstno-neodvisna gramatika $G$ je \textit{dopustna}, če je
+        \begin{itemize}
+            \item Deterministična,
+            \item Ne vsebuje neuporabnih simbolov,
+            \item  $ L(G) \neq \emptyset $ in prazen niz ne nastopa kot desni član kateregakoli produkcijska pravila v $ P $.
+        \end{itemize}
     \end{definicija}
     \pause
     \begin{posledica}
@@ -205,7 +212,7 @@
 
 \section{D0L-sistem}
 
-\begin{frame}{Endomorfiem}
+\begin{frame}{Endomorfizem}
     \begin{definicija}
         Naj bo $ \Sigma $ abeceda. \textit{Endomorfizem množice $ \Sigma^* $} je preslikava $ f \colon \Sigma^* \to \Sigma^* $
         tako, da je
@@ -213,7 +220,7 @@
             f(\varepsilon) = \varepsilon \text{ in } \forall w,u \in \Sigma^* \colon f(wu) = f(w)f(u).
         \]
         \pause
-        Za endomorfizem $ f $ množice $ \Sigma^* $ induktivno definiramo
+        Induktivno definiramo
         \begin{align*}
             f^0(w) &= w, \\
             f^1(w) &= f(w), \\
@@ -227,9 +234,9 @@
     \begin{definicija}
         \textit{D0L sistem} je trojica $ D = (\Sigma, \ f, \ w) $, kjer je
         \begin{itemize}
-            \item<2-> $ \Sigma $ abeceda
-            \item<3-> $ f $ endomorfizem množice $ \Sigma^* $
-            \item<4-> $ w \in \Sigma^* $ \textit{aksiom}
+            \item<2-> $ \Sigma $ abeceda,
+            \item<3-> $ f $ endomorfizem množice $ \Sigma^* $,
+            \item<4-> $ w \in \Sigma^* $ \textit{aksiom}.
         \end{itemize}
         \pause
         \onslide<5->{Sistem generira zaporedje nizov $ \{ f^k(w) \mid k = 0, 1,2 \ldots \} $, 
@@ -301,7 +308,7 @@
 \begin{frame}{Posplošitev izreka}
     \begin{izrek}
             Naj bo $G$ dopustna kontekstno-neodvisna gramatika in naj bo $ \alpha \in (V \cup \Sigma)^+ $.
-    Potem ima D0L sistem $ (V \cup \Sigma, f_g, \alpha) $ fiksno točko $ w^* \in \Sigma^+ $. in velja formula
+    Potem ima D0L sistem $ (V \cup \Sigma, f_G, \alpha) $ fiksno točko $ w^* \in \Sigma^+ $ in velja formula
     \[
     w^* = f_G^{|V|}( \alpha ).
     \]
@@ -331,8 +338,7 @@
 \section{Preobrazba niza}
 
 \begin{frame}{Preobrazba niza}
-    \pause
-    Z $\A$ označimo poljubno abecedo z vsaj dvema črk
+    Z $\A$ označimo poljubno abecedo z vsaj dvema črkama
     in fiksiramo končno mnogo množico simbolov
     \[
         \{A_0, A_1, A_2, \ldots \},
@@ -343,19 +349,27 @@
 
 \begin{frame}{Preobrazba niza}
     \begin{definicija}
-        Naj bo $\A$ abeceda. S $ \G(\A) $ označimo pravo podmnožico vseh kontekstno neodivsnih gramatik
+        Naj bo $\A$ abeceda. Z $ \G(\A) $ označimo pravo podmnožico vseh kontekstno neodivsnih gramatik
         $G$, ki izpolnjujejo naslednje pogoje:
-        \begin{itemize}
-            \item<1-> $G$ je dopustna
-            \item<2-> $ V(G) = \{ A_0, A_1, A_2, \ldots, A_{|V(G)| - 1} \} $
-            \item<3-> $ \Sigma(G) \subset \A $; $ S(G) = A_0 $
-            \item<4-> Če naštejemo nekončne simbole $V(G)$ v vrstnem redu pojavitve v nizu
+        \begin{enumerate}
+            \item<1-> $G$ je dopustna;
+            \item<2-> $ V(G) \subset \A $;
+            \item<3->$ S(G) = A_0 $;
+            \item<4-> $ V(G) = \{ A_0, A_1, A_2, \ldots, A_{|V(G)| - 1} \} $;
+            \item<5-> Če naštejemo nekončne simbole $V(G)$ v vrstnem redu pojavitve v nizu.
             \[
             f_G^0(A_0) f_G^1(A_0) f_G^2(A_0) \dots f_G^{|V(G)| - 1}(A_0),
             \]
             dobimo urejen seznam $ A_0, A_1, A_2, \ldots A_{|V(G)| - 1} $
-        \end{itemize}
+        \end{enumerate}
     \end{definicija}
+\end{frame}
+
+\begin{frame}{Preobrazba niza}
+    \begin{opomba}
+         Naj bo $ G \in \G(\A) $ in sta izpoljena prva dva pogoja zgornje definicije.
+         Potem lahko enolično preimenujemo spremenljivke iz $ V(G) $ tako, da dobimo gramatiko, ki izpolnjuje tudi ostale tri pogoje. Pridelano gramatiko označimo z $[G]$ in očitno velja $[G] \in \G(\A) $.
+    \end{opomba}
 \end{frame}
 
 \begin{frame}{Preobrazba niza}
@@ -370,9 +384,9 @@
 \begin{frame}{Preobrazba niza}
     \begin{definicija}
         Naj bo $\A$ abeceda in $G$ kontekstno-neodvisna gramatika. 
-        Preobrazba niza je preslikava
+        \textit{Preobrazba niza} je preslikava
         \begin{align*}
-            \A^+ &\rightarrow G^*(A), \\
+            \A^+ &\rightarrow \G^*(\A), \\
             x &\mapsto G_x.
         \end{align*}
         \pause
@@ -390,9 +404,83 @@
         Naj bo $ \x = x_1 x_2 \cdots x_n \in \A^+ $.
         Vpeljemo \textit{bisekcijsko členitev niza}
         \[
-            S(\x) = \{ \x \} \cup \{ x_i \cdots x_j \mid \frac{i-1}{j-i+1} \text{ in }  \}.
+            B(\x) = \{ \x \} \cup \{ x_i \cdots x_j \mid \tfrac{i-1}{j-i+1} \text{ in } \log_2{(j-i+1)} \text{ sta celi števili}  \}.
         \]
+        \pause
+        Za vsak podniz $ w \in B(\x) $ z $ ( b(w, L), b(w,R) )$ označimo členitev podniza, kjer sta niza $ b(w, L) $ in $ b(w,R) $ enake dolžine.
     \end{definicija}
+\end{frame}
+
+\begin{frame}{Biskecijska preobrazba niza}
+    \begin{exampleblock}{Biskecijska členitev niza}
+        Naj bo $\x = 0001010 $, pote je
+        \[
+            B(\x) = \{ \x, 0001, 01, 0, 00, 1 \}.
+        \]
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{}
+    \begin{definicija}
+        \textit{Bisekcijska preobrazba niza} je preobrazba niza $ \x \mapsto [G_{\x}] $, kjer je
+        \begin{itemize}
+            \item<2-> $ V(G_{\x}) = \{ A^w \mid w \in B(\x) \} $,
+            \item<3-> $ T(G_{\x}) = \{ w \in B(\x) \mid |w| = 1 \} $,
+            \item<4-> $ S(G_{\x}) = A^{\x} $.
+        \end{itemize}
+    \end{definicija}
+\end{frame}
+
+\begin{frame}{}
+    \begin{definicija}
+        Množica $ P(G_{\x}) $ vsebuje sledeča produkcijska pravila
+        \begin{itemize}
+            \item<1-> Če je $ |u| = 1 $, je produkcijsko pravilo oblike
+            \[
+                A^w \rightarrow w.  
+            \]
+            \item<2-> Če je $ \log_2{|w|} $ celo število, je produkcijsko pravilo oblike
+            \[
+                A^w \rightarrow A^{b(w,L)} A^{b(w,R)}. 
+            \]
+            \item<3-> Če $ \log_2{|w|} $ ni celo število, torej je $ w = \x $, je produkcijsko pravilo oblike
+            \[
+                A^w \rightarrow A^w_1 A^w_2 \cdots A^w_t,
+            \]
+            kjer je $ (w_1, w_2, \ldots, w_t) $ enolična členitev niza $\x$, da je $ \forall i \colon w_i \in B(\x) $ in $ |x| > |u_1| > |u_2| > \cdots > |u_t| $.
+        \end{itemize}
+    \end{definicija}
+\end{frame}
+
+\begin{frame}
+    \begin{exampleblock}{Biskecijska preobrazba niza \x = 0001010}
+        Vemo, da je $ B(\x) = \{ \x, 0001, 01, 0, 00, 1 \} $
+        \pause
+        in produkcijska pravila $ G_{\x} $ so
+        \begin{align*}
+            \uncover<3->{A^{\x} &\rightarrow A^{0001} A^{01} A^{0} \\}
+            \uncover<4->{A^{0001} &\rightarrow A^{00} A^{01} \\}
+            \uncover<5->{A^{00} &\rightarrow A^0 A^0 \\}
+            \uncover<5->{A^{01} &\rightarrow A^0 A^1 \\}
+            \uncover<6->{A^0 &\rightarrow 0 \\}
+            \uncover<7->{A^1 &\rightarrow 1 }
+        \end{align*}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+    \begin{exampleblock}{Biskecijska preobrazba niza \x = 0001010}
+        Vemo, da je $ B(\x) = \{ \x, 0001, 01, 0, 00, 1 \} $
+        in produkcijska pravila $ [G_{\x}] $ so
+        \begin{align*}
+            A_0 &\rightarrow A_1 A_2 A_3 \\
+            A_1 &\rightarrow A_4 A_2\\
+            A_2 &\rightarrow A_3 A_5 \\
+            A_3 &\rightarrow 0 \\
+            A_4 &\rightarrow A_3 A_3 \\
+            A_5 &\rightarrow 1
+        \end{align*}
+    \end{exampleblock}
 \end{frame}
 
 \end{document}
