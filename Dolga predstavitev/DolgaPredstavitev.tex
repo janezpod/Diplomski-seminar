@@ -22,7 +22,6 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\A}{\mathcal{A}}
-\newcommand{\x}{\textit{\textbf{x}}}
 
 \theoremstyle{definition} % tekst napisan pokoncno
 \newtheorem{definicija}{Definicija}[section]
@@ -33,6 +32,7 @@
 
 
 \newcommand\Vtextvisiblespace[1][.3em]{%
+
 \mbox{\kern.06em\vrule height.3ex}%
 \vbox{\hrule width#1}%
 \hbox{\vrule height.3ex}}
@@ -51,7 +51,7 @@
 \section{Ponovitev}
 
 \begin{frame}{Spomnimo se}
-    S kontekstno-neodivsnih gramatik želimo stisniti poljuben niz.
+    S kontekstno-neodvisnih gramatik želimo stisniti poljuben niz.
     \pause
     \begin{definicija}
         \begin{itemize}
@@ -71,7 +71,7 @@
 
 \begin{frame}{Kontekstno-neodvisne gramatike}
     \begin{definicija}
-        \textit{Kontektsno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
+        \textit{Kontekstno-neodvisna gramatika} je četverica $ G = ( V, \Sigma, P, S ) $, kjer je
         \begin{itemize}
             \item<2-> $ V $ končna množica \textit{nekončnih simbolov},
             \item<3-> abeceda $ \Sigma $ množica \textit{končnih simbolov},
@@ -185,7 +185,7 @@
 
 \begin{frame}
     \begin{exampleblock}{Za dopustno gramatiko je dovolj podati produkcijska pravila}
-        Podana imamo produckcijska pravila 
+        Podana imamo produkcijska pravila 
         \begin{itemize}
             \item $ P = \{ A_0 \rightarrow aA_1A_2A_3, A_1 \rightarrow ab, A_2 \rightarrow A_1b, A_3 \rightarrow A_2b \} $ 
         \end{itemize}
@@ -196,7 +196,8 @@
         \] 
         }
         \pause
-        \onslide<2->{Končni simboli gramatike so
+        \onslide<2->{
+        Končni simboli gramatike so
         \[
             \Sigma = \{ a, b \}.
         \] 
@@ -239,7 +240,8 @@
             \item<4-> $ w \in \Sigma^* $ \textit{aksiom}.
         \end{itemize}
         \pause
-        \onslide<5->{Sistem generira zaporedje nizov $ \{ f^k(w) \mid k = 0, 1,2 \ldots \} $, 
+
+        \onslide<5->{Sistem tvori zaporedje nizov $ \{ f^k(w) \mid k = 0, 1,2 \ldots \} $, 
         ki ima \textit{fiksno točko $ w^* $}, če velja
         \begin{gather*}
             w^* \in \{ f^k(w) \mid k = 0, 1,2 \ldots \}, \\
@@ -258,7 +260,7 @@
             \text{če je } A \rightarrow \alpha \text{ produkcijsko pravilo, potem je } f_G(A) = \alpha.
         \end{gather*}
         \pause
-        D0L sistem $ (V \cup \Sigma, \ f_G, \ S) $ označimo z $ D(G) $ in ga imenujemo \textit{D0L sistem prirejen gramatiki $G$}.
+        D0L sistem $ (V \cup \Sigma, \ f_G, \ S) $ imenujemo \textit{D0L sistem prirejen gramatiki $G$}.
     \end{definicija}
 \end{frame}
 
@@ -286,7 +288,7 @@
 
 \begin{frame}
     \begin{exampleblock}{Preverimo, da je gramatika dopustna in izračunajmo jezik}
-        Podana imamo produckcijska pravila 
+        Podana imamo produkcijska pravila 
         \begin{itemize}
             \item<1-> $ P = \{ A_0 \rightarrow aA_1A_2A_3, A_1 \rightarrow ab, A_2 \rightarrow A_1b, A_3 \rightarrow A_2b \} $
             \item<2-> $ V = \{ A_0, A_1, A_2, A_3 \} $ in $ \Sigma = \{ a,b \} $
@@ -305,41 +307,11 @@
     \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Posplošitev izreka}
-    \begin{izrek}
-            Naj bo $G$ dopustna kontekstno-neodvisna gramatika in naj bo $ \alpha \in (V \cup \Sigma)^+ $.
-    Potem ima D0L sistem $ (V \cup \Sigma, f_G, \alpha) $ fiksno točko $ w^* \in \Sigma^+ $ in velja formula
-    \[
-    w^* = f_G^{|V|}( \alpha ).
-    \]
-    \end{izrek}
-\end{frame}
+\section{Pretvorba niza v gramatiko}
 
-\begin{frame}{Uporaben endomorfizem}
-    \begin{definicija}
-        Naj bo $G$ dopustna kontekstno-neodvisna gramatika. Definiramo preslikavo
-        $ f_G^\infty \colon (V \cup \Sigma)^* \to (V \cup \Sigma)^* $, ki vsak 
-        $ \alpha \in (V \cup \Sigma)^* $ preslika v fiksno točko D0L sistema $ (V \cup \Sigma, \ f_G^\infty, \ \alpha) $.
-    \end{definicija}
-\end{frame}
-
-% \begin{frame}{Uporaben endomorfizem}
-%     \begin{izrek}
-%         Naj bo $G$ dopustna kontekstno-neodvisna gramatika. Potem veljajo naslednje trditve:
-%         \begin{itemize}
-%             \item<1-> f_G^\infty \text{ je endomorifzem na } (V \cup \Sigma)^* \\
-%             \item<2->\forall \alpha \in (V \cup \Sigma)^+ \colon f_G^\infty(\alpha) \in \Sigma^+ \\
-%             \item<3-> \forall \alpha \in (V \cup \Sigma)^+ \colon f_G^\infty(\alpha) = f_G^{|V|}(\alpha) \\
-%             \item<4->\text{Če je } A \rightarrow \beta \text{ produkcijsko pravilo, potem je } f_G^\infty(A) = f_G^\infty(\beta)
-%         \end{itemize}
-%     \end{izrek}
-% \end{frame}
-
-\section{Preobrazba niza}
-
-\begin{frame}{Preobrazba niza}
+\begin{frame}{Pretvorba niza v gramatiko}
     Z $\A$ označimo poljubno abecedo z vsaj dvema črkama
-    in fiksiramo končno mnogo množico simbolov
+    in fiksiramo števno neskončno množico simbolov
     \[
         \{A_0, A_1, A_2, \ldots \},
     \]
@@ -347,138 +319,145 @@
     od simbolov $ A_0, A_1, A_2, \ldots $ ne nastopa v abecedi $\A$.
 \end{frame}
 
-\begin{frame}{Preobrazba niza}
+\begin{frame}{Pretvorba niza v gramatiko}
     \begin{definicija}
-        Naj bo $\A$ abeceda. Z $ \G(\A) $ označimo pravo podmnožico vseh kontekstno neodivsnih gramatik
+        Naj bo $\A$ abeceda. Z $ \G(\A) $ označimo podmnožico vseh kontekstno neodvisnih gramatik
         $G$, ki izpolnjujejo naslednje pogoje:
         \begin{enumerate}
             \item<1-> $G$ je dopustna;
-            \item<2-> $ V(G) \subset \A $;
+            \item<2-> $ \Sigma(G) \subseteq \A $;
             \item<3->$ S(G) = A_0 $;
             \item<4-> $ V(G) = \{ A_0, A_1, A_2, \ldots, A_{|V(G)| - 1} \} $;
-            \item<5-> Če naštejemo nekončne simbole $V(G)$ v vrstnem redu pojavitve v nizu.
+            \item<5-> Če naštejemo nekončne simbole v vrstnem redu pojavitve v nizu
             \[
             f_G^0(A_0) f_G^1(A_0) f_G^2(A_0) \dots f_G^{|V(G)| - 1}(A_0),
             \]
-            dobimo urejen seznam $ A_0, A_1, A_2, \ldots A_{|V(G)| - 1} $
+            dobimo urejen seznam $ A_0, A_1, A_2, \ldots, A_{|V(G)| - 1} $.
         \end{enumerate}
     \end{definicija}
 \end{frame}
 
-\begin{frame}{Preobrazba niza}
+\begin{frame}{Pretvorba niza v gramatiko}
     \begin{opomba}
-         Naj bo $ G \in \G(\A) $ in sta izpoljena prva dva pogoja zgornje definicije.
-         Potem lahko enolično preimenujemo spremenljivke iz $ V(G) $ tako, da dobimo gramatiko, ki izpolnjuje tudi ostale tri pogoje. Pridelano gramatiko označimo z $[G]$ in očitno velja $[G] \in \G(\A) $.
+         Naj bo $ G \in \G(\A) $ in sta izpolnjena prva dva pogoja zgornje definicije.
+         Potem lahko enolično preimenujemo spremenljivke iz $ V(G) $ tako, da dobimo gramatiko, ki izpolnjuje tudi ostale tri pogoje. Pridelano gramatiko označimo z $[G]$ in očitno velja $ [G] \in \G(\A) $.
     \end{opomba}
 \end{frame}
 
-\begin{frame}{Preobrazba niza}
-    \begin{definicija}
-        Naj bo $\A$ abeceda. Z $\G^*(\A)$ označimo pravo podmnožico množice $\G(\A)$ za katero velja, da za vsaka nekončna simbola $ A,B \in V(G), \ A \neq B $ velja
-        \[
-            f_G^\infty(A) \neq f_G^\infty(B).
-        \]
-    \end{definicija}
-\end{frame}
-
-\begin{frame}{Preobrazba niza}
+\begin{frame}{Pretvorba niza v gramatiko}
     \begin{definicija}
         Naj bo $\A$ abeceda in $G$ kontekstno-neodvisna gramatika. 
-        \textit{Preobrazba niza} je preslikava
+        \textit{Pretvorba niza v gramatiko} je preslikava
         \begin{align*}
-            \A^+ &\rightarrow \G^*(\A), \\
-            x &\mapsto G_x.
+            \A^+ &\rightarrow \G(\A), \\
+            w &\mapsto G_w.
         \end{align*}
         \pause
-        Z $|G|$ označimo skupno število vseh desnih članov produkcijskih pravil gramatike vključno s ponovitvami. Preobrazba niza je \textit{asimptotsko kompaktna}, če je
+        Z $|G|$ označimo skupno število vseh desnih članov produkcijskih pravil gramatike vključno s ponovitvami. Pretvorba niza v gramatiko je \textit{asimptotsko kompaktna}, če je
         \[
-            \lim_{n \rightarrow \infty} \max_{x \in \A^n} \frac{|G_x|}{|x|} = 0.
+            \lim_{n \rightarrow \infty} \max_{w \in \A^n} \frac{|G_w|}{|w|} = 0.
         \]
     \end{definicija}
 \end{frame}
 
-\section{Biskecijska preobrazba niza}
+% Ali ni to kar podpoglavje od preobrazbe?
+\subsection{Biskecijska pretvorba niza v gramatiko}
 
-\begin{frame}{Biskecijska preobrazba niza}
+\begin{frame}{Biskecijska pretvorba niza v gramatiko}
     \begin{definicija}
-        Naj bo $ \x = x_1 x_2 \cdots x_n \in \A^+ $.
+        Naj bo $ w = u_1 u_2 \cdots u_n \in \A^+ $.
         Vpeljemo \textit{bisekcijsko členitev niza}
         \[
-            B(\x) = \{ \x \} \cup \{ x_i \cdots x_j \mid \tfrac{i-1}{j-i+1} \text{ in } \log_2{(j-i+1)} \text{ sta celi števili}  \}.
+            B(w) = \{ w \} \cup \{ u_i \cdots u_j \mid \tfrac{i-1}{j-i+1} \text{ in } \log_2{(j-i+1)} \text{ sta celi števili}  \}.
         \]
         \pause
-        Za vsak podniz $ w \in B(\x) $ z $ ( b(w, L), b(w,R) )$ označimo členitev podniza, kjer sta niza $ b(w, L) $ in $ b(w,R) $ enake dolžine.
+        Za vsak podniz $ u \in B(w) $ z $ ( b(u, L), b(u,R) )$ označimo členitev podniza, kjer sta niza $ b(u, L) $ in $ b(u,R) $ enake dolžine.
     \end{definicija}
 \end{frame}
 
-\begin{frame}{Biskecijska preobrazba niza}
+\begin{frame}{Biskecijska pretvorba niza v gramatiko}
     \begin{exampleblock}{Biskecijska členitev niza}
-        Naj bo $\x = 0001010 $, pote je
+        Naj bo $w = 0001010 $, pote je
         \[
-            B(\x) = \{ \x, 0001, 01, 0, 00, 1 \}.
+            B(w) = \{ w, 0001, 01, 0, 00, 1 \}.
         \]
     \end{exampleblock}
 \end{frame}
 
 \begin{frame}{}
     \begin{definicija}
-        \textit{Bisekcijska preobrazba niza} je preobrazba niza $ \x \mapsto [G_{\x}] $, kjer je
+        \textit{Bisekcijska pretvorba niza v gramatiko} je pretvorba niza v gramatiko $ w \mapsto [G_{w}] $, kjer je
         \begin{itemize}
-            \item<2-> $ V(G_{\x}) = \{ A^w \mid w \in B(\x) \} $,
-            \item<3-> $ T(G_{\x}) = \{ w \in B(\x) \mid |w| = 1 \} $,
-            \item<4-> $ S(G_{\x}) = A^{\x} $.
+            \item<2-> $ V(G_{w}) = \{ A^u \mid u \in B(w) \} $,
+            \item<3-> $ \Sigma(G_{w}) = \{ u \in B(w) \mid |u| = 1 \} $,
+            \item<4-> $ S(G_{w}) = A^{w} $.
         \end{itemize}
     \end{definicija}
 \end{frame}
 
 \begin{frame}{}
     \begin{definicija}
-        Množica $ P(G_{\x}) $ vsebuje sledeča produkcijska pravila
+        Množica $ P(G_{w}) $ vsebuje sledeča produkcijska pravila
         \begin{itemize}
             \item<1-> Če je $ |u| = 1 $, je produkcijsko pravilo oblike
             \[
-                A^w \rightarrow w.  
+                A^u \rightarrow u.  
             \]
-            \item<2-> Če je $ \log_2{|w|} $ celo število, je produkcijsko pravilo oblike
+            \item<2-> Če je $ \log_2{|u|} $ celo število, je produkcijsko pravilo oblike
             \[
-                A^w \rightarrow A^{b(w,L)} A^{b(w,R)}. 
+                A^u \rightarrow A^{b(u,L)} A^{b(u,R)}. 
             \]
-            \item<3-> Če $ \log_2{|w|} $ ni celo število, torej je $ w = \x $, je produkcijsko pravilo oblike
+            \item<3-> Če $ \log_2{|u|} $ ni celo število, torej je $ u = w $, je produkcijsko pravilo oblike
             \[
-                A^w \rightarrow A^w_1 A^w_2 \cdots A^w_t,
+                A^u \rightarrow A^{u_1} A^{u_2} \cdots A^{u_t},
             \]
-            kjer je $ (w_1, w_2, \ldots, w_t) $ enolična členitev niza $\x$, da je $ \forall i \colon w_i \in B(\x) $ in $ |x| > |u_1| > |u_2| > \cdots > |u_t| $.
+            kjer je $ (u_1, u_2, \ldots, u_t) $ enolična členitev niza $u$, da je $ \forall i \colon u_i \in B(w) $ in $ |u| > |u_1| > |u_2| > \cdots > |u_t| $.
         \end{itemize}
     \end{definicija}
 \end{frame}
 
 \begin{frame}
-    \begin{exampleblock}{Biskecijska preobrazba niza \x = 0001010}
-        Vemo, da je $ B(\x) = \{ \x, 0001, 01, 0, 00, 1 \} $
+    \begin{exampleblock}{Biskecijska pretvorba niza $ w = 0001010 $ v gramatiko }
+        Vemo, da je $ B(w) = \{ w, 0001, 01, 0, 00, 1 \} $
         \pause
-        in produkcijska pravila $ G_{\x} $ so
+        in pravila $ G_{w} $ so
         \begin{align*}
-            \uncover<3->{A^{\x} &\rightarrow A^{0001} A^{01} A^{0} \\}
+            \uncover<3->{A^{w} &\rightarrow A^{0001} A^{01} A^{0} \\}
             \uncover<4->{A^{0001} &\rightarrow A^{00} A^{01} \\}
             \uncover<5->{A^{00} &\rightarrow A^0 A^0 \\}
-            \uncover<5->{A^{01} &\rightarrow A^0 A^1 \\}
-            \uncover<6->{A^0 &\rightarrow 0 \\}
-            \uncover<7->{A^1 &\rightarrow 1 }
+            \uncover<6->{A^{01} &\rightarrow A^0 A^1 \\}
+            \uncover<7->{A^0 &\rightarrow 0 \\}
+            \uncover<8->{A^1 &\rightarrow 1 }
         \end{align*}
     \end{exampleblock}
 \end{frame}
 
 \begin{frame}
-    \begin{exampleblock}{Biskecijska preobrazba niza \x = 0001010}
-        Vemo, da je $ B(\x) = \{ \x, 0001, 01, 0, 00, 1 \} $
-        in produkcijska pravila $ [G_{\x}] $ so
+    \begin{exampleblock}{Biskecijska pretvorba niza $ w = 0001010 $ v gramatiko }
+        Vemo, da je $ B(w) = \{ w, 0001, 01, 0, 00, 1 \} $
+        in pravila $ G_{w} $ so
+        \begin{align}
+            A^{w} &\rightarrow A^{0001} A^{01} A^{0} \\
+            A^{0001} &\rightarrow A^{00} A^{01} \\
+            A^{00} &\rightarrow A^0 A^0 \\
+            A^{01} &\rightarrow A^0 A^1 \\
+            A^0 &\rightarrow 0 \\
+            A^1 &\rightarrow 1
+        \end{align}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+    \begin{exampleblock}{Biskecijska pretvorba niza v gramatiko w = 0001010}
+        Vemo, da je $ B(w) = \{ w, 0001, 01, 0, 00, 1 \} $
+        in pravila $ [G_{w}] $ so
         \begin{align*}
-            A_0 &\rightarrow A_1 A_2 A_3 \\
-            A_1 &\rightarrow A_4 A_2\\
-            A_2 &\rightarrow A_3 A_5 \\
-            A_3 &\rightarrow 0 \\
-            A_4 &\rightarrow A_3 A_3 \\
-            A_5 &\rightarrow 1
+            A_0 &\rightarrow A_1 A_2 A_3 \tag{1} \\
+            A_1 &\rightarrow A_4 A_2 \tag{2}\\
+            A_2 &\rightarrow A_3 A_5 \tag{4}\\
+            A_3 &\rightarrow 0 \tag{5} \\
+            A_4 &\rightarrow A_3 A_3 \tag{3} \\
+            A_5 &\rightarrow 1 \tag{6}
         \end{align*}
     \end{exampleblock}
 \end{frame}
