@@ -37,7 +37,7 @@
 \vbox{\hrule width#1}%
 \hbox{\vrule height.3ex}}
 
-\title[Gramatike za kodiranje podatkov]{Kontekstno-neodvisne gramatike za kodiranje in stiskanje podatkov}
+\title[Gramatike za kodiranje podatkov]{Kontekstno-neodvisne gramatike \\ za kodiranje in stiskanje podatkov}
 \author{Janez Podlogar}
 \institute[UL-FMF]{Univerza v Ljubljani, Fakulteta za matematiko in fiziko}
 \date[Maj 2023]{5. 5. 2023}
@@ -128,7 +128,7 @@
 \end{frame}
 
 \begin{frame}{Deterministična kontekstno-neodvisna gramatika}
-    \begin{exampleblock}{Deterministična kontekstno-neodvisna gramatika z praznim jezikom}
+    \begin{exampleblock}{Deterministična kontekstno-neodvisna gramatika s praznim jezikom}
         Naj bo $ G = ( V, \Sigma, P, S ) $, kjer je 
         \begin{itemize}
             \item<2-> $ V = \{ S \} $
@@ -143,7 +143,7 @@
 \end{frame}
 
 \begin{frame}{Deterministična kontekstno-neodvisna gramatika}
-    \begin{exampleblock}{Deterministična kontekstno-neodvisna gramatika z odvečnimi simboli}
+    \begin{exampleblock}{Deterministična kontekstno-neodvisna gramatika z neuporabnimi simboli}
         Naj bo $ G = ( V, \Sigma, P, S ) $, kjer je 
         \begin{itemize}
             \item $ V = \{ S, A \} $
@@ -161,7 +161,7 @@
     \begin{definicija}
         Pravimo, da kontekstno-neodvisna gramatika $G$ \textit{ne vsebuje neuporabnih simbolov}, ko za vsak simbol
         $ y \in V \cup \Sigma, \ y \neq S $, obstaja končno mnogo nizov $ \alpha_1, \alpha_2, \ldots, \alpha_n \in 
-        (V \cup \Sigma)^* $ tako, da je $y$ vsebovan vsaj v enem izmed nizov in velja
+        (V \cup \Sigma)^* $ tako, da se $y$ pojavi v vsaj enem izmed teh nizov in velja
         \[
             S = \alpha_1 \Rightarrow \alpha_2 \Rightarrow \cdots \alpha_n \in L(G).
         \] 
@@ -460,6 +460,16 @@
             A_5 &\rightarrow 1 \tag{6}
         \end{align*}
     \end{exampleblock}
+\end{frame}
+
+\section{Diplomska naloga}
+
+\begin{frame}{Načrt nadaljnjega dela}
+    \begin{itemize}
+        \item Asimptotsko kompaktne pretvorbe niza in pripadajoči rezultati,
+        \item Lempel–Ziv pretvorba niza in biskecijska pretvorba niza,
+        \item Implementacija in empirična analiza zgoraj navednih pretvorb.
+    \end{itemize}
 \end{frame}
 
 \end{document}
