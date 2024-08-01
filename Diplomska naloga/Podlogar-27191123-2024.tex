@@ -37,18 +37,18 @@
 %   V povzetku na kratko opišite vsebinske rezultate dela. Sem ne sodi razlaga
 %   organizacije dela, torej v katerem razdelku je kaj, pač pa le opis vsebine.
 \povzetek{Definiramo podrazred kontekstno-neodvisnih gramatik, imenovan dopustne gramatike.
-Nizu $w$ iz dane abecede priredimo dopustno gramatiko $G_w$, katere jezik je $\{ w \}$.
-Predstavimo dva razreda prirejanja dopustne gramatike nizu in za vsakega podamo algoritem.
-Za stiskanje niza $w$ z binarnim kodiranjem prepisovalnih pravil dopustne gramatike 
+Nizu $w$ iz abecede priredimo dopustno gramatiko $G_w$, katere jezik je $\{ w \}$.
+Predstavimo dva razreda prirejanja dopustne gramatike nizu in za vsak rrazred podamo primer
+prirejanja. Za stiskanje niza $w$ z binarnim kodiranjem prepisovalnih pravil dopustne gramatike 
 $G_w$ analiziramo odvečnost in pokažemo, da je takšno stiskanje univerzalna koda.}
 
 % - povzetek v angleščini
 \abstract{We define a subclass of context-free grammars, called admissable grammars. For each
-string $w$ from a given alphabet, we assign an admissable grammar $G_w$, such that its language
+string $w$ of an alphabet, we assign an admissable grammar $G_w$, such that its language
 is $\{ w \}$. We introduce two classes of assigning an admissable grammars to a string and 
-provide an algorithm for each. We analyze the redundancy in lossless compression of a string $w$
-using a binary encoding of the production rules of tje admissable grammar $G_w$ and demonstrate 
-that such compression constitutes a universal code.
+provide an example for each class. We analyze the redundancy in lossless compression of a 
+string $w$ using a binary encoding of the production rules of the admissable grammar $G_w$ and
+demonstrate that such compression constitutes a universal code.
 }
 
 % - klasifikacijske oznake, ločene z vejicami
@@ -90,7 +90,7 @@ stiskanje brez izgube\sep univerzalna koda}
 \geslo{information source}{informacijski vir}
 \geslo{information theory}{teorija informacij}
 \geslo{irreducible grammar}{neskrčljiva gramatika}
-\geslo{language over an alphabeth}{jezik na abecedi}
+\geslo{language over an alphabet}{jezik na abecedi}
 \geslo{left-total relation}{celovita relacija}
 \geslo{lossless compression}{stiskanje brez izgube}
 \geslo{lossy compression}{stiskanje z izgube}
@@ -237,10 +237,10 @@ tako, da ga lahko dekodirajo le pooblaščene osebe. Takšnemu kodiranju pravimo
 šifriranje. Šifriranje ne preprečuje dostopa do kodiranega sporočila, ampak onemogoča pravilno
 dešifiranje oziroma razumevanje vsebine prestrezniku. %npr Cezarjeva šifra
 Eden izmed namenov kodiranja je tudi doseči jedernatost sporočila. Stiskanje podatkov 
-je zapis informacij sporočila v zgoščeni obliki. Z uporabo lepih lastnosti sporočila, ga lahko
-učinkoviteje prenesemo in porabimo manj prostora. Ena od takih lastnosti je statistična struktura
-jezika. Uporabimo jo v Morsejevi abecedi, kjer imajo črke z višjo frekvenco (v angleškem jeziku) 
-krajši zapis. %npr. Huffmanovo kodiranje
+je zapis informacij sporočila v zgoščeni obliki. Z uporabo lepih lastnosti infromacijskega vira 
+in posameznega sporočila, lahko sporočilo učinkoviteje prenesemo in porabimo manj prostora. Ena 
+od takih lastnosti je statistična struktura jezika. Uporabimo jo v Morsejevi abecedi, kjer
+imajo črke z višjo frekvenco (pojavitve v angleškem jeziku) krajši zapis. %npr. Huffmanovo kodiranje
 
 V delu bomo preučevali metode kodiranja, ki izkoriščajo prisotnost ponavljajočih se vzorcev
 v sporočilu. Zanimalo nas bo stiskanje preko \emph{gramatike}, več o drugih metodah pa najdemo 
@@ -318,7 +318,7 @@ jeziku. Za nas bo abeceda množica veljavnih črk jezika.
     Naj bo $w \in \A^*$ in $w = w_1w_2 \cdots w_n$ predstavitvi niza $w$ s črkami abecede 
     $\A$. \emph{Frekvenca črke $s$ v nizu $w$} je
     \[
-        f(s|w) = \abs{ \bigl\{ i \in \{1, 2 \cdots, n\} \colon w_i = s \bigr\} }.
+        f(s|w) = \abs{ \bigl\{ i \in \{1, 2 \cdots, n\} \mid w_i = s \bigr\} }.
     \]
 \end{definicija}
 
@@ -328,15 +328,16 @@ jeziku. Za nas bo abeceda množica veljavnih črk jezika.
 \end{definicija}
 
 \begin{primer}\label{primer:string}
-    Za abecedo $\A = \{ a,b,c \}$ so $\mathit{ab} \in \A^2$, $\mathit{abccc} \in \A^5$
-    in $\mathit{cababcccababcccab} \in \A^{17}$ končni nizi abecede $\A$.
-    Niz $\mathit{ab}$ je predpona niza $\mathit{abccc}$.
+    Za abecedo $\A = \{ a,b,c \}$ so $\mathit{ab} \in \A^2$, $\mathit{abccc} \in \A^5$,
+    $\mathit{cababcccababcccab} \in \A^{17}$ končni nizi abecede $\A$ in $\mathit{ab}$ je
+    predpona $\mathit{abccc}$.
 \end{primer}
 
 \subsection{Kodiranje sporočila}
 
-Kodiranje sporočila je spreminjanje zapisa sporočila po sistemu pravil, ki ga imenujemo kod. Kod
-bomo podali s preslikavo.
+Kodiranje sporočila je spreminjanje zapisa sporočila po sistemu pravil, ki ga imenujemo kod.
+Predstavimo dve kodiranji, ki ju bomo uporabili pri dokazu binarnega kodiranju dopustne
+gramatike~\ref{izrek:BinarnoKodiranje}.
 
 \begin{definicija}
     \emph{Kodna preslikava} je injektivna preslikava $ \kappa \colon \A^*_s
@@ -356,7 +357,7 @@ bomo podali s preslikavo.
         \cup \{ \Vtextvisiblespace[5pt] \}, \quad
         \A_c = \{ \cdot ,-, \Box \},
     \]
-    kjer je \Vtextvisiblespace[5pt] presledek, $cdot$ kratki signal, $-$ dolgi signal in $\Box$ 
+    kjer je \Vtextvisiblespace[5pt] presledek, $\cdot$ kratki signal, $-$ dolgi signal in $\Box$ 
     kratka enota tišine. Definiramo kodno preslikavo črk abecede 
     $\kappa_s \colon \A \to \A_c^*$, ki vsaki črki iz abecede $\A_s$ priredi niz črk 
     kodne abecede $\A_c$. Predpis preslikave $\kappa_s$ je določen na sliki~\ref{fig:morse}.
@@ -369,7 +370,7 @@ bomo podali s preslikavo.
         \kappa(w) = \kappa_s(a_1) \Box\Box\Box \kappa_s(a_2) \Box\Box\Box \cdots 
         \Box\Box\Box \kappa_s(a_n).
     \]
-    Poglejmo dve kodiranji
+    Poglejmo dve kodiranji sporočil
     \begin{gather*}
         \kappa(\text{SOS}) = \phantom{} \cdot\Box\cdot\Box\cdot \Box\Box\Box -\Box-\Box- 
         \Box\Box\Box \cdot\Box\cdot\Box\cdot \phantom{}, \\
@@ -394,8 +395,9 @@ Kodiranje z namenom krajšanja zapisa sporočila imenujemo \emph{stiskanje podat
     \emph{Stiskanje} je kodna preslikava $\kappa$ za katero velja 
     \[ 
     \exists n \in \N \ \forall w \in \A^* \colon \abs{w} \geq n \implies
-    \left\lvert \kappa(w)\right\rvert \ll \left\lvert w \right\rvert.
+    \abs{\kappa(w)} \ll \abs{w}.
     \]
+    Razmerju $\frac{\abs{\kappa(w)}}{\abs{w}}$ pravimo \emph{razmerje stisljivosti}. 
     $\kappa(w)$ imenujemo \emph{stisnjen niz $w$} in $\delta(\kappa(w))$ \emph{rekonstrukcija niza}.
 \end{definicija}
 
@@ -434,7 +436,6 @@ Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiran
         \eta \colon \N &\to \{ 0, 1 \}^+, \\
         n &\mapsto \underbrace{0 \cdots 0}_{n-1}1.
     \end{align*}
-    Opomnimo, da je v tem primeru izvorna abeceda števno neskončna.
 \end{definicija}
 
 \begin{primer}
@@ -449,14 +450,12 @@ Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiran
 \subsubsection{Leksikografsko kodiranje}% Enumerative coding in Lehmer code
 
 \begin{definicija}
-    Naj bo $S \subseteq \{ 1,2, \ldots, M\}^n$ za $n, M \in \N$ in 
-    $w_1, w_2, \ldots, w_k \in \{ 0,1 \}$. Z $n_s(w_1w_2 \cdots w_k)$ označimo 
-    \emph{število nizov v $S$ za katere je $w_1w_2 \cdots w_k$ predpona}.
+    Naj bo $S \subseteq \{ 1,2, \ldots, M\}^n$ za in $w_1, w_2, \ldots, w_k \in \{ 1,2, \ldots, M\}$. 
+    Z $n_s(w_1w_2 \cdots w_k)$ označimo \emph{število nizov v $S$ za katere je $w_1w_2 \cdots w_k$ predpona}.
 \end{definicija}
 
 \begin{definicija}
-    Naj bo $S \subseteq \{ 1,2, \ldots, M\}^n$ za $n, M \in \N$. \emph{Leksikografksa indeks $S$}
-    je preslikava
+    Naj bo $S \subseteq \{ 1,2, \ldots, M\}^n$. \emph{Leksikografksa indeks $S$} je preslikava
     \[
         i_s \colon S \to \{ 0,1 \ldots, n -1 \},
     \]
@@ -473,7 +472,7 @@ Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiran
 \end{primer}
 
 \begin{trditev}
-    Leksikografksi indeks $S \subseteq \{ 0,1 \}^n$ je podan s predpisom
+    Leksikografski indeks $S \subseteq \{ 0,1 \}^n$ je podan s predpisom
     \[
         i_s(w) = \sum_{j=1}^{n} w_j \cdot n_s(w_1w_2 \cdots w_{j-1}0).
     \]
@@ -486,7 +485,7 @@ Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiran
 \begin{dokaz}
     Velja $w_1w_2 \cdots w_{j-1}0 < w_1w_2 \cdots w_{j-1}1$. Za vsak $j$ takšen, da je $w_j=1$,
     preštejemo število nizov v $S$, ki se prvič razlikujejo od niza $w$ na $j$-tem mestu.
-    To so ravno nizi, ki imaho manjši leksikogrfski indeks od $w$. Število teh nizov je po 
+    To so nizi, ki imajo manjši leksikogrfski indeks od $w$. Število teh nizov je po 
     definiciji enako številu $n_s(w_1w_2 \cdots w_{j-1}0)$.
 
     Ko seštejemo $n_s(w_1w_2 \cdots w_{j-1}0)$ za vsak $j = 1,2, \cdots, n$ preštejemo vse
@@ -504,16 +503,16 @@ Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiran
         \item $j=1 \colon i = 4 > 3 = n_s(0) \implies x_1 = 1$ in $i \coloneq 4 - 3 = 1$;
         \item $j=2 \colon i = 1 > 0 = n_s(10) \implies x_2 = 1$ in $i \coloneq 1 - 0 = 1$;
         \item $j=3 \colon i = 1 < 2 = n_s(110) \implies x_3 = 0$;
-        \item $j=4 \colon i = 1 > 1 = n_s(1100) \implies x_4 = 0$ in $i \coloneq 1 - 1 = 0$.
+        \item $j=4 \colon i = 1 > 1 = n_s(1100) \implies x_4 = 1$ in $i \coloneq 1 - 1 = 0$.
     \end{itemize}
     Tore je $i_s(1101) = 4$.
 \end{primer}
 
-Zgornjo trditev razširimo na poljubno abecedo $\{ 1,2, \ldots, M\}$, kjer je $M \in \N$.
-Trditve ne bomo dokazali, saj je dokaz skoraj enak dokazu prejšnje trditve.
+Zgornjo trditev razširimo na poljubno abecedo $\{ 1,2, \ldots, M\}$. Trditve ne bomo dokazali,
+saj je dokaz skoraj enak dokazu prejšnje trditve.
 
 \begin{trditev}
-    Leksikografksi indeks od $w \in S \subseteq \{ 1,2, \ldots, M\}^n$ za $n, M \in \N$ je 
+    Leksikografski indeks od $w \in S \subseteq \{ 1,2, \ldots, M\}^n$ je 
     podan s predpisom
     \[
         i_s(w) = \sum_{j=1}^{n} \sum_{k=1}^{w_j-1} n_s(w_1w_2 \cdots w_{j-1}k).
@@ -527,17 +526,22 @@ Trditve ne bomo dokazali, saj je dokaz skoraj enak dokazu prejšnje trditve.
     potem je $x_j = m$ in in nastavi $i \coloneq i - \sum_{k=1}^{m-1} n_s(w_1w_2 \cdots w_{j-1}k)$.
 \end{trditev} 
 
-Leksikografski indeks bi lahko posplošili na poljubno \emph{linearno urejeno} abecedo. Namesto 
-tega za poljubno abecedo $\A$ velikosti $M$ podamo bijektivno preslikavo $\xi$ v 
+Formulo za leksikografski indeks lahko posplošimo na poljubno \emph{linearno urejeno} abecedo.
+Namesto tega za poljubno abecedo $\A$ velikosti $M$ podamo bijektivno preslikavo $\xi$ v 
 $\{ 1,2, \ldots, M\}$ in z njo \emph{induciramo linearno urejenost na $\A$} tako,
 da je za $a,b \in \A$
 \[
     a < b \iff \xi(a) < \xi(b).
 \]
+Ker imamo bijektivno preslikavo med abecedo $\A$ in abecedo $\{ 1,2, \ldots, M\}$ vsak niz
+$w \in \A^*$ preslikavo v $\{ 1,2, \ldots, M\}^*$ po črkah z $\xi$ in mu nato priredimo 
+leksikografksi indeks. Podobno za inverz, najprej izračunamo inverz leksikografksega indeksa 
+v abecedi $\{ 1,2, \ldots, M\}$ in ga nato po črkah z $\xi^{-1}$ preslikavo nazaj v niz 
+abecede $\A$.
 
 \begin{definicija}
     Naj bo $\A$ abeceda velikosti $n$. \emph{Abecedni vrstni red abecede $\A$}, je 
-    zaporedje črk $\A \colon a_1, a_2, \ldots, a_n$, tako da je
+    zaporedje črk $a_1, a_2, \ldots, a_n \in \A$, tako da je
     \[
         a_1 < a_2 < \ldots < a_n.
     \]
@@ -545,7 +549,7 @@ da je za $a,b \in \A$
 
 \begin{trditev}
     Naj bo $\A = \{a_1, a_2, \ldots, a_M \}$ in $c_1, c_2, \ldots, c_M \in \N$.
-    Definiramo množico vseh nizov abecede $\A$, kjer se za vsak $i= i = 1, 2, \ldots, M$ črka
+    Definiramo množico vseh nizov abecede $\A$, kjer se za $i = 1, 2, \ldots, M$ črka
     $a_i$ pojavi $c_i$-krat
     \[
         S = \bigl\{ u \in \A^* \mid \forall i= 1, 2, \ldots, M \colon f(a_i|u) = c_i \bigr\}.
@@ -554,8 +558,8 @@ da je za $a,b \in \A$
     \[
         n_s(w_1w_2 \cdots w_{j-1}k) = 
         \begin{cases}
-            \binom{n-j}{r_1, r_2, \cdots, r_k}; & \text{če je } w_1w_2 \cdots w_{j-1}k \in S\\
-            0; & \text{sicer}
+            \binom{n-j}{r_1, r_2, \cdots, r_k} & \text{;če je } w_1w_2 \cdots w_{j-1}k \in S\\
+            \qquad 0 & \text{;sicer}
         \end{cases},
     \]
     kjer je $n = \sum_{i=1}^M c_i$ in $r_i = c_i - f(a_i|w_1w_2 \cdots w_{j-1}k)$ za 
@@ -590,7 +594,7 @@ da je za $a,b \in \A$
         \item $B_2$ je eniška koda vsake frekvenc $f(a_i|w)$ v enakem redu kot nastopajo črke v $B_1$;
         \item $B_3$ je binarni zapis $i_{s(w)}(w)$.
     \end{itemize}
-    Opomnimo, da je abeceda $\A$ poznana tako kodirniku kot dekodirniku.
+    Abeceda $\A$ in njen abecedeni vrstni red sta poznana tako kodirniku kot dekodirniku.
 \end{definicija}
 
 \begin{primer}\label{primer:leksikografsko}
@@ -622,19 +626,19 @@ da je za $a,b \in \A$
     \]
 \end{primer}
 
-Več o kodiranju nizov iz $S \subseteq \{ 1,2, \ldots, M\}^n$, ki izkoriščajo strukturo $S$, 
+Več o kodiranju nizov iz $S \subseteq \{ 1,2, \ldots, M\}^n$, ki uporabljajo strukturo $S$, 
 najdemo v~\cite{Cover1973}.
 
 \subsection{Teorija informacij}
 
 \emph{Teorija informacij} preučuje prenos, obdelavo, pridobivanje in uporabo informacij. Temelje
 področja je postavil Claude Shannon v~\cite{Shannon1949}. Koncept informacije je preširok, da bi 
-ga lahko zajeli z eno samo definicijo. V tem razdelku predstavimo osnove teorije informacij in 
-definiramo \emph{entropijo}, ki ima številne lastnosti, ki se strinjajo z intuitivnim merilom količine informacij.
+ga lahko zajeli z eno samo definicijo. V razdelku predstavimo dva dva pogosta modela
+informacijskega vira in definiramo \emph{entropijo}, ki ima številne lastnosti, ki se strinjajo z
+intuitivnim merilom količine informacij.
 
-Recimo, da imamo dogodek $A$, ki je množica izidov nekega naključnega poskusa, in $\probP(A)$
-verjetnost, da se zgodi dogodek $A$. Koliko informacije dobimo, če se ta dogodek zgodi? Intuitivno
-bi rekli, da:
+Recimo, da imamo dogodek $A$ in $\probP(A)$ verjetnost, da se ta dogodek zgodi.
+Koliko informacij dobimo, če se ta dogodek zgodi? Intuitivno bi rekli, da:
 \begin{itemize}
     \item je gotov dogodek popolnoma pričakovan in ne nosi nobene informacije;
     \item manj verjetni kot je dogodek, bolj presenetljiv je in nosi več informacij;
@@ -646,15 +650,15 @@ Da se preveriti, da spodnja definicija informacije dogodka res izpolnjuje vse tr
     Naj bo $X$ diskretna slučajna spremeljivka. Označimo $p(x) = \probP(X = x)$. 
     \emph{Shannonova informacija dogodka $A$} je
     \[
-        i(A) = - \log_b(p(x)),
+        i(A) = - \log_b p(x),
     \]
-    kjer je $b > 1$. Najpogostejša je izbira $b=2$, potem Shannonovo informacijo merimo v 
+    kjer je $b > 1$. Najpogostejša izbira je $b=2$, potem Shannonovo informacijo merimo v 
     \emph{bitih}. 
 \end{definicija}
 
 \begin{primer}
     Mečemo pošteni kovanec. Z $G$ označimo dogodek da pade glava in z $C$ dogodek, da pade cifra.
-    Smiselno je, da imata oba dogodka enako informacij.
+    Smiselno je, da oba dogodka nosita enako informacij.
     \[
         i(G) = i(C) = 1 \text{ bit}.
     \]
@@ -666,7 +670,7 @@ Da se preveriti, da spodnja definicija informacije dogodka res izpolnjuje vse tr
     \end{align*}
 \end{primer} 
 
-Shannonova informacija je le alternativni način izražanja verjetnosti dogodka. Predstavljajmo si 
+Shannonova informacija je le alternativni način izražanja verjetnosti dogodka. Predstavljamo si 
 jo kot mero ``presenečenja'', da se je dogodek zgodil. Malo verjetni dogodki so zelo presenetljivi
 in bodo zelo vplivali na naša dejanja, medtem ko nas skoraj gotovi dogodki ne presenetijo in bomo
 z življenjem nadaljevali, kot da se ni nič zgodilo.
@@ -688,7 +692,7 @@ kako presenetljiva je naključna spremenljivka ``v povprečju''.
 \begin{definicija}
     Naj bo $X$ diskretna slučajna spremeljivka. \emph{Entropija slučajne spremenljivke $X$} je
     \begin{align*}
-        H(X) &= \sum_{x \in X} - p(x) \log_2(p(x)) \\
+        H(X) &= \sum_{x \in X} - p(x) \log_b p(x) \\
              &= \sum_{x \in X} p(x) I(x) \\
              &= \E[I(X)].
     \end{align*}
@@ -732,7 +736,7 @@ spomina, jo ocenimo preko niza, ki ga generira.
 
 \begin{definicija}
     Naj bo $\{ X \}_{i=1}^{\infty}$ diskretni vir $X$ brez spomina abecede $\A$, kjer ne 
-    poznamo porazdelitve slučajne spremenljivke $X$ in $w$ niz generiran z diskretnim virom $X$
+    poznamo porazdelitve slučajne spremenljivke $X$, in $w$ niz generiran z diskretnim virom $X$
     brez spomina $\A$ dolžine $n$.
     \emph{Entropija niza $w$} je
     \[
@@ -743,7 +747,7 @@ spomina, jo ocenimo preko niza, ki ga generira.
 \end{definicija}
 
 \begin{primer}\label{primer:EntropijaNiza}
-    Za niz $w =1211223$ iz~\ref{primer:leksikografsko} je entropija
+    Za niz $w =1211223$ iz primera~\ref{primer:leksikografsko} je entropija enaka
     \[
         H(w) = 
         - \frac{3}{7} \log_2 \left( \frac{3}{7} \right)
@@ -757,25 +761,23 @@ Sledeča lema, ki je dokazana v~\cite[Lema 2.3]{CsiszarKorner2011}, pojasni entr
 kombinatoričnega vidika. Uporabili jo bomo v dokazu~\ref{izrek:BinarnoKodiranje}.
 
 \begin{lema}\label{lema:ocena}
-    Naj bo $\{ X \}_{i=1}^{\infty}$ diskretni vir $X$ brez spomina abecede $\A$ in  
-    $w$ niz, ki ga dobimo z stikanjem prvih $\ell$ členov zaporedja $\{ X \}_{i=1}^{\infty}$.
-    Potem velja 
+    Naj bo $\{ X \}_{i=1}^{\infty}$ diskretni vir $X$ brez spomina abecede $\A$ in $w$ niz 
+    generiran z diskretnim virom $X$ brez spomina $\A$ dolžine $n$. Potem velja 
     \[
-        \abs{S(w)} \leq 2^{\ell \cdot H(X)}.
+        \abs{S(w)} \leq 2^{n \cdot H(w)}.
     \] 
 \end{lema}
 
 \begin{primer}
-    Predstavljajmo si, da smo niz $w=1211223$ iz primera~\ref{primer:leksikografsko} dobili kot 
+    Recimo, da smo niz $w=1211223$ iz primera~\ref{primer:leksikografsko} dobili kot 
     zaporedje prvih $7$ členov diskretni vir $X$ brez spomina abecede $\A = \{ 1,2,3 \}$. 
-    Recimo, da je $p(1) = f(1|w)$, $p(2) = f(2|w)$ in $p(3) = f(3|w)$. Potem lahko ocenimo
-    množico $S(w)$ z
+    Potem ocenimo
     \[
         140 = \abs{S(w)} \leq 2^{7 \cdot H(X)} \approx 1130.
     \]
 \end{primer}
 
-Shannon v~\cite{Shannon1949} postavi tudi statistično spodnjo mejo za stiskanje diskretnega
+Shannon v~\cite{Shannon1949} postavi statistično spodnjo mejo za stiskanje diskretnega
 vira brez izgube. Izrek je podavn verbalno za diskretni vir brez spomina 
 v~\cite[1. poglavje, 4. razdelek]{Mackay2003} na sledeč način.
 
@@ -790,16 +792,15 @@ v~\cite[1. poglavje, 4. razdelek]{Mackay2003} na sledeč način.
     $p(n) = 2^{-n}$ za $n \in \N$. Potem je eniško kodiranje po črkah optimalno v smislu zgornjega
     izreka, saj je v tem primeru eniško kodiranje enako \emph{Huffmanovemu kodiranju}~\cite{Huffman1952}.
     Huffmanovo kodiranje je optimalno kodiranje po črkah pri znani verjetnostni porazdelitvi 
-    diskretnega vira brez spomina. Tako kot v definiciji eniškega kodiranja, je abeceda vira 
-    števno neskončna.
+    diskretnega vira brez spomina.
 \end{primer}
 
 Posledica izreka~\ref{izrek:EntropijaKodiranje} je, da za optimalnno stiskanje $\kappa$ brez 
 izgube diskretnega $X$ vira brez spomina, velja $\E[\abs{\kappa(w)}] \geq H(X)$.
-To pove, da v povprečju velja $\abs{\kappa(w)} = - \log_2\mu(w)$. Več o tem najdemo 
-v~\cite[1. poglavje, 5. razdelek]{Mackay2003}. \emph{Odvečnost} stiskanja $\kappa$ merimo
+Torej, v povprečju velja $\abs{\kappa(w)} = - \log_2\mu(w)$. Več o tem najdemo 
+v~\cite[1. poglavje, 5. razdelek]{Mackay2003}. \emph{Odvečnost} stiskanja $\kappa$
 je razliko med dolžino kodiranega niza in optimalno doložino. Odvečnost nam torej pove kako
-blizu je stiskanje optimalnemu stiskanju.
+blizu je $\kappa$ optimalnemu stiskanju.
 
 \begin{definicija}\label{def:odv}
     \emph{Maksimalna točkovna odvečnost reda $n$ kodne preslikave $\kappa$ glede na družino 
@@ -813,38 +814,40 @@ blizu je stiskanje optimalnemu stiskanju.
 Diskretni vir $X$ brez spomina je najpreprostejši model infromacijskega vir, saj je črka $X_i$ 
 neodvisna od vseh prejšnjih $X_1, X_2, \ldots , X_{i-1}$. Nizi, ki jih generira, ne modelirajo
 dobro sporočil, ki jih srečamo v praksi. Zato predstavimo sledeči kompleksnejši model
-informacijskega vira, ki ga bomo uporbili v poglavju~\ref{subsection:StiskanjeNiza}, da ima
-stiskanja z formalno gramatiko majhno odvečnost.
+informacijskega vira, ki ga bomo uporbili v poglavju~\ref{subsection:StiskanjeNiza}.
 
 \begin{definicija}\label{def:FSS} % Finite state source
     Naj bo $m \in \N$. Informacijski vir abecede $\A$ je 
-    \emph{končni vir abecede $\A$ stopnje $m$}, če obstaja množica stanj $S$ velikosti $m$, 
-    začetno stanje $s_0 \in S$ in množico
+    \emph{končni vir abecede stopnje $m$}, če obstaja množica stanj $S$ velikosti $m$, 
+    začetno stanje $s_0 \in S$ in množica \emph{verjetnosti prehoda s črko iz stanja v stanje}
     \[
         \{ p(a, s|s^\prime) \in \R_{\geq 0} \mid s, s^\prime \in S, a \in \A \}
+    \] 
+    tako, da za vsak $s^\prime \in S$ velja
+    \[
+        \sum_{a \in \A} \sum_{s \in S} p(a, s|s^\prime) = 1
     \]
-    \emph{verjetnosti prehoda s črko $a$ iz stanja $s^\prime$ v stanje $s$} tako, da je
-    \begin{align*}
-        \sum_{a \in \A} \sum_{s \in S} p(a, s|s^\prime) &= 1 \text{ za vsak } s^\prime \in S, \\
-        \mu(w_1w_2 \cdots w_n) &= \sum_{s_1, s_2, \ldots, s_n} 
-        \left( p(w_1,s_1|s_0) \prod_{i=2}^{n} p(w_i, s_i|s_{i-1}) \right)
-    \end{align*}
-    za vsak $w_1w_2 \cdots w_n \in \A^+$.
+    in, da za vsak $w_1w_2 \cdots w_n \in \A^+$ velja
+    \[
+        \mu(w_1w_2 \cdots w_n) = \sum_{s_1, s_2, \ldots, s_n} 
+        \left( p(w_1,s_1|s_0) \prod_{i=2}^{n} p(w_i, s_i|s_{i-1}) \right).
+    \]
     Z $\Lambda_{kv}^m(\A)$ označimo družino končnih virov abecede $\A$ stopnje $m$.
 \end{definicija}
 
 \begin{primer}
     Naj bo $\A = \{ a, b, c \}$, $S = \{ s_0, s_1, s_2 \}$ in napišemo le neničelne 
-    verjetnosti prehoda iz stanja v stanje s črko
+    verjetnosti prehoda s črko iz stanja v stanje
     \begin{gather*}
         p(a, s_0|s_0) = 0.5, \, p(a, s_1|s_0) = 0.4, \, p(b, s_1|s_0) = 0.1, \\
         p(b, s_1|s_1) = 0.8, \, p(c, s_2|s_1) = 0.2, \\
         p(c, s_2|s_2) = 0.7, \, p(c, s_1|s_2) = 0.3,
     \end{gather*}
-    Torej imamo končni vir abecede $\{ a, b, c \}$ stopnje $3$. Shematično ga predstavimo na 
-    sledeč način. Vsako stanje je vozlišče. Začetno vozlišče označimo z vhodno puščico. Vozlišči sta 
-    povezani, če obstaja neničelna verjetnost prehoda med njima. Nad vsako povezavo napišemo črko,
-    s katero se premaknemo, iz enega stanja v drugega in verjetnost prehoda.
+    Ker velja $\sum_{a \in \A} \sum_{s \in S} p(a, s|s^\prime) = 1$,  imamo končni vir abecede 
+    $\{ a, b, c \}$ stopnje $3$. Shematično ga predstavimo na sledeč način. Vsako stanje je 
+    vozlišče. Začetno vozlišče označimo z vhodno puščico. Vozlišči sta povezani, če obstaja 
+    neničelna verjetnost prehoda med njima. Nad vsako povezavo napišemo črko, s katero se 
+    premaknemo, iz enega stanja v drugega in verjetnost prehoda.
     \begin{figure}[H] 
         \centering 
         \begin{tikzpicture}
@@ -874,7 +877,7 @@ stiskanja z formalno gramatiko majhno odvečnost.
     \end{figure}
     Določimo verjetnost, da naš informacijski vir generira nize $\mathit{cba}$, $\mathit{abcab}$, 
     $\mathit{aabcabc}$. Vedno začnemo v začetnem stanju $s_0$. Ker iz se iz začetnega stanja 
-    ne ne moremo premakniti v nobeno drugo stanje s črko $s$, je
+    ne moremo premakniti s črko $c$ v nobeno drugo stanje, je
     \[
         \mu(\mathit{cba}) = 0.
     \]
@@ -2261,7 +2264,7 @@ prirejanji.
         \item $B_4 = 11$;
         \item $B_5 = 00100101111$;
         \item $B_6 = 00010100$, saj vidimo, da je niz $\omega_G$ le premenovani niza $w = 1211223$,
-        kateremu smo že v primeru~\ref{primer:leksikografsko} izračunali leksikografksi indeks.
+        kateremu smo že v primeru~\ref{primer:leksikografsko} izračunali leksikografski indeks.
     \end{itemize}
     Staknemo, da dobimo
     \[
