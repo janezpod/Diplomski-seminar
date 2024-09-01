@@ -36,20 +36,25 @@
 % - povzetek v slovenščini
 %   V povzetku na kratko opišite vsebinske rezultate dela. Sem ne sodi razlaga
 %   organizacije dela, torej v katerem razdelku je kaj, pač pa le opis vsebine.
-\povzetek{Definiramo podrazred kontekstno-neodvisnih gramatik imenovan dopustne gramatike.
-Nizu $w$ iz abecede priredimo dopustno gramatiko $G_w$, katere jezik je $\{ w \}$.
-Predstavimo dva razreda prirejanj dopustne gramatike nizu in za vsak razred podamo primer
-prirejanja. Binarno kodiranje prepisovalnih pravil dopustne gramatike $G_w$ skupaj s 
-predstavljenim prirejanjem zagotavlja dobro zgornjo mejo odvečnosti. Takšno stiskanje podatkov je 
-univerzalen kod.}
+\povzetek{Temeljni problem komunikacije je učinkovit prenos sporočila. Stiskanje podatkov je
+kodiranje, katerega cilj je zapisati sporočilo v zgoščeni obliki. V tem okviru definiramo 
+podrazred kontekstno-neodvisnih gramatik imenovan dopustne gramatike. Nizu $w$ priredimo dopustno
+gramatiko $G_w$, katere jezik je $\{ w \}$. Predstavimo dva razreda prirejanj dopustne gramatike 
+nizu in za vsak razred podamo primer prirejanja. Binarno kodiranje prepisovalnih pravil dopustne
+gramatike $G_w$ skupaj s predstavljenim prirejanjem zagotavlja dobro zgornjo mejo odvečnosti. 
+Takšno stiskanje podatkov je univerzalen kod, kar v splošnem zagotavlja skoraj optimalno 
+stiskanje.}
 
 % - povzetek v angleščini
-\abstract{We define a subclass of context-free grammars, called admissable grammars. For each
-string $w$ of an alphabet, we assign an admissable grammar $G_w$, such that its language
-is $\{ w \}$. We introduce two classes of assigning an admissable grammars to a string and 
-provide an example for each class. Binary encoding of the production rules of an admissable
-grammar $G_w$ with the underlying admissable grammar assignment results in good redundancy
-bound. Such data Compression constitutes a universal code.}
+\abstract{A fundamental problem of communication is the effective transmission of a message.
+Data compression is a form of encoding aimed at representing the message in a condensed form.
+Within this framework, we define a subclass of context-free grammars, referred to as admissible 
+grammars. For each string $w$, we assign an admissible grammar $G_w$, such that its language
+is $\{ w \}$. We present two classes of assignments of admissible grammars to a string and 
+provide an example for each class. Binary encoding of the production rules of an admissible
+grammar $G_w$ together with the underlying admissible grammar assignment results in a good 
+redundancy bound. Such data compression constitutes a universal code, generally providing 
+near-optimal compression.}
 
 % - klasifikacijske oznake, ločene z vejicami
 %   Oznake, ki opisujejo področje dela, so dostopne na strani https://www.ams.org/msc/
@@ -70,11 +75,11 @@ stiskanje brez izgube\sep univerzalen kod}
 % - angleško-slovenski slovar strokovnih izrazov
 \slovar{
 % \geslo{angleški izraz}{slovenski izraz}
-\geslo{admissable grammar}{dopustna gramatika}
+\geslo{admissible grammar}{dopustna gramatika}
 \geslo{alphabet}{abeceda}
 \geslo{channel}{kanal}
 \geslo{code}{kod}
-\geslo{concatenation}{stikanje}
+\geslo{concatenation}{stik}
 \geslo{context-free grammar}{kontekstno-neodvisna gramatika}
 \geslo{data compression}{stiskanje podatkov}
 \geslo{decoder}{dekodirnik}
@@ -98,7 +103,7 @@ stiskanje brez izgube\sep univerzalen kod}
 \geslo{maximal pointwise redundancy}{maksimalna točkovna odvečnost}
 \geslo{phrase structure grammar}{frazeološka strukturna gramatika}
 \geslo{prefix}{predpona}
-\geslo{production rules}{prepisovalno pravilo}
+\geslo{production rule}{prepisovalno pravilo}
 \geslo{reciever}{sprejemnik}
 \geslo{redundancy}{odvečnost}
 \geslo{total order}{linearna urejenost}
@@ -175,7 +180,7 @@ stiskanje brez izgube\sep univerzalen kod}
 
 \section{Uvod}
 
-Temeljni problem sporazumevanja je prenos sporočila od informacijskega vira do sprejemnika.
+Temeljni problem komunikacije je prenos sporočila od informacijskega vira do sprejemnika.
 Privzemimo komunikacijski model prikazan na spodnji sliki, ki je prirejna po~\cite{Shannon1949}.
 \tikzset{block/.style={draw, thick, text width=3cm, minimum height=1.5cm, align=center}, line/.style={-latex}}
 \begin{figure}[H]
@@ -193,7 +198,7 @@ Privzemimo komunikacijski model prikazan na spodnji sliki, ki je prirejna po~\ci
         \draw[line] (c)-- (d); 
     \end{tikzpicture}
     }
-    \caption{Komunikacijski model}
+    \caption{Komunikacijski model.}
 \end{figure}
 
 \emph{Informacijski vir} izbere želeno sporočilo iz množice vseh možnih sporočil.
@@ -206,7 +211,7 @@ Besedilo, zapisano z pismenkami, je neberljivo za slepe osebe, saj je komunikaci
 primeru vid. Prav tako pisanega besedila v prvotni obliki ni mogoče poslati s telegrafom. 
 V tem primeru je komunikacijski kanal žica in pismenke se po njej ne morejo sprehoditi. 
 Najpomembnejši namen kodirnika je pretvorba sporočila v obliko, ki jo lahko pošljemo po kanalu.
-V opisanih primerih je sporočilo, ki bi ga radi prenesli, zapisana v neprimerni obliki. V primeru
+V opisanih primerih je sporočilo, ki bi ga radi prenesli, zapisano v neprimerni obliki. V primeru
 slepe osebe je potrebno besedilo zapisati z Braillovo pisavo, v primeru telegrafa pa je besedilo 
 potrebno pretvoriti v električni signal, kot ilustrira naslednji primer.
 \begin{primer}\label{primer:mors}
@@ -238,14 +243,14 @@ tako, da ga lahko dekodirajo le pooblaščene osebe. Takšnemu kodiranju pravimo
 šifriranje. Šifriranje ne preprečuje dostopa do kodiranega sporočila, ampak onemogoča pravilno
 dešifiranje oziroma razumevanje vsebine prestrezniku. %npr Cezarjeva šifra
 
-Eden izmed namenov kodiranja je tudi doseči jedernatost sporočila. Stiskanje podatkov 
+Eden izmed namenov kodiranja je doseči jedernatost sporočila. Stiskanje podatkov 
 je zapis informacij sporočila v zgoščeni obliki. Z uporabo lepih lastnosti infromacijskega vira 
-in posameznega sporočila, lahko sporočilo učinkoviteje prenesemo in porabimo manj prostora. Ena 
-od takih lastnosti je statistična struktura jezika. Uporabimo jo v Morsejevi abecedi, kjer
+in posameznega sporočila, lahko sporočilo učinkoviteje prenesemo in porabimo manj prostora in časa.
+Ena od takih lastnosti je statistična struktura jezika. Uporabimo jo v Morsejevi abecedi, kjer
 imajo črke z višjo frekvenco (pojavitve v angleškem jeziku) krajši zapis. %npr. Huffmanovo kodiranje
 
 V delu bomo preučevali metode kodiranja, ki izkoriščajo prisotnost ponavljajočih se vzorcev
-v sporočilu. Zanimalo nas bo stiskanje preko \emph{gramatike}, več o drugih metodah pa najdemo 
+v sporočilu. Zanimalo nas bo stiskanje z uporabo \emph{gramatike}, več o drugih metodah pa najdemo 
 v~\cite{Sayood2017}. Gramatika ali slovnica je nabor pravil, ki jih mora stavek 
 upoštevati, da je ``pravilen''. Pri stiskanju podatkov nas zanimajo \emph{formalne gramatike}, 
 ki jih razumemo kot nabor pravil za generiranje zaporedja črk. Zaporedje črk želimo 
@@ -276,14 +281,18 @@ stisniti preko zgoščenega nabora pravil, ki generirajo dano zaporedje.
 
 \section{Osnovni pojmi}
 
+Preden se osredotočimo na formalne gramatike, spoznajmo nekaj temeljnih pojmov.
+Prvi razdelek uvaja konstrukcijo nizov iz abecede, drugi razdelek formalizira koncept kodiranja 
+in stiskanja podatkov, tretji razdelek pa obravnava pojem informacije in informacijskega vira.
+
 \subsection{Jezik na abecedi}
-Gradnik besedila je abeceda. To je množica črk, ki ponavadi predstavljajo zvoke v govorjenem
-jeziku. Za nas bo abeceda množica veljavnih črk jezika.
+Besedila sestavljamo iz črk. Abeceda je množica črk, ki ponavadi predstavljajo zvoke v
+govorjenem jeziku. Za nas bo abeceda množica veljavnih črk jezika.
 
 \begin{definicija}
     \emph{Abeceda} je končna neprazna množica. Elementom abecede pravimo \emph{črke}.
-    Za vsak $\ell > 0$ rekurzivno definiramo \emph{množico vseh nizov abecede $\A$ dolžine 
-    $\ell + 1$}
+    Za vsak $\ell \geq 0$ rekurzivno definiramo \emph{množico vseh nizov abecede $\A$ dolžine 
+    $\ell$}
     \begin{gather*}
         \A^0 = \{ \varepsilon \}, \\
         \A^{\ell+1} = \{ wa \mid w \in \A^{\ell} \text{ in } a \in \A \},
@@ -308,19 +317,19 @@ jeziku. Za nas bo abeceda množica veljavnih črk jezika.
         w*u = w_1w_2 \cdots w_nu_1u_2 \cdots u_m,
     \]
     kjer sta $w_1w_2 \cdots w_n$ in $u_1u_2 \cdots u_m$ predstavitvi nizov $w$ in $u$ s črkami
-    abecede $\A$. Operacijo $*$ imenujemo \emph{stikanje}. Simbol $*$ spustimo in 
+    abecede $\A$. Operacijo $*$ imenujemo \emph{stik}. Simbol $*$ spustimo in 
     krajše pišemo $wu$.
 \end{definicija}
 
 \begin{opomba}
-    Stikanje je asociativna operacija. Torej je $(\A^*, *)$ monoid in $(\A^+, *)$ polgrupa.
+    Stik je asociativna operacija. Torej je $(\A^*, *)$ monoid in $(\A^+, *)$ polgrupa.
 \end{opomba}
 
 \begin{definicija}
     Naj bo $w \in \A^*$ in $w = w_1w_2 \cdots w_n$ predstavitev niza $w$ s črkami abecede 
     $\A$. \emph{Frekvenca črke $s$ v nizu $w$} je
     \[
-        f(s|w) = \abs{ \bigl\{ i \in \{1, 2 \cdots, n\} \mid w_i = s \bigr\} }.
+        f(s|w) = \abs{ \bigl\{ i \in \{1, 2, \ldots, n\} \mid w_i = s \bigr\} }.
     \]
 \end{definicija}
 
@@ -367,7 +376,7 @@ gramatike~\ref{izrek:BinarnoKodiranje}.
     \[
         \kappa_s(\Vtextvisiblespace[5pt]) = \Box.
     \]
-    Za niz $w = a_1a_2 \ldots, a_n \in \A^*_s$ kodno preslikavo $\kappa$ definiramo po črkah
+    Za niz $w = a_1a_2 \cdots a_n \in \A^*_s$ kodno preslikavo $\kappa$ definiramo po črkah
     \[
         \kappa(w) = \kappa_s(a_1) \Box\Box\Box \kappa_s(a_2) \Box\Box\Box \cdots 
         \Box\Box\Box \kappa_s(a_n).
@@ -397,7 +406,7 @@ gramatike~\ref{izrek:BinarnoKodiranje}.
     \exists n \in \N \ \forall w \in \A^* \colon \abs{w} \geq n \implies
     \abs{\kappa(w)} \ll \abs{w}.
     \]
-    Razmerju $\frac{\abs{\kappa(w)}}{\abs{w}}$ pravimo \emph{razmerje stisljivosti}.
+    Razmerju $\frac{\abs{\kappa(w)}}{\abs{w}}$ pravimo \emph{razmerje stiskanja}.
     Kodo $\kappa(w)$ imenujemo \emph{stisnjen niz $w$} in $\delta(\kappa(w))$ 
     \emph{rekonstrukcija niza $w$}.
 \end{definicija}
@@ -418,13 +427,13 @@ je značilna nepovratna izguba informacije.
     \]
 \end{definicija}
 
-Stiskanje brez izgube uporabljamo pri stiskanju besedl, saj je pomembno da je rekonstrukcija
+Stiskanje brez izgube uporabljamo pri stiskanju besedil, saj je pomembno da je rekonstrukcija
 besedila enaka izvirnemu besedilu. Majhne razlike med rekonstrukcijo in izvirnim besedilom 
 lahko povzročijo velike pomenske razlike. Primer tega so bančni zapiski.
 
 V nekaterih primerih pa lahko toleriramo izgubo informacije. Na primer, pri zvočnih posnetkih, 
 slikah in videoposnetkih je lahko rekonstrukcija drugačna od izvirnika, saj so razlike za 
-človeka neopazne. V zameno za izgubo informacije dosežemo boljšo razmerje stisljivosti kot
+človeka neopazne. V zameno za izgubo informacije dosežemo boljšo razmerje stiskanja kot
 pri stiskanju brez izgube.
 
 Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiranje}.
@@ -451,14 +460,16 @@ Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiran
 \subsubsection{Leksikografsko kodiranje}% Enumerative coding in Lehmer code
 
 \begin{definicija}
-    Naj bo $S \subseteq \{ 1,2, \ldots, M\}^n$ za in $w_1, w_2, \ldots, w_k \in \{ 1,2, \ldots, M\}$. 
-    Z $n_s(w_1w_2 \cdots w_k)$ označimo \emph{število nizov v $S$ za katere je $w_1w_2 \cdots w_k$ predpona}.
+    Naj bo $S \subseteq \{ 1,2, \ldots, M\}^n$, $w_1, w_2, \ldots, w_k \in \{ 1,2, \ldots, M\}$
+    in $1 \leq k \leq n$. Z $n_s(w_1w_2 \cdots w_k)$ označimo 
+    \emph{število nizov v $S$ za katere je $w_1w_2 \cdots w_k$ predpona}.
 \end{definicija}
 
 \begin{definicija}
-    Naj bo $S \subseteq \{ 1,2, \ldots, M\}^n$. \emph{Leksikografksi indeks $S$} je preslikava
+    Naj bo $S \subseteq \{ 1,2, \ldots, M\}^n$. \emph{Leksikografski indeks na $S$} je
+    preslikava
     \[
-        i_s \colon S \to \{ 0,1 \ldots, n -1 \},
+        i_s \colon S \to \{ 0,1, \ldots, n -1 \},
     \]
     da je $i_s(w_1w_2 \cdots w_n) < i_s(u_1u_2 \cdots u_n)$ natanko takrat, ko za najmanjši
     tak $k$, da je $w_k \neq u_k$, velja $w_k < u_k$.
@@ -469,14 +480,15 @@ Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiran
     \[
         0001 < 0101 < 0110 < 1100 < 1101 < 1111.
     \]
-    in $n_s(0) = 3$, $n_s(10) = 0$, $n_s(110) = 2$, $n_s(1100) = 1$
+    in $n_s(0) = 3$, $n_s(10) = 0$, $n_s(110) = 2$, $n_s(1100) = 1$.
 \end{primer}
 
 \begin{trditev}
-    Leksikografski indeks $S \subseteq \{ 0,1 \}^n$ je podan s predpisom
+    Leksikografski indeks na $S \subseteq \{ 0,1 \}^n$ je podan s predpisom
     \[
-        i_s(w) = \sum_{j=1}^{n} w_j \cdot n_s(w_1w_2 \cdots w_{j-1}0).
+        i_s(w) = \sum_{j=1}^{n} w_j \cdot n_s(w_1w_2 \cdots w_{j-1}0),
     \]
+    kjer je $w_1w_2 \cdots w_n$ predstavitev niza $w$ s črkami abecede $\{ 0,1 \}$.
     Sledeči algoritem je inverz funkcije $i_s$. Torej za $i \in \{ 0, 1, \ldots, n - 1 \}$ 
     poišče tak $w \in S$, da je $i_s(w) = i$. Za $j = 1, 2, \ldots, n$ naredi: Če je 
     $i > n_s(w_1w_2 \cdots w_{j-1}0)$, je $x_j = 1$ in nastavi 
@@ -489,7 +501,7 @@ Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiran
     To so nizi, ki imajo manjši leksikografski indeks od $w$. Število teh nizov je po 
     definiciji enako številu $n_s(w_1w_2 \cdots w_{j-1}0)$.
 
-    Ko seštejemo $n_s(w_1w_2 \cdots w_{j-1}0)$ za vsak $j = 1,2, \cdots, n$, preštejemo vse
+    Ko seštejemo $n_s(w_1w_2 \cdots w_{j-1}0)$ za vsak $j = 1,2, \ldots, n$, preštejemo vse
     elemente $S$, katerih leksikografski indeks je manjši od leksikografskega indeksa od $w$.
 \end{dokaz}
 
@@ -513,11 +525,12 @@ Zgornjo trditev razširimo na poljubno abecedo $\{ 1,2, \ldots, M\}$. Dokaz spus
 enak dokazu prejšnje trditve.
 
 \begin{trditev}
-    Leksikografski indeks od $w \in S \subseteq \{ 1,2, \ldots, M\}^n$ je 
+    Leksikografski indeks na $S \subseteq \{ 1,2, \ldots, M\}^n$ je 
     podan s predpisom
     \[
-        i_s(w) = \sum_{j=1}^{n} \sum_{k=1}^{w_j-1} n_s(w_1w_2 \cdots w_{j-1}k).
+        i_s(w) = \sum_{j=1}^{n} \sum_{k=1}^{w_j-1} n_s(w_1w_2 \cdots w_{j-1}k),
     \]
+    kjer je $w_1w_2 \cdots w_n$ predstavitev niza $w$ s črkami abecede $\{ 1,2, \ldots, M\}$.
     Sledeči algoritem je inverz funkcije $i_s$. Torej za $i \in \{ 0, 1, \ldots, n - 1 \}$ 
     poišče tak $w \in S$, da je $i_s(w) = i$. Za $j = 1,2, \ldots, n$ naredi: Poišči najmanški 
     $m \in \{ 1,2, \ldots, M\}$, da je 
@@ -537,7 +550,7 @@ da za $a,b \in \A$ velja
 
 \begin{definicija}
     Naj bo $\A$ abeceda velikosti $n$. \emph{Abecedni vrstni red $\A$}, je 
-    zaporedje črk $a_1, a_2, \ldots, a_n \in \A$, da je $a_1 < a_2 < \ldots < a_n$.
+    zaporedje črk $a_1, a_2, \ldots, a_n \in \A$, da je $a_1 < a_2 < \cdots < a_n$.
 \end{definicija}
 
 \begin{primer}
@@ -593,15 +606,17 @@ da za $a,b \in \A$ velja
         \item $B_1$ koda znakov abecede $\A$, ki nastopajo v nizu $w$. To je niz, kjer
         za vsak element iz $\A$ v abecednem vrstnem redu z enico označimo ali je vsebovan
         v $\{a_1, a_2, \ldots, a_k \}$ in z ničlo, če ni;
-        \item $B_2$ eniška koda vsake frekvenc $f(a_i|w)$ v enakem redu kot nastopajo črke v $B_1$;
+        \item $B_2$ eniška koda vsake frekvence $f(a_i|w)$ v enakem redu kot nastopajo črke v $B_1$;
         \item $B_3$ binarni zapis $i_{s(w)}(w)$.
     \end{itemize}
     Abeceda $\A$ in njen abecedeni vrstni red sta poznana tako kodirniku kot dekodirniku.
 \end{definicija}
 
 \begin{primer}\label{primer:leksikografsko}
-    Naj bo $\A = \{ 1, 2, 3, 4, 5 \}$. Leksikografsko kodiramo $w = 1211223$. Dobimo
-    $B_1 = 11100$, saj črke $1,2,3$ nastopajo v $w$, medtem ko $4,5$ ne. Ker je
+    Naj bo $\A = \{ 1, 2, 3, 4, 5 \}$. Leksikografsko kodiramo $w = 1211223$. Potem je $S(w)$ 
+    množica vseh nizov dolžine $7$ v katerih črka $1$ nastopa trikrat, črka $2$ nastopa trikrat 
+    in črka $3$ nastopa enkrat. Dobimo $B_1 = 11100$, saj črke $1,2,3$ nastopajo v $w$, medtem ko 
+    $4,5$ ne. Ker je
     \[
         \eta \left( f(1|w) \right) = 001, \, \eta \left( f(2|w) \right) = 001, \,
         \eta \left( f(3|w) \right) = 1,
@@ -666,7 +681,7 @@ Da se preveriti, da spodnja definicija informacije dogodka izpolnjuje vse tri in
     \[
         i(A) = - \log_b p(x),
     \]
-    kjer je $b > 1$. V najpogostejšem primer, ko je $b=2$, merimo Shannonovo informacijo v 
+    kjer je $b > 1$. V najpogostejšem primeru, ko je $b=2$, merimo Shannonovo informacijo v 
     \emph{bitih}. 
 \end{definicija}
 
@@ -695,7 +710,7 @@ in bodo zelo vplivali na naša dejanja, medtem ko nas skoraj gotovi dogodki ne p
         i(\text{Andreja zadane}) &= - \log_2 (0.000001) \doteq 20 \text{ bitov}, \\
         i(\text{Andreja ne zadane}) &= - \log_2 (0.999999) \doteq 1.4 \cdot 10^{-6} \text{ bitov}.
     \end{align*}
-    Če Andreja ne zadane, bo Bojan nadaljeval z svojim dnem, kot da se ni nič zgodilo. Če pa 
+    Če Andreja ne zadane, bo Bojan nadaljeval s svojim dnem, kot da se ni nič zgodilo. Če pa 
     Andreja zadane, se bo Bojanovo življenje zelo spremenilo.
 \end{primer}
 
@@ -715,7 +730,7 @@ kako presenetljiva je naključna spremenljivka ``v povprečju''.
     \emph{Informacijski vir abecede $\A$} je preslikava $\mu \colon \A^+ \to [0,1]$, da je 
     \begin{align*}
         \sum_{a \in \A} \mu(a) &= 1, \\
-        \mu(w) &= \sum_{a \in \A} \mu(wa) \text{ za vsak } w \in \A^+
+        \mu(w) &= \sum_{a \in \A} \mu(wa) \text{ za vsak } w \in \A^+.
     \end{align*}
     Z $\Lambda(\A)$ označimo družino vseh informacijskih virov abecede $\A$.
 \end{definicija}
@@ -729,7 +744,7 @@ kako presenetljiva je naključna spremenljivka ``v povprečju''.
     \end{align*}
     kjer je $w_1w_2 \cdots w_n$ predstavitev niza $w$ s črkami abecede $\A$.
     \emph{Niz generiran z virom $X$ brez spomina abecede $\A$ dolžine $n$} je niz, ki 
-    ga dobimo tako, da staknemo $n$ realziacij diskretna slučajna spremeljivka $X$.
+    ga dobimo tako, da staknemo $n$ realziacij diskretne slučajne spremenljivke $X$.
 \end{definicija}
 
 \begin{trditev}
@@ -749,15 +764,15 @@ kako presenetljiva je naključna spremenljivka ``v povprečju''.
 
 Vir brez spomina je najpreprostejši model informacijskega vira, saj je vsaka črka v nizu neodvisna
 od vseh ostalih. V splošnem ne poznamo porazdelitve slučajne spremenljivke, ki
-definira vir brez spomina, zato porazdelitev ocenimo. Slovenščino modeliramo z virom brez spomina
-tako, da porazdelitev ocenimo preko frekvenc črk v slovenskem besedilu.
+definira vir brez spomina, zato porazdelitev ocenimo. Slovenščino naivno modeliramo z virom brez
+spomina tako, da porazdelitev ocenimo preko frekvenc črk v slovenskem besedilu.
 
 \begin{definicija}
     Imamo vir $X$ brez spomina abecede $\A$, kjer ne poznamo porazdelitve slučajne spremenljivke
-    $X$ in $w$ in $w$ niz generiran z virom $X$ brez spomina abecede $\A$ dolžine $n$.
+    $X$ in $w$ končni niz generiran z virom $X$ brez spomina abecede $\A$.
     \emph{Entropija niza $w$} je
     \[
-        H(w) = \sum_{s \in \{ w_1, \ldots, w_n \}} - \frac{f(s|w)}{\abs{w}} 
+        H(w) = \sum_{s \in \A} - \frac{f(s|w)}{\abs{w}} 
         \log_2 \left( \frac{f(s|w)}{\abs{w}} \right).
     \]
 \end{definicija}
@@ -777,9 +792,9 @@ Sledeča lema, dokazana v~\cite[Lema 2.3]{CsiszarKorner2011}, pojasni entropijo 
 kombinatoričnega vidika. Uporabimo jo v dokazu~\ref{izrek:BinarnoKodiranje}.
 
 \begin{lema}\label{lema:ocena}
-    Naj bo $w$ niz abecede $\A$ dolžine $n$. Potem velja 
+    Naj bo $w \in \A^*$. Potem velja 
     \[
-        \abs{S(w)} \leq 2^{n \cdot H(w)}.
+        \abs{S(w)} \leq 2^{\abs{w} \cdot H(w)}.
     \] 
 \end{lema}
 
@@ -797,7 +812,7 @@ v~\cite[1. poglavje, 4. razdelek]{Mackay2003} na sledeč način.
 \begin{izrek}\label{izrek:EntropijaKodiranje}
     Niz generiran z virom $X$ brez spomina $\A$ dolžine $n$, se lahko stisne z 
     zanemarljivim tveganjem izgube informacij v $n \cdot H(X)$ bitov, ko gre $n \to \infty$. 
-    Če niz stisknemo v manj kot $n \cdot H(X)$ bitov, skoraj gotovo pride do izgube informacij.
+    Če niz stisnemo v manj kot $n \cdot H(X)$ bitov, skoraj gotovo pride do izgube informacij.
 \end{izrek}
 
 \begin{primer}
@@ -849,7 +864,7 @@ v poglavju~\ref{subsection:StiskanjeNiza}.
 \end{definicija}
 
 \begin{primer}
-    Naj bo $\A = \{ a, b, c \}$ in$S = \{ s_0, s_1, s_2 \}$. Napišemo le neničelne 
+    Naj bo $\A = \{ a, b, c \}$ in $S = \{ s_0, s_1, s_2 \}$. Napišemo le neničelne 
     verjetnosti prehoda s črko iz stanja v stanje
     \begin{gather*}
         p(a, s_0|s_0) = 0.5, \, p(a, s_1|s_0) = 0.4, \, p(b, s_1|s_0) = 0.1, \\
@@ -911,7 +926,7 @@ v poglavju~\ref{subsection:StiskanjeNiza}.
     \end{align*}
 \end{primer}
 
-Več o odvečnost v povezavi s končnimi viri abecede $\A$ stopnje $m$,
+Več o odvečnosti v povezavi s končnimi viri abecede $\A$ stopnje $m$,
 najdemo v~\cite{Plotkin1992}.
 
 \section{Kontekstno-neodvisne gramatike}
@@ -925,13 +940,13 @@ kako iz dane abecede tvorimo nize oziroma kateri nizi so ``pravilni''. Veljavne 
 za modeliranje naravnih jezikov, kompresijo podatkov, so osnova programskih jezikov ter 
 formalizirajo matematično logiko in sisteme aksiomov.
 
-Definicijo formalne gramatike poda Chomsky v~\cite{Chomsky1956} in jih razdeli v štiri razrede z 
+Definicijo formalne gramatike poda Chomsky v~\cite{Chomsky1956} in jih razdeli v štiri razrede s 
 postopnim povečevanjem omejitev~\cite{Chomsky1959, ChomskySchutzenberger1963}.
 V delu bomo spoznali le en razred formalnih gramatik, in sicer \emph{kontekstno-neodvisne gramatike}.
 
 \begin{definicija}
-    Relacija $ P \subseteq A \times B $ je \emph{celovita}, če velja 
-    $\forall x \in A \ \exists y \in B \colon (x,y) \in P$.
+    Relacija $R \subseteq A \times B$ je \emph{celovita}, če velja 
+    $\forall x \in A \ \exists y \in B \colon (x,y) \in R$.
 \end{definicija}
 
 \begin{definicija}
@@ -949,18 +964,21 @@ V delu bomo spoznali le en razred formalnih gramatik, in sicer \emph{kontekstno-
 \begin{definicija}
     Naj bo $G$ kontekstno-neodvisna gramatika in $\alpha$, $\beta$, $\gamma \in (V \cup \Sigma)^*$,
     $A \in V$ ter naj bo $(A, \beta) \in P$, pišemo $A \rightarrow \beta$. 
-    \emph{Levi član prepisovalnega pravila $A \rightarrow \beta$} je $A$ in 
-    \emph{desni član prepisovalnega pravila} je $\beta$. Pravimo, da se 
+    \emph{Leva stran prepisovalnega pravila $A \rightarrow \beta$} je $A$ in 
+    \emph{desna stran prepisovalnega pravila} je $\beta$. Pravimo, da se 
     $\alpha A \gamma$ \emph{prepiše s pravilom} $A \rightarrow \beta$ v $\alpha\beta\gamma$,
     pišemo $\alpha A \gamma \Rightarrow \alpha\beta\gamma$. Pravimo, da $\alpha $ \emph{izpelje} 
-    $\beta$, če je $\alpha = \beta$ ali če za $k \geq 0$ obstaja zaporedje 
+    $\beta$, če je $\alpha = \beta$ ali če za $n \geq 2$ obstaja zaporedje 
     $\alpha_1, \alpha_2, \ldots, \alpha_n \in (V \cup \Sigma)^+$, da 
     \[
-        \alpha = \alpha_1 \Rightarrow \alpha_2 \Rightarrow \ldots \Rightarrow \alpha_n
+        \alpha = \alpha_1 \Rightarrow \alpha_2 \Rightarrow \cdots \Rightarrow \alpha_n
         = \beta,
     \]
-    kar krajše pišemo $\alpha \xRightarrow{*} \beta$. Kontekstno-neodvisno gramatiko okrajšamo s KNG.
+    kar krajše pišemo $\alpha \xRightarrow{*} \beta$.
 \end{definicija}
+
+Za kontekstno-neodvisno gramatiko uporabljamo okrajšavo KNG in se sklicujemo na komponente
+četrverice $(V, \Sigma, P, S)$ brez njene eksplicitne navedbe.
 
 \begin{primer}
     Naj bo $ V = \{ S\}$, 
@@ -997,7 +1015,7 @@ Ko govorimo o poljubnem simbolu, ga označimo z $y$.
 \end{primer}
 
 \begin{primer}
-    Formalizirajmo formalno gramatiko iz primera~\ref{primer:motivacija}. Dobili smo jo z nizom
+    Zapišimo formalno gramatiko iz primera~\ref{primer:motivacija}. Dobili smo jo z nizom
     $w = \mathit{cababcccababcccab} $. Označimo jo z $ G_w = (V, \Sigma, P, S) $, kjer je 
     \begin{gather*}
         V = \{ S, A, B, C \}, \\
@@ -1016,12 +1034,12 @@ iz KNG enolično rekonstruramo niz $w$. V razdelku predstavimo poseben primer KN
 \emph{dopustne gramatike}~\cite{KiefferYang2000}.
 
 \begin{definicija}
-    KNG $G$ je \emph{deterministična}, če vsak nekončen simbol $ A \in V $ nastopa natanko enkrat
-    kot levi član nekega prepisovalnega pravila. KNG, ki ni deterministična, je 
+    KNG $G$ je \emph{deterministična}, če vsak nekončen simbol $A \in V$ nastopa natanko enkrat
+    kot leva stran nekega prepisovalnega pravila. KNG, ki ni deterministična, je 
     \emph{nedeterministična}.
 \end{definicija}
 
-Determinističnost zagotovi, da je prepisovalno pravilo natanko določeno z njegovim levim članom.
+Determinističnost zagotovi, da je prepisovalno pravilo natanko določeno z njegovo levo stranjo.
 
 \begin{trditev}\label{trditev:DetJezik}
     Naj bo $G$ deterministična KNG. Potem je jezik $G$ enojec ali pa prazna množica.
@@ -1053,12 +1071,12 @@ njihov jezik neprazen.
     pri tem število ponovitev končnega simbola $a$ pove kolikokrat smo uporabili pravila.
     \[
         S \Rightarrow \mathit{Aa} \Rightarrow \mathit{Baa} \Rightarrow \mathit{Aaaa} \Rightarrow
-        \mathit{Baaa} \Rightarrow\ldots
+        \mathit{Baaa} \Rightarrow \cdots
     \]
 \end{primer}
 
 Ker bomo KNG stisnili, želimo da ne vsebuje odvečnih simbolov. Simbol je odvečen, če se
-ne pojavi v nobenei izpeljavi niza, ki je v jeziku KNG.
+ne pojavi v nobeni izpeljavi niza, ki je v jeziku KNG.
 
 \begin{definicija}
     Pravimo, da KNG $G$ \emph{ne vsebuje neuporabnih simbolov}, 
@@ -1075,8 +1093,8 @@ Zgornje zahteve sedaj združimo v nov podrazred KNG.
 
 \begin{definicija}
     KNG $G$ je \emph{dopustna gramatika}, če je deterministična, ne vsebuje neuporabnih simbolov,
-    ima prazen jezik in prazen niz ne nastopa kot desni član kateregakoli prepisovalnega 
-    pravila v $ P $.
+    ima neprazen jezik in prazen niz ne nastopa kot desna stran kateregakoli prepisovalnega 
+    pravila v $P$.
 \end{definicija}
 
 \begin{posledica}
@@ -1088,14 +1106,14 @@ Zgornje zahteve sedaj združimo v nov podrazred KNG.
     gramatike.
 \end{dokaz}
 
-Če je $G$ dopustna gramatika, obstaja enolično določen $w \in \Sigma(G)^+$, da je
+Če je $G$ dopustna gramatika, obstaja enolično določen $w \in \Sigma^+$, da je
 $L(G) = \{ w \}$. Zato jo bomo pogosto označili kar z $G_w$ in rekli, da generira niz $w$.
 
 Prepisovalna pravila točno določajo KNG, saj lahko iz njih enolično določimo $V$, $\Sigma$ in $S$.
-Nekončni simboli so levi člani prepisovalnih pravil, končni simboli so desni člani prepisovalnih
-pravil, ki niso tudi levi člani kateregakoli prepisovalnega pravila in začetni simbol je nekončni
-simbol, ki ne nastopa kot desni član kateregakoli prepisovalnega pravila. Torej je dovolj, da 
-stisnemo le prepisovalna pravila.
+Nekončni simboli so leve strani prepisovalnih pravil, končni simboli so simboli, ki nastopajo
+v desni strani prepisovalnih pravil in ne nastopajo v levi strani kateregakoli prepisovalnega
+pravila. Začetni simbol je nekončni simbol, ki ne nastopa v desni strani kateregakoli 
+prepisovalnega pravila. Torej je dovolj, da stisnemo le prepisovalna pravila.
 
 \begin{primer}\label{primer:dopustna}
     Podana so prepisovalna pravila
@@ -1108,7 +1126,7 @@ stisnemo le prepisovalna pravila.
     bomo preverili v primeru~\ref{primer:PreverjanjeDopustnosti}.
 \end{primer}
 
-\subsection{D0L-sistem}
+\subsection[Deterministični kontekstno-neodvisni L-sistem]{Deterministični kontekstno-neodvisni \(L\)-sistem}
 
 Kot nas je pri uvedbi formalne gramatike motivirala slovnica, nas sedaj motivira biologija.
 Procese, ki potekajo istočasno, na primer razmnoževanje bakterij ali rast rastlin, lahko opišemo z
@@ -1141,15 +1159,15 @@ $L$-sistemih najdemo v~\cite{RozenbergSalomaa2012}.
     \emph{Deterministični kontekstno-neodvisni $L$-sistem}, na kratko \emph{D0L-sistem},
     je trojica $D = (\Sigma, f, w)$, kjer je $\Sigma$ abeceda, $f$ endomorfizem na $\Sigma^*$,
     in $w \in \Sigma^*$. Sistem ima \emph{fiksno točko $ w^* $}, če za zaporedje 
-    $\{ f^k(w) \mid k = 0, 1,2 \ldots \}$ velja
+    $\{ f^k(w) \mid k = 0,1, \ldots \}$ velja
     \begin{gather*}
-        w^* \in \{ f^k(w) \mid k = 0, 1, 2, \ldots \}, \\
+        w^* \in \{ f^k(w) \mid k = 0, 1, \ldots \}, \\
         f(w^*)= w^*.
     \end{gather*}
 \end{definicija}
 
 \begin{definicija}
-    Naj bo $G$ deterministična KNG v kateri prazen niz ne nastopa kot desni član kateregakoli 
+    Naj bo $G$ deterministična KNG v kateri prazen niz ne nastopa kot desna stran kateregakoli 
     prepisovalnega pravila. Na $(V \cup \Sigma)^*$ definiramo endomorfizem $f_G$, da velja
     \begin{gather*}
         \forall a \in \Sigma \colon f_G(a) = a; \\
@@ -1170,7 +1188,7 @@ iteraciji uporabimo le eno prepisovalno pravilo naenkrat.
         P = \{ A \rightarrow \mathit{aBCD}, B \rightarrow \mathit{ab}, C \rightarrow 
         \mathit{Bb}, D \rightarrow \mathit{Cb} \}.
     \] 
-    Ker je $G$ deterministična in prazni niz ne nastopa kot desni član kateregakoli prepisovalnega
+    Ker je $G$ deterministična in prazni niz ne nastopa kot desna stran kateregakoli prepisovalnega
     pravila, ji lahko priredimo D$0$L$(G)$. Potem je $S = A$, $f_G(a) = a$, $f_G(b) = b$,
     $f_G(A) = aBCD$, $f_G(B) = ab$, $f_G(C) = Bb$ in $f_G(D) = Cb$. Izračunajmo še fiksno točko:
     \begin{align*}
@@ -1188,7 +1206,7 @@ iteraciji uporabimo le eno prepisovalno pravilo naenkrat.
 \end{trditev}
 
 \begin{dokaz}
-    Ker je $G$ dopustna, je deterministična in prazen niz ne nastopa kot desni član kateregakoli
+    Ker je $G$ dopustna, je deterministična in prazen niz ne nastopa kot desna stran kateregakoli
     prepisovalnega pravila. Torej ji lahko priredimo D$0$L$(G)$. Prav tako velja, da je jezik 
     enojec, torej $L(G) = \{ w \}$.
     
@@ -1212,7 +1230,7 @@ iteraciji uporabimo le eno prepisovalno pravilo naenkrat.
 \subsection{Izpeljevalni graf}
 
 \begin{definicija}
-    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desni član kateregakoli
+    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desna stran kateregakoli
     prepisovalnega pravila. \emph{Izpeljevalni graf $G$}, označimo ga z $\Gamma(G)$, je 
     usmerjen graf z vozlišči $ V \cup \Sigma $. Za prepisovalno pravilo
     \[    
@@ -1309,15 +1327,15 @@ Osvežimo osnovni definiciji iz teorije grafov.
     \end{gather}
     
     Naj bosta $A, B \in V$ med katerima obstaja pot od $A$ do $B$. Ker je $G$ dopustna, ne vsebuje
-    neuporabnih simbolov. Za $A$ obstajajo $\alpha_1, \alpha_2, \ldots, \alpha_n \in (V \cup \Sigma)^+$ 
-    , da $A$ nastopa v vvsaj v enem izmed njih in $S \Rightarrow \alpha_1 \Rightarrow 
+    neuporabnih simbolov. Za $A$ obstajajo $\alpha_1, \alpha_2, \ldots, \alpha_n \in (V \cup \Sigma)^+$,
+    da $A$ nastopa v vsaj enem izmed njih in $S \Rightarrow \alpha_1 \Rightarrow 
     \alpha_2 \Rightarrow \cdots \Rightarrow \alpha_n \in L(G)$. To pomeni, da $A$ za nek 
     $i = 1, 2, \ldots$ nastopa v $f^i_G(S)$. Ker obstaja pot od $A$ do $B$, potem $B$ nastopa
     za nek $j = i+1, i+2, \ldots$ v $f^j_G(S)$.
 
     Recimo da ima graf $\Gamma(G)$ cikel, torej obstaja neka pot od $A$ do $A$. Potem se $A$
     pojavi neskončnokrat v zaporedju $\{ f^i_G(S) \mid i = 1, 2, \ldots \}$, to pa je v 
-    protislovju z izjavo~\ref{gather:acikel}, ki sledi iz predpostavke.
+    protislovju z izjavo~\eqref{gather:acikel}, ki sledi iz predpostavke.
 \end{dokaz}
 
 \subsection{Karakterizacija dopustne gramatike}
@@ -1327,7 +1345,7 @@ D$0$L-sistema gramatike lahko preizkusimo dopustnost gramatike. Še več, D$0$L-
 poda algoritem za izračun niza, ki ga generira dopustna gramatika.
 
 \begin{izrek}\label{izrek:ekvivalence}
-    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desni član 
+    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desna stran 
     kateregakoli prepisovalnega pravila. Potem so naslednje trditve ekvivalentne:
     \begin{enumerate}
         \item $G$ je dopustna gramatika.
@@ -1340,7 +1358,7 @@ poda algoritem za izračun niza, ki ga generira dopustna gramatika.
 Pred dokazom zgornjega izreka potrebujemo še tri leme, ki bodo pomagale pri dokazu.
 
 \begin{lema}\label{lema:pomožna}
-    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desni član kateregakoli prepisovalnega 
+    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desna stran kateregakoli prepisovalnega 
     pravila in je $\Gamma(G)$ acikličen. Vzemimo $\alpha \in ( V \cup \Sigma)^+ \setminus \Sigma^+$.
     Potem obstaja nekončni simbol $ A \in V $, ki nastopa v nizu $\alpha$ in za $\forall i=1,2,\ldots$
     velja
@@ -1350,8 +1368,8 @@ Pred dokazom zgornjega izreka potrebujemo še tri leme, ki bodo pomagale pri dok
 \end{lema}
 
 \begin{dokaz}
-    Dokažimo s protislovjem. Predpostavimo, da zaključek leme ne velja. Z $H$ označimo vse 
-    nekončne simbole $V$, ki nastopajo v $\alpha$. Po predpostavki je $H$ neprazna. Za vsak 
+    Dokažimo s protislovjem. Predpostavimo, da zaključek leme ne velja. S $H$ označimo množico 
+    nekončnih simbolov, ki nastopajo v $\alpha$. Po predpostavki je $H$ neprazna. Za vsak 
     $B \in H$ definiramo 
     \[
         H(B) = \{ C \in V \mid C \text{ nastopa v enem izmed nizov } f^i_G(B), \ i= 1, 2, \ldots \}.
@@ -1374,7 +1392,7 @@ Pred dokazom zgornjega izreka potrebujemo še tri leme, ki bodo pomagale pri dok
 \end{dokaz}
 
 \begin{lema}\label{lema:izračun}
-    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desni član 
+    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desna stran 
     kateregakoli prepisovalnega pravila in je $\Gamma(G)$ acikličen. Potem je
     \[
         \forall \alpha \in ( V \cup \Sigma)^+ \colon f^{\abs{V}}_G(\alpha) \in \Sigma^+.
@@ -1401,13 +1419,13 @@ Pred dokazom zgornjega izreka potrebujemo še tri leme, ki bodo pomagale pri dok
     en simbol ponovi. Torej, obstaja $A \in V$ in $i,j \in \{0, 1, \ldots, \abs{V} \}$, $i<j$, 
     da je $A_i = A_j = A$.
 
-    Po~\ref{gather:nastopa} $A_i$ nastopa v $f^i_G(\alpha)$ ter po~\ref{gather:nenastopa} ne 
-    nastopa v $f^j_G(\alpha)$. Vendar po~\ref{gather:nastopa} tudi $A_j$ nastopa v $f^j_G(\alpha)$.
+    Po~\eqref{gather:nastopa} $A_i$ nastopa v $f^i_G(\alpha)$ ter po~\eqref{gather:nenastopa} ne 
+    nastopa v $f^j_G(\alpha)$. Vendar po~\eqref{gather:nastopa} tudi $A_j$ nastopa v $f^j_G(\alpha)$.
     Ker je $A_i = A_j = A$, smo prišli do protislovja.
 \end{dokaz}
 
 \begin{lema}\label{lema:nastopanje}
-    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desni član 
+    Naj bo $G$ KNG v kateri prazen niz ne nastopa kot desna stran 
     kateregakoli prepisovalnega pravila in naj bo $\Gamma(G)$ acikličen ter ima
     koren $S$. Potem vsak simbol iz $V \cup \Sigma$ nastopi v vsaj enem izmed nizov $f^i_G(S)$ za 
     $i= 0, 1, \ldots, \abs{V}$. 
@@ -1432,12 +1450,12 @@ Sedaj lahko dokažemo izrek.
         \item[$1\Rightarrow 2$] Sledi po lemah~\ref{lema:koren} in~\ref{lema:acikličen}.
         \item[$2\Rightarrow 3$] Sledi po lemah~\ref{lema:izračun} in~\ref{lema:nastopanje}.
         \item[$3\Rightarrow 1$] Obstoj D$0$L$(G)$ zagotovi determinističnost in da
-        prazen niz ne nastopa kot desni član kateregakoli prepisovalnega pravila. 
+        prazen niz ne nastopa kot desna stran kateregakoli prepisovalnega pravila. 
         
         Jezik je neprazen, saj $f_G^{\abs{V}}(S) \in \Sigma^+$. 
 
-        KNG $G$ ne vsebuje neuporabnih simbolov, saj vsak simbol iz $V \cup \Sigma$ nastopa v vsaj enem 
-        izmed nizov $f_G^i(S)$ za $i=0, 1, \ldots, \abs{V}$.
+        KNG $G$ ne vsebuje neuporabnih simbolov, saj vsak simbol iz $V \cup \Sigma$ nastopa v vsaj
+        enem izmed nizov $f_G^i(S)$ za $i=0, 1, \ldots, \abs{V}$.
     \end{itemize}
 \end{dokaz}
 
@@ -1506,15 +1524,15 @@ Sledeči endomorfizem bo prišel prav v naslednjem poglavju.
         \item [$2.$] Velja po definiciji fiksne točke endomorfizma.
         \item[$3.$] Sledi direktno iz posledice~\ref{posledica:razširtev}.
         \item[$4.$] Ker imamo prepisovalno pravilo, $A \rightarrow \alpha$ zaporedje
-        $\{ f^k(\alpha) \mid k = 1, 2, 3 \ldots \}$ dobimo tako, da odstraimo prvi člen zaporedja
-        $\{ f^k(A) \mid k = 0, 1, 2 \ldots \}$. Zaporedji imata enako fiksno točko.
+        $\{ f^k(\alpha) \mid k = 1, 2, \ldots \}$ dobimo tako, da odstraimo prvi člen zaporedja
+        $\{ f^k(A) \mid k = 0, 1, \ldots \}$. Zaporedji imata enako fiksno točko.
     \end{itemize}
 \end{dokaz}
 
 \section{Prirejanje in kodiranje dopustne gramatike} 
 
 Spodnja slika prikazuje glavno idejo stiskanja niza s pomočjo KNG.
-Nizu $w$ abecede najprej priredimo KNG $G_w$ in jo nato binarno kodiramo.
+Nizu $w$ najprej priredimo KNG $G_w$ in jo nato binarno kodiramo.
 
 \tikzset{block/.style={draw, thick, text width=3cm, minimum height=1.5cm, align=center}, line/.style={-latex}}
 \begin{figure}[H]
@@ -1533,19 +1551,19 @@ Nizu $w$ abecede najprej priredimo KNG $G_w$ in jo nato binarno kodiramo.
         \draw[line] (d)-- (e);
     \end{tikzpicture}
     }
-    \caption{Kodirnik niza $w$}
+    \caption{Kodirnik niza $w$.}
     \label{fig:Kodirnik}
 \end{figure}
 
 Od tu naprej naj bo $\A$ poljubna abeceda, $\abs{\A} \geq 2$ iz katere bomo generirali niz.
 Naj bo $\{ A_0, A_1, \ldots \}$ končna abeceda in predpostavimo da je
 $\A \cap \{ A_0, A_1, \ldots \} = \emptyset$. Simbole $A_0, A_1, \ldots$ uporabljamo za nekončne 
-simbole, njihov \emph{naravni vrstni red} je določen z naraščanjem indeksa.
+simbole, njihov \emph{naravni leksikografski vrstni red} je določen z naraščanjem indeksa.
 
 \subsection{Prirejanje gramatike}
 
 Namen dopustne gramatike je generirati niz abecede $\A$, zato ni
-pomembno, kako poimenujemo nekončne simbole
+pomembno, kako poimenujemo nekončne simbole.
 
 \begin{definicija}\label{def:G(A)} 
     Naj bo $\G(\A)$ množica vseh KNG $G$, ki zadostujejo:
@@ -1630,10 +1648,10 @@ Predstavimo dva razreda prirejanj dopustne gramatike: asimptotsko kompaktno in n
 \end{definicija}
 
 \begin{definicija}
-    Z $\abs{G}$ označimo vsoto dolžin desnih članov prepisovalnih pravil KNG $G$.
+    Z $\abs{G}$ označimo vsoto dolžin desnih strani prepisovalnih pravil KNG $G$.
 \end{definicija}
 
-\subsubsection{asimptotsko kompaktno prirejanje gramatike}
+\subsubsection{Asimptotsko kompaktno prirejanje gramatike}
 
 \begin{definicija}
     Prirejanje gramatike nizu abecede $\A$ je \textit{asimptotsko kompaktno}, če za vsak niz
@@ -1654,12 +1672,12 @@ in \emph{bisekcijsko prirejanje gramatike}.
         \item $\sigma_\text{lz}(w) = \emptyset$.
         \item Poiščemo najmanjši $i_1 \in \N$, da $u_1 = w_1 \cdots w_{i_1}$ ne nastopa v 
         $\sigma_{\text{lz}}(w)$. Dodamo $u_1$ v $\sigma_{\text{lz}}(w)$.
-        \item Poiščemo najmanjši $i_2 \in \N$, da $u_2 = w_{i_1} \cdots w_{i_2}$ ne nastopa v 
+        \item Poiščemo najmanjši $i_2 \in \N$, da $u_2 = w_{i_1+1} \cdots w_{i_2}$ ne nastopa v 
         $\sigma_{\text{lz}}(w)$. Dodamo $u_2$ v $\sigma_{\text{lz}}(w)$. \\
         \begin{center}
         $\vdots$
         \end{center}
-        \item Poiščemo najmanjši $i_{m} \in \N$, da $u_{i_m} = w_{i_{m-1}} \cdots w_{i_m}$
+        \item Poiščemo najmanjši $i_{m} \in \N$, da $u_{i_m} = w_{i_{m-1}+1} \cdots w_{i_m}$
         ne nastopa v $\sigma_{\text{lz}}(w)$. Dodamo $u_m$ v $\sigma_{\text{lz}}(w)$.
         Ker je $i_m = n$, zaključimo.
     \end{itemize}
@@ -1677,7 +1695,7 @@ in \emph{bisekcijsko prirejanje gramatike}.
 \begin{definicija}
     Naj bo $w \in \A^+$, $w_1w_2 \cdots w_n$ predstavitev niza $w$ s črkami abecede in 
     $\sigma_\text{lz}(w) = \{ u_1, u_2, \ldots, u_m \}$.
-    \emph{Lempel-Ziv dopustno gramatiko $G^\text{lz}_w$} je
+    \emph{Lempel-Ziv dopustna gramatiko $G^\text{lz}_w$} je
     \begin{itemize}
         \item $\Sigma = \{ u \in \sigma_{\text{lz}}(w) \mid \abs{u} = 1 \}$;
         \item $V = \{ A_w \} \cup \{ A_u \mid u \in \sigma_{\text{lz}}(w) \}$;
@@ -1705,7 +1723,16 @@ in \emph{bisekcijsko prirejanje gramatike}.
     \[
         \max_{w \in \A^n} \abs{\sigma_\text{lz}(w)} = \mathcal{O} \left( \frac{n}{\log_2(n)} \right).
     \]
-    Preprosto preverimo, da je$\abs{G^\text{lz}_w} = 3 \cdot \abs{\sigma_\text{lz}(w)}$, zato
+    Navzgor ocenimo $\abs{G^\text{lz}_w}$. Dolžina desne strani prepisovalnega pravila
+    \[ 
+        A_w \rightarrow A_{u_1}A_{u_2} \cdots A_{u_m}
+    \]
+    je $m$. Imamo še $m$ pravil oblike
+    \[
+        A_{u_i} \rightarrow A_{\alpha}b
+    \]
+    in dolžina desne strani vsakega je manj ali enaka $2$. Ker je $m = \abs{\sigma_\text{lz}(w)}$,
+    sledi $\abs{G^\text{lz}_w} \leq m + 2m = 3 \cdot \abs{\sigma_\text{lz}(w)}$. Zato je
     \[
         \lim_{n \rightarrow \infty} \max_{w \in \A^n} \frac{\abs{G^\text{lz}_w}}{\abs{w}} = 0.
     \]
@@ -1745,10 +1772,13 @@ in \emph{bisekcijsko prirejanje gramatike}.
         \sigma_{\text{bis}}(w) = \{ w \} \cup \Bigl\{ w_iw_{i+1} \cdots w_j \Bigm| \log_2(j-i-1) \in \N_0
         \text{ in } \frac{i-1}{j-i-1} \in \N_0 \bigr\}.
     \]
-    Pogoj $\log_2(j-i-1) \in \N_0$ pove, da vsebuje le podnize dolžine $2^n$ za $n \in \N_0$. 
-    Pogoj $\frac{i-1}{j-i-1} \in \N_0$ pove, da se po nizu $w$ ``premikamo'' s korakom dolžine 
-    podniza.
 \end{definicija}
+
+\begin{opomba}
+    Pogoj $\log_2(j-i-1) \in \N_0$ pove, da $\sigma_{\text{bis}}(w)$ vsebuje le podnize dolžine
+    $2^n$ za $n \in \N_0$.  Pogoj $\frac{i-1}{j-i-1} \in \N_0$ pove, da se po nizu $w$ 
+    ``premikamo'' s korakom dolžine podniza.
+\end{opomba}
 
 \begin{primer}\label{primer:BisČlenitev}
     Naj bo $w = 0001010$. Poiščimo podmnožico nizov $\sigma_{\text{bis}}(w)$. Po definiciji je 
@@ -1764,12 +1794,12 @@ in \emph{bisekcijsko prirejanje gramatike}.
         \underline{0001} \, 010.
     \]
     Če podčratmo vse nize, ki so vsebovani v $\sigma_{\text{bis}}(w)$, vidimo zakaj jo imenujemo
-    Bisekcijska dopustna gramatika:
-    \[
+    \emph{bisekcijska} dopustna gramatika:
+    \begin{gather}
         \underline{\underline{\underline{\underline{0} \, \underline{0}} \,
         \underline{\underline{0} \, \underline{1}}} \, \underline{\underline{0} \, \underline{1}}
-        \, \underline{0}}.
-    \]
+        \, \underline{0}}. \label{gather:podčratno}
+    \end{gather}
     Torej je $\sigma_{\text{bis}}(w) = \{ 0001010, 0001, 01, 00, 1, 0 \}$.
 \end{primer}
 
@@ -1810,8 +1840,9 @@ prirejanje gramatike.
 \begin{primer}
     Nizu $w = 0001010$ priredimo bisekcijsko gramatiko.  V prejšnjem 
     primeru~\ref{primer:BisČlenitev} smo izračunali 
-    $\sigma_{\text{bis}}(w) = \{ 0001010, 0001, 01, 00, 1, 0 \}$. Prepisovalna pravila
-    dopustne gramatike $G^\text{bis}_w$ so
+    $\sigma_{\text{bis}}(w) = \{ 0001010, 0001, 01, 00, 1, 0 \}$ in iz podčranega 
+    niza~\refeq{gather:podčratno} vidimo, da je $\underline{0001} \, \underline{01} \, \underline{0}$
+    iskano razbitje niza $w$. Prepisovalna pravila dopustne gramatike $G^\text{bis}_w$ so
     \begin{align*}
         A_w &\rightarrow A_{0001}A_{01}A_{0}, \\
         A_{0001} &\rightarrow A_{00}A_{01}, \\
@@ -1837,9 +1868,9 @@ prirejanje gramatike.
 \begin{definicija}
     Pravimo, da je $G \in \G^*(\A)$ \emph{neskrčljiva gramatika}, če:
     \begin{enumerate}
-        \item Vsak $A \in V$, $A \neq S$ nastopa vsaj dvakrat kot desni član prepisovalnih pravil;
-        \item Ne obstajata $y_1,y_2 \in V \cup \Sigma$, da niz $y_1y_2$ nastopa kot podniz 
-        desnega člana kateregali prepisovalnega pravila več kot enkrat na neprekrivajočih se mestih. 
+        \item Vsak $A \in V$, $A \neq S$ nastopa vsaj dvakrat v desni strani prepisovalnih pravil;
+        \item Ne obstajata $y_1,y_2 \in V \cup \Sigma$, da niz $y_1y_2$ nastopa kot podniz desne 
+        strani kateregali prepisovalnega pravila več kot enkrat na neprekrivajočih se mestih. 
     \end{enumerate}
 \end{definicija}
 
@@ -1848,13 +1879,13 @@ prirejanje gramatike.
     neskrčljivo gramatiko.
 \end{definicija}
 
-Različne neskrčjiva prirejanja gramatike dobimo tako, da izvajamo različne sisteme ``skrčitev''.
+Različna neskrčjiva prirejanja gramatike dobimo tako, da izvajamo različne sisteme ``skrčitev''.
 V nadaljevanju si bomo ogledali pet pravil po katerih iz poljubne dopustne gramatike v končno 
 mnogo korakih pridemo do neskrčljive gramatike.
 
 \begin{pravilo}
     Naj bo $G$ dopustna gramatika in $A \in V$ nekončni simbol, ki se pojavi samo 
-    enkrat kot desni član prepisovalnega pravila. Torej, obstajata prepisovalni pravili 
+    enkrat v desni strani prepisovalnega pravila. Torej, obstajata prepisovalni pravili 
     $B \rightarrow \alpha A \gamma$ in $A \rightarrow \beta$, kjer so 
     $\alpha, \beta, \gamma \in (V \cup \Sigma)^*$.
 
@@ -1874,7 +1905,7 @@ mnogo korakih pridemo do neskrčljive gramatike.
     \]
     kjer so $\alpha_1, \alpha_2, \alpha_3, \beta \in (V \cup \Sigma)^*$ in $\abs{\beta} \geq 2$.
 
-    Izberemo ``svež'' $B \notin \{ A_0, A_1, \ldots \} \setminus V \cup \Sigma$. Če v prepisovalnih pravilih dopustne gramatike $G$ v enem koraku
+    Izberemo ``svež'' $B \notin V \cup \Sigma$. Če v prepisovalnih pravilih dopustne gramatike $G$ v enem koraku
     \begin{itemize}
         \item dodamo pravilo $B \rightarrow \beta$;
         \item nadomestimo pravilo $A \rightarrow \alpha_1 \beta \alpha_2 \beta \alpha_3$ z 
@@ -1894,7 +1925,7 @@ mnogo korakih pridemo do neskrčljive gramatike.
     $(\alpha_1 \neq \varepsilon \vee \alpha_2 \neq \varepsilon)$ in 
     $(\alpha_3 \neq \varepsilon \vee \alpha_4 \neq \varepsilon)$.
 
-    Izberemo ``svež'' $C \notin \{ A_0, A_1, \ldots \} \setminus (V \cup \Sigma)$. Če v prepisovalnih 
+    Izberemo ``svež'' $C \notin V \cup \Sigma$. Če v prepisovalnih 
     pravilih dopustne gramatike $G$ v enem koraku
     \begin{itemize}
         \item dodamo pravilo $C \rightarrow \beta$;
@@ -1931,8 +1962,8 @@ mnogo korakih pridemo do neskrčljive gramatike.
 
     Če v prepisovalnih pravilih dopustne gramatike $G$
     \begin{itemize}
-        \item zamenjamo vse $B$, ki nastopajo kot desni člani pravil, z $A$;
-        \item odstranimo vsa prepisovalna pravila, katerih levi član je neuporaben simbol;
+        \item zamenjamo vse $B$, ki nastopajo v desni strani pravil, z $A$;
+        \item odstranimo vsa prepisovalna pravila, katerih leva stran vsebuje neuporaben simbol;
         \item odstranimo vse neuporabne simbole,
     \end{itemize}
     dobimo dopustno gramatiko $G^\prime$, da velja $L(G^\prime) = L(G)$. Dopustna gramatika 
@@ -1953,7 +1984,7 @@ pravil pridemo do neskrčljive gramatike $G^\prime$?
 \begin{dokaz}
     Ker je $G$ dopustna gramatika, brez škode za splošnost nekončne simbole premenujemo v 
     $A_0, A_1, \ldots, A_{\abs{V}-1}$ tako, da zadostimo $5.$ zahtevi definicije~\ref{def:G(A)}.
-    Niz vseh desnih članov prepisovalnih pravil je
+    Niz vseh desnih strani prepisovalnih pravil je
     \[
         f_G(A_0)f_G(A_1) \cdots f_G(A_{\abs{V}-1})
     \]
@@ -1988,10 +2019,10 @@ pravil pridemo do neskrčljive gramatike $G^\prime$?
         $ 1 + \abs{\beta} = \abs{G^\prime} < \abs{G} = 2 \abs{\beta}$, saj je $\abs{\beta} \geq 2$.
         
         Sledi $C(G^\prime) < C(G)$.
-        \item Ker zamenjamo vse $B$, ki nastopajo kot desni člani prepisovalnih pravil, z $A$,
-        postane $B$ neuporaben simbol. Torej je $\abs{V^\prime} < \abs{V}$, saj odstranimo $B$
-        in tudi $\abs{G^\prime} < \abs{G}$, saj odstranimo prepisovalno pravilo v katerem
-        $B$ nastopa kot levi član.
+        \item Ker zamenjamo vse $B$, ki nastopajo v desni strani prepisovalnih pravil, z $A$,
+        postane $B$ neuporaben simbol. Torej je $\abs{V^\prime} = \abs{V} - 1$, saj odstranimo $B$
+        in tudi $\abs{G^\prime} < \abs{G}$, saj odstranimo vsaj prepisovalno pravilo, v katerih
+        $B$ nastopa kot leva strana.
 
         Sledi $C(G^\prime) < C(G)$.
     \end{enumerate}
@@ -2006,7 +2037,7 @@ pravil pridemo do neskrčljive gramatike $G^\prime$?
     Sledi direktno iz trditve~\ref{trditev:C} in trditve~\ref{trditev:Skrčitev}
 \end{dokaz}
 
-Z skrčitvenimi pravili zasnujemo različna neskrčljiva prirejanja gramatike. Poglejmo si dve taki
+S skrčitvenimi pravili zasnujemo različna neskrčljiva prirejanja gramatike. Poglejmo si dve taki
 prirejanji.
 
 \begin{definicija}
@@ -2159,8 +2190,8 @@ podamo binarni kod prepisovalnih pravil dopustne gramatike, ki ga lahko enoličn
     \[
         \rho_G = f_G(A_0)f_G(A_1) \cdots f_G(A_{\abs{V}-1})
     \]
-    \emph{niz vseh desnih članov prepisovalnih pravil}. Niz $\rho_G$ brez prve pojavitve
-    nekončnih simbolov $A_1, \ldots, A_{\abs{V}-1}$ označimo z $\omega_G$.
+    \emph{niz vseh desnih strani prepisovalnih pravil}. Niz $\rho_G$ brez prve pojavitve
+    nekončnih simbolov $A_1, A_2, \ldots, A_{\abs{V}-1}$ označimo z $\omega_G$.
     \emph{Entropija gramatike $G$} je 
     \[
         H(G) = \abs{\omega_G} \cdot H(\omega_G).
@@ -2200,10 +2231,10 @@ podamo binarni kod prepisovalnih pravil dopustne gramatike, ki ga lahko enoličn
     Abeceda $\A$ in njen vrstni red sta poznana tako kodirniku kot dekodirniku.
     Spomnimo se definicije eniške kode~\ref{def:eniška} in leksikografskega 
     kodiranja niza~\ref{def:LeksikografskoKodiranje}.
-    Vsakemu $G \in \G(\A)$ priredimo kodo $B(G) = B_1B_2B_3B_4B_5B_5$, kjer je:
+    Vsakemu $G \in \G(\A)$ priredimo kodo $B(G) = B_1B_2B_3B_4B_5B_5B_6$, kjer je:
     \begin{itemize}
         \item $B_1$ eniška koda $\abs{V}$. Sledi $\abs{B_1} = \abs{V} \leq \abs{G}$.
-        \item $B_2$ je stik vseh eniških kod dolžin desnih članov prepisovalnih pravil. Sledi 
+        \item $B_2$ je stik vseh eniških kod dolžin desnih strani prepisovalnih pravil. Sledi 
         $\abs{B_2} = \abs{G}$.
 
         \item $B_3$ dobimo tako, da se sprehodimo čez $\rho_G$ in prvo pojavitev vsakega
@@ -2211,8 +2242,8 @@ podamo binarni kod prepisovalnih pravil dopustne gramatike, ki ga lahko enoličn
         \item $B_4$ je niz, kjer za vsak element iz $\A$ v abecednem vrstnem redu z 
         $1$ označimo, če je vsebovan v $\Sigma$ in z $0$, če ni. Sledi $\abs{B_4} = \abs{\A}$;
         \item $B_5$ je stik eniških kod frekvenc $f(y|\rho_G)$ za vsak 
-        $y \in (V \cup \Sigma) \setminus S$. Najprej staknemo frekvence končnih simbolov v 
-        abecednem vrstnem redu nato pa nekončne simbole v naravnem abecednem vrstnem redu. 
+        $y \in (V \cup \Sigma) \setminus \{ S \}$. Najprej staknemo frekvence končnih simbolov v 
+        abecednem vrstnem redu nato pa nekončne simbole v naravnem leksikografskem vrstnem redu.
         Sledi $\abs{B_5} = \abs{G}$.
         \item $B_6$ je binarni zapis $i_{s(\omega_G)}(\omega_G)$. Sledi 
         $\abs{B_6} = \lceil \log_2(S(\omega_G)) \rceil$.
@@ -2292,7 +2323,7 @@ podamo binarni kod prepisovalnih pravil dopustne gramatike, ki ga lahko enoličn
         \[
             \rho_G = A_1y_1A_2A_3y_2y_3A_4y_4y_5y_6y_7,
         \]
-        kjer so $y_i \in V \cup \Sigma$ za $i = 1,2, \cdots, 7$ še neznani.
+        kjer so $y_i \in V \cup \Sigma$ za $i = 1,2, \ldots, 7$ še neznani.
         \item Ker poznamo abecedo $\A$ preberemo naslednjih $\abs{\A} = 3$ simbolov in dobimo
         $B_4 = 110$. Ker poznamo vrstni red, sledi $\Sigma = \{ a, b \}$.
         \item Preberemo naslednjih $\abs{G}$ mest in dobimo $B_5 = 00100101111$. To sporoči,
@@ -2316,7 +2347,7 @@ podamo binarni kod prepisovalnih pravil dopustne gramatike, ki ga lahko enoličn
             r_{A_4} &= 0.
         \end{align*}
         To pove, da je $S(\omega_G) = \bigl\{ u \in \Sigma^* \mid \forall y \in (V \cup \Sigma) 
-        \setminus S \colon f(y|u) = f(y|\omega_G) \bigr\}$.
+        \setminus \{ S \} \colon f(y|u) = f(y|\omega_G) \bigr\}$.
         \item Še neprebrana mesta so $B_6 = 0001010000$, torej je $i_{s(\omega_G)}(\omega_G) = 20$.
         Z algoritmom iz definicije~\ref{def:LeksikografskoKodiranje} poiščemo $\omega_G$. To smo 
         že storili v primeru~\ref{primer:leksikografsko} za niz $w = 1211223$. Sledi, da je
@@ -2327,7 +2358,7 @@ podamo binarni kod prepisovalnih pravil dopustne gramatike, ki ga lahko enoličn
         \[
             \rho_G = A_1aA_2A_3baA_4abbA_1.
         \]
-        Ker poznamo dolžine desnih članov prepisovalnih pravil, iz niza $\rho_G$ dopolnimo 
+        Ker poznamo dolžine desnih strani prepisovalnih pravil, iz niza $\rho_G$ dopolnimo 
         prepisovalna pravila iz $2.$ točke.
         \begin{align*}
             A_0 &\rightarrow A_1aA_2, \\
@@ -2377,7 +2408,7 @@ v~\cite{KiefferYang2000}.
 
 \begin{izrek}
     Naj bo $\varPhi \in \varPi_{as}(\A)$ in $\{ \nu_n \}$ zaporedje pozitivnih števil,
-    ki konvergira prot $0$ tako, da je
+    ki konvergira proti $0$ tako, da je
     \[
         \max_{w \in \A^n} \frac{\abs{G_w}}{\abs{w}} = O(\nu_n).
     \]
@@ -2404,8 +2435,8 @@ prirejanjem vsaj tako hitro kot $\frac{\log_2 \log_2(n)}{\log_2(n)}$ pomnožena 
 
 Lempel in Ziv sta predstavila pojem \emph{univerzalnega koda}~\cite{LempelZiv1977, Ziv1978, LempelZiv1978}.
 To je stiskanje brez izgube, ki zmore učinkovito obravnavati katerikoli informacijski vir, saj
-dinamično prepozna in izkoristi ponavljajoče vzorece v sporočilu. To zagotavlja skoraj optimalne
-stopnje stiskanja brez potrebe po predhodnem znanju informacijskega vira. Izkaže se, da iz 
+dinamično prepozna in izkoristi ponavljajoče vzorece v sporočilu. To zagotavlja skoraj optimalno
+stopnjo brez potrebe po predhodnem znanju informacijskega vira. Izkaže se, da iz 
 izreka~\ref{izrek:RedKonvergenca} sledi, da je vsako stiskanje $\varPhi \in \varPi_{as}(\A)$ 
 univerzalen kod. Dokaz najdemo v~\cite{KiefferYang2000}.
 
