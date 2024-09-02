@@ -36,18 +36,16 @@
 % - povzetek v slovenščini
 %   V povzetku na kratko opišite vsebinske rezultate dela. Sem ne sodi razlaga
 %   organizacije dela, torej v katerem razdelku je kaj, pač pa le opis vsebine.
-\povzetek{Temeljni problem komunikacije je učinkovit prenos sporočila. Stiskanje podatkov je
-kodiranje, katerega cilj je zapisati sporočilo v zgoščeni obliki. V tem okviru definiramo 
-podrazred kontekstno-neodvisnih gramatik imenovan dopustne gramatike. Nizu $w$ priredimo dopustno
-gramatiko $G_w$, katere jezik je $\{ w \}$. Predstavimo dva razreda prirejanj dopustne gramatike 
-nizu in za vsak razred podamo primer prirejanja. Binarno kodiranje prepisovalnih pravil dopustne
-gramatike $G_w$ skupaj s predstavljenim prirejanjem zagotavlja dobro zgornjo mejo odvečnosti. 
-Takšno stiskanje podatkov je univerzalen kod, kar v splošnem zagotavlja skoraj optimalno 
-stiskanje.}
+\povzetek{Stiskanje podatkov je kodiranje, katerega cilj je zapisati sporočilo v zgoščeni obliki.
+V tem okviru definiramo podrazred kontekstno-neodvisnih gramatik imenovan dopustne gramatike. 
+Nizu $w$ priredimo dopustno gramatiko $G_w$, katere jezik je $\{ w \}$. Predstavimo dva razreda 
+prirejanj dopustne gramatike nizu in za vsak razred podamo primer prirejanja. Binarno kodiranje
+prepisovalnih pravil dopustne gramatike $G_w$ skupaj s predstavljenim prirejanjem zagotavlja dobro
+zgornjo mejo odvečnosti. Takšno stiskanje podatkov je univerzalen kod, kar v splošnem zagotavlja
+skoraj optimalno stiskanje.}
 
 % - povzetek v angleščini
-\abstract{A fundamental problem of communication is the effective transmission of a message.
-Data compression is a form of encoding aimed at representing the message in a compact form.
+\abstract{Data compression is a form of encoding aimed at representing the message in a compact form.
 Within this framework, we define a subclass of context-free grammars, referred to as admissible 
 grammars. For each string $w$, we assign an admissible grammar $G_w$, such that its language
 is $\{ w \}$. We present two classes of assignments of admissible grammars to a string and 
@@ -2034,7 +2032,7 @@ pravil pridemo do neskrčljive gramatike $G^\prime$?
 \end{izrek}
 
 \begin{dokaz}
-    Sledi direktno iz trditve~\ref{trditev:C} in trditve~\ref{trditev:Skrčitev}
+    Sledi direktno iz trditve~\ref{trditev:C} in trditve~\ref{trditev:Skrčitev}.
 \end{dokaz}
 
 S skrčitvenimi pravili zasnujemo različna neskrčljiva prirejanja gramatike. Poglejmo si dve taki
@@ -2043,7 +2041,7 @@ prirejanji.
 \begin{definicija}
     Za podani niz $w$ začnemo z trivialno dopustno gramatiko $S \rightarrow w$. 
     Dokler lahko, uporabi eno izmed skrčitvenih pravil $2, 3, 4$. 
-    Dobimo neskrčljivo dopustno gramatiko $G^\text{nup}_w$
+    Dobimo neskrčljivo dopustno gramatiko $G^\text{nup}_w$.
     
     Da dobimo kanonično obliko ustrezno preimenujemo nekončne simbole. 
     Prirejanje $w \mapsto [G^\text{nup}_w]$ imenujemo \emph{metoda najdaljšega ujemajočega podniza}.
