@@ -1719,7 +1719,7 @@ in \emph{bisekcijsko prirejanje gramatike}.
 \begin{proof}
     Lempel in Ziv sta v~\cite{LempelZiv1976} pokazala, da velja
     \[
-        \max_{w \in \A^n} \abs{\sigma_\text{lz}(w)} = \mathcal{O} \left( \frac{n}{\log_2(n)} \right).
+        \max_{w \in \A^n} \abs{\sigma_\text{lz}(w)} \in \mathcal{O} \left( \frac{n}{\log_2(n)} \right).
     \]
     Navzgor ocenimo $\abs{G^\text{lz}_w}$. Dolžina desne strani prepisovalnega pravila
     \[ 
@@ -2408,20 +2408,20 @@ v~\cite{KiefferYang2000}.
     Naj bo $\varPhi \in \varPi_{as}(\A)$ in $\{ \nu_n \}$ zaporedje pozitivnih števil,
     ki konvergira proti $0$ tako, da je
     \[
-        \max_{w \in \A^n} \frac{\abs{G_w}}{\abs{w}} = O(\nu_n).
+        \max_{w \in \A^n} \frac{\abs{G_w}}{\abs{w}} \in \mathcal{O}(\nu_n).
     \]
     Potem za vsak $m \in \N$
     \[
-        \text{odv}_n \left( \kappa, \Lambda_{kv}^m(\A) \right) =
-        O \left( \nu_n \cdot \log_2 \left( \frac{1}{\nu_n} \right) \right).
+        \text{odv}_n \left( \kappa, \Lambda_{kv}^m(\A) \right) \in
+        \mathcal{O} \left( \nu_n \cdot \log_2 \left( \frac{1}{\nu_n} \right) \right).
     \]
 \end{izrek}
 
 \begin{izrek}\label{izrek:RedKonvergenca}
     Velja $\varPi_{nk}(\A) \subset \varPi_{as}(\A)$ in za vsak $m \in \N$ velja 
     \[
-        \max_{\varPhi \in \varPi_{nk}(\A)} \text{odv}_n \left( \kappa, \Lambda_{kv}^m(\A) \right) =
-        O \left( \frac{\log_2 \log_2(n)}{\log_2(n)} \right).
+        \max_{\varPhi \in \varPi_{nk}(\A)} \text{odv}_n \left( \kappa, \Lambda_{kv}^m(\A) \right) \in
+        \mathcal{O} \left( \frac{\log_2 \log_2(n)}{\log_2(n)} \right).
     \]
 \end{izrek}
 
