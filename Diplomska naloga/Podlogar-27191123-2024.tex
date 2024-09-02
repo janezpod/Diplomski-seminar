@@ -241,9 +241,9 @@ tako, da ga lahko dekodirajo le pooblaščene osebe. Takšnemu kodiranju pravimo
 šifriranje. Šifriranje ne preprečuje dostopa do kodiranega sporočila, ampak onemogoča pravilno
 dešifiranje oziroma razumevanje vsebine prestrezniku. %npr Cezarjeva šifra
 
-Eden izmed namenov kodiranja je doseči jedernatost sporočila. Stiskanje podatkov 
-je zapis informacij sporočila v zgoščeni obliki. Z uporabo lepih lastnosti infromacijskega vira 
-in posameznega sporočila, lahko sporočilo učinkoviteje prenesemo in porabimo manj prostora in časa.
+Eden izmed namenov kodiranja je doseči jedrnatost sporočila. Stiskanje podatkov 
+je zapis informacij sporočila v zgoščeni obliki. Z uporabo lepih lastnosti informacijskega vira 
+in posameznega sporočila lahko sporočilo učinkoviteje prenesemo in porabimo manj prostora in časa.
 Ena od takih lastnosti je statistična struktura jezika. Uporabimo jo v Morsejevi abecedi, kjer
 imajo črke z višjo frekvenco (pojavitve v angleškem jeziku) krajši zapis. %npr. Huffmanovo kodiranje
 
@@ -409,7 +409,7 @@ gramatike~\ref{izrek:BinarnoKodiranje}.
     \emph{rekonstrukcija niza $w$}.
 \end{definicija}
 
-Stiskanje podatkov razdelimo v dve kategoriji. \emph{Stiskanje brez izgube}, ki omogoča natančno
+Stiskanje podatkov razdelimo v dve kategoriji: \emph{stiskanje brez izgube}, ki omogoča natančno
 rekonstrukcijo izvirnega sporočila iz stisnjenih podatkov, in \emph{stiskanje z izgubo}, za katero
 je značilna nepovratna izguba informacije.
 
@@ -425,13 +425,13 @@ je značilna nepovratna izguba informacije.
     \]
 \end{definicija}
 
-Stiskanje brez izgube uporabljamo pri stiskanju besedil, saj je pomembno da je rekonstrukcija
+Stiskanje brez izgube uporabljamo pri stiskanju besedil, saj je pomembno, da je rekonstrukcija
 besedila enaka izvirnemu besedilu. Majhne razlike med rekonstrukcijo in izvirnim besedilom 
 lahko povzročijo velike pomenske razlike. Primer tega so bančni zapiski.
 
 V nekaterih primerih pa lahko toleriramo izgubo informacije. Na primer, pri zvočnih posnetkih, 
 slikah in videoposnetkih je lahko rekonstrukcija drugačna od izvirnika, saj so razlike za 
-človeka neopazne. V zameno za izgubo informacije dosežemo boljšo razmerje stiskanja kot
+človeka neopazne. V zameno za izgubo informacije dosežemo boljše razmerje stiskanja kot
 pri stiskanju brez izgube.
 
 Spoznajmo dve kodiranji, ki ju bomo uporabili v dokazu~\ref{izrek:BinarnoKodiranje}.
@@ -763,7 +763,7 @@ kako presenetljiva je naključna spremenljivka ``v povprečju''.
 Vir brez spomina je najpreprostejši model informacijskega vira, saj je vsaka črka v nizu neodvisna
 od vseh ostalih. V splošnem ne poznamo porazdelitve slučajne spremenljivke, ki
 definira vir brez spomina, zato porazdelitev ocenimo. Slovenščino naivno modeliramo z virom brez
-spomina tako, da porazdelitev ocenimo preko frekvenc črk v slovenskem besedilu.
+spomina, tako da porazdelitev ocenimo preko frekvenc črk v slovenskem besedilu.
 
 \begin{definicija}
     Imamo vir $X$ brez spomina abecede $\A$, kjer ne poznamo porazdelitve slučajne spremenljivke
@@ -822,11 +822,11 @@ v~\cite[1. poglavje, 4. razdelek]{Mackay2003} na sledeč način.
 \end{primer}
 
 Posledica izreka~\ref{izrek:EntropijaKodiranje} je, da za optimalno stiskanje $\kappa$ brez 
-izgube $X$ vira brez spomina, velja $\E[\abs{\kappa(w)}] \geq H(X)$.
-Torej v povprečju velja $\abs{\kappa(w)} = - \log_2\mu(w)$. Več o tem najdemo 
+izgube $X$ vira brez spomina velja $\E[\abs{\kappa(w)}] \geq H(X)$.
+Torej, v povprečju velja $\abs{\kappa(w)} = - \log_2\mu(w)$. Več o tem najdemo 
 v~\cite[1. poglavje, 5. razdelek]{Mackay2003}. \emph{Odvečnost} stiskanja $\kappa$
-je razlika med dolžino kodiranega niza in optimalno dolžino. Odvečnost torej pove kako
-blizu je $\kappa$ optimalnemu stiskanju. Sledeča definicija odvečnosti meri kako blizu smo
+je razlika med dolžino kodiranega niza in optimalno dolžino. Odvečnost torej pove, kako
+blizu je $\kappa$ optimalnemu stiskanju. Sledeča definicija odvečnosti meri, kako blizu smo
 v najslabšem primeru glede na dolžino niza.
 
 \begin{definicija}\label{def:odv}
@@ -932,7 +932,7 @@ najdemo v~\cite{Plotkin1992}.
 Pravopis določa pravila o rabi črk in ločil. Slovnica je sistem pravil 
 za tvorjenje povedi in sestavljanje besedil. Slovenska slovnica, Slovenski pravopis in Slovar 
 slovenskega knjižnega jezika določajo slovenski knjižni jezik, ki je poglavitno sredstvo javnega 
-in uradnega sporazumevanja v Sloveniji. Podobno je \emph{formalna gramatika} sistem pravil, ki pove
+in uradnega sporazumevanja v Sloveniji. Podobno je \emph{formalna gramatika} sistem pravil, ki pove,
 kako iz dane abecede tvorimo nize oziroma kateri nizi so ``pravilni''. Veljavne nize imenujemo 
 \emph{formalni jezik}. Formalne gramatike in formalni jeziki imajo široko uporabo. Uporabljajo se
 za modeliranje naravnih jezikov, kompresijo podatkov, so osnova programskih jezikov ter 
@@ -994,7 +994,7 @@ Za kontekstno-neodvisno gramatiko uporabljamo okrajšavo KNG in se sklicujemo na
 \end{primer}
 
 Ime kontekstno-neodvisna gramatika izvira iz oblike prepisovalnih pravil. Na levi strani 
-pravila mora vedno stati samo en nekončni simbol. Torej ne sme vsebovati pravil oblike 
+pravila mora vedno stati samo en nekončni simbol. Torej, ne sme vsebovati pravil oblike 
 $\alpha A \gamma \rightarrow \alpha\beta\gamma$, saj je uporaba tega pravila odvisna od 
 \emph{konteksta} nekončnega simbola $A$. Kontekst določata niza 
 $\alpha, \beta \in ( V \cup \Sigma )^*$, ki se nahajata neposredno pred in po nekončnim simbolom.
@@ -1027,7 +1027,7 @@ Ko govorimo o poljubnem simbolu, ga označimo z $y$.
 
 \subsection{Dopustne gramatike}
 
-Da lahko stistnemo niz $w$ s pomočjo KNG mora biti njen jezik enojec $\{ w \}$, saj lahko
+Da lahko stistnemo niz $w$ s pomočjo KNG, mora biti njen jezik enojec $\{ w \}$, saj lahko
 iz KNG enolično rekonstruramo niz $w$. V razdelku predstavimo poseben primer KNG, to so
 \emph{dopustne gramatike}~\cite{KiefferYang2000}.
 
@@ -1073,7 +1073,7 @@ njihov jezik neprazen.
     \]
 \end{primer}
 
-Ker bomo KNG stisnili, želimo da ne vsebuje odvečnih simbolov. Simbol je odvečen, če se
+Ker bomo KNG stisnili, želimo, da ne vsebuje odvečnih simbolov. Simbol je odvečen, če se
 ne pojavi v nobeni izpeljavi niza, ki je v jeziku KNG.
 
 \begin{definicija}
@@ -1338,7 +1338,7 @@ Osvežimo osnovni definiciji iz teorije grafov.
 
 \subsection{Karakterizacija dopustne gramatike}
 
-Preko izpeljevalnega grafa gramatike lahko ugotovimo ali je podana gramatika dopustna. Tudi preko
+Preko izpeljevalnega grafa gramatike lahko ugotovimo, ali je podana gramatika dopustna. Tudi preko
 D$0$L-sistema gramatike lahko preizkusimo dopustnost gramatike. Še več, D$0$L-sistem gramatike
 poda algoritem za izračun niza, ki ga generira dopustna gramatika.
 
@@ -1553,8 +1553,8 @@ Nizu $w$ najprej priredimo KNG $G_w$ in jo nato binarno kodiramo.
     \label{fig:Kodirnik}
 \end{figure}
 
-Od tu naprej naj bo $\A$ poljubna abeceda, $\abs{\A} \geq 2$ iz katere bomo generirali niz.
-Naj bo $\{ A_0, A_1, \ldots \}$ končna abeceda in predpostavimo da je
+Od tu naprej naj bo $\A$ poljubna abeceda, $\abs{\A} \geq 2$, iz katere bomo generirali niz.
+Naj bo $\{ A_0, A_1, \ldots \}$ končna abeceda in predpostavimo, da je
 $\A \cap \{ A_0, A_1, \ldots \} = \emptyset$. Simbole $A_0, A_1, \ldots$ uporabljamo za nekončne 
 simbole, njihov \emph{naravni leksikografski vrstni red} je določen z naraščanjem indeksa.
 
@@ -1659,7 +1659,7 @@ Predstavimo dva razreda prirejanj dopustne gramatike: asimptotsko kompaktno in n
     \]
 \end{definicija}
 
-Predstavimo dve asimptotsko kompaktni prirejanji gramatike, \emph{Lempel-Ziv prirejanje gramatike}
+Predstavimo dve asimptotsko kompaktni prirejanji gramatike: \emph{Lempel-Ziv prirejanje gramatike}
 in \emph{bisekcijsko prirejanje gramatike}.
 
 \begin{definicija}
@@ -1707,7 +1707,7 @@ in \emph{bisekcijsko prirejanje gramatike}.
         \]
         kjer je $u = \alpha b$, $\alpha \in \Sigma^*$ in $b \in \Sigma$.
     \end{itemize}
-    Da dobimo kanonično obliko $[G^\text{lz}_w]$ ustrezno preimenujemo nekončne simbole po
+    Da dobimo kanonično obliko $[G^\text{lz}_w]$, ustrezno preimenujemo nekončne simbole po
     postopku opisanem v definiciji~\ref{def:G(A)}. Prirejanju $w \mapsto [G^\text{lz}_w]$ pravimo
      \emph{Lempel-Ziv prirejanje gramatike}.
 \end{definicija}
@@ -1750,7 +1750,7 @@ in \emph{bisekcijsko prirejanje gramatike}.
         A_{000} &\rightarrow A_{00}0, \\
         A_{001} &\rightarrow A_{00}1.
     \end{align*}
-    Da dobimo kanonično obliko ustrezno preimenujemo nekončne simbole, kar
+    Da dobimo kanonično obliko, ustrezno preimenujemo nekončne simbole, kar
     je v tem primeru zelo lahko. Prepisovalna pravila $[G^\text{lz}_w] \in \G^*(\{ 0, 1 \})$ so
     \begin{align*}
         A_0 &\rightarrow A_1A_2A_3A_4A_5A_6, \\
@@ -1828,7 +1828,7 @@ in \emph{bisekcijsko prirejanje gramatike}.
             A_u \rightarrow A_{u_1}A_{u_2} \cdots A_{u_m}.
         \]
     \end{itemize}
-    Da dobimo kanonično obliko $[G^\text{bis}_w]$ ustrezno preimenujemo nekončne simbole.
+    Da dobimo kanonično obliko $[G^\text{bis}_w]$, ustrezno preimenujemo nekončne simbole.
     Prirejanju $w \mapsto [G^\text{bis}_w]$ pravimo \emph{bisekcijsko prirejanje gramatike}.
 \end{definicija}
 
@@ -1849,7 +1849,7 @@ prirejanje gramatike.
         A_{1} &\rightarrow 1, \\
         A_{0} &\rightarrow 0.
     \end{align*}
-    Da dobimo kanonično obliko ustrezno preimenujemo nekončne simbole.
+    Da dobimo kanonično obliko, ustrezno preimenujemo nekončne simbole.
     Prepisovalna pravila $[G^\text{bis}_w] \in \G^*(\{ 0, 1 \})$ so
     \begin{align*}
         A_0 &\rightarrow A_1A_2A_3, \\
@@ -1878,7 +1878,7 @@ prirejanje gramatike.
 \end{definicija}
 
 Različna neskrčjiva prirejanja gramatike dobimo tako, da izvajamo različne sisteme ``skrčitev''.
-V nadaljevanju si bomo ogledali pet pravil po katerih iz poljubne dopustne gramatike v končno 
+V nadaljevanju si bomo ogledali pet pravil, po katerih iz poljubne dopustne gramatike v končno 
 mnogo korakih pridemo do neskrčljive gramatike.
 
 \begin{pravilo}
@@ -2043,7 +2043,7 @@ prirejanji.
     Dokler lahko, uporabi eno izmed skrčitvenih pravil $2, 3, 4$. 
     Dobimo neskrčljivo dopustno gramatiko $G^\text{nup}_w$.
     
-    Da dobimo kanonično obliko ustrezno preimenujemo nekončne simbole. 
+    Da dobimo kanonično obliko, ustrezno preimenujemo nekončne simbole. 
     Prirejanje $w \mapsto [G^\text{nup}_w]$ imenujemo \emph{metoda najdaljšega ujemajočega podniza}.
 \end{definicija}
 
@@ -2157,7 +2157,7 @@ prirejanji.
     Opomnimo, da je $C(G^\text{nup}_w) = 30 < C(G_w) = 63$ in da smo do neskrčljive gramatike
     $G^\text{nup}_w$ prišli z uporabo $6$ skrčitvenih pravil.
 
-    Da dobimo kanonično obliko neskrčljive gramatike ustrezno preimenujemo
+    Da dobimo kanonično obliko neskrčljive gramatike, ustrezno preimenujemo
     nekončne simbole. Prepisovalna pravila $[G^\text{nup}_w] \in \G^*(\{ 0, 1 \})$ so
     \begin{align*}
         A_0 &\rightarrow A_1A_2A_3A_3A_4A_1, \\
@@ -2374,7 +2374,7 @@ podamo binarni kod prepisovalnih pravil dopustne gramatike, ki ga lahko enoličn
 
 V prvem razdelku poglavja smo spoznali dve prirejanji gramatike: asimptotsko kompaktno in neskrčljivo.
 V drugem razdelku smo spoznali binarno kodiranje gramatike. Sedaj ti dve preslikavi združimo v  
-\emph{stiskanje niza abecede $\A$ z gramatikami $\G(\A)$}
+\emph{stiskanje niza abecede $\A$ z gramatikami $\G(\A)$}.
 
 \begin{definicija}
     \emph{Stiskanje niza abecede $\A$ z gramatikami $\G(\A)$} je 
@@ -2396,7 +2396,7 @@ V drugem razdelku smo spoznali binarno kodiranje gramatike. Sedaj ti dve preslik
     \emph{stiskanje niza abecede $\A$ z neskrčljivim prirejanjem}.
 \end{definicija}
 
-V sledečih dveh izrekih uporabimo masksimalno točkovno odvečnost reda $n$ kodne preslikave 
+V sledečih dveh izrekih uporabimo maksimalno točkovno odvečnost reda $n$ kodne preslikave 
 $\kappa$ glede na družino informacijskih virov abecede $\A$ iz definicije~\ref{def:odv} in
 končni vir abecede $\A$ stopnje $m$ iz definicije~\ref{def:FSS}. Čeprav ju ne bomo dokazali,
 sta izreka zanimiva, saj podata zgornjo mejo maksimalne točkovne odvečnosti reda $n$ stiskanja 
@@ -2429,7 +2429,7 @@ Prvi izrek pove, da odvečnost stiskanja z asimptotsko kompaktnim prirejanjem ko
 odvisnosti od izbire kodiranja znotraj razreda.
 Drugi pa, da je stiskanje z neskrčljivim prirejanjem tudi stiskanje z asimptotsko kompaktnim 
 prirejanjem. Pove tudi, da odvečnost konvergira enakomerno proti $0$ za vsa stiskanja z neskrčljivim 
-prirejanjem vsaj tako hitro kot $\frac{\log_2 \log_2(n)}{\log_2(n)}$ pomnožena z neko konstanto.
+prirejanjem, vsaj tako hitro kot $\frac{\log_2 \log_2(n)}{\log_2(n)}$ pomnoženo z neko konstanto.
 
 Lempel in Ziv sta predstavila pojem \emph{univerzalnega koda}~\cite{LempelZiv1977, Ziv1978, LempelZiv1978}.
 To je stiskanje brez izgube, ki zmore učinkovito obravnavati katerikoli informacijski vir, saj
