@@ -80,14 +80,17 @@
             \item Abeceda je končna neprazna množica.
             \item Relacija $R \subseteq A \times B$ je \emph{celovita}, če velja 
             $\forall x \in A \ \exists y \in B \colon (x,y) \in R$.
-            \item Kleenijevo zaprtje abecede $V$ je $V^*$, ki vsebuje prazen niz $\varepsilon$
-            in je zaprta za operacijo stik. Torej vsebuje prazen niz $\varepsilon$ in vse nize
-            končne dolžine, ki jih lahko tvorimo z stikanjem poljubnih elemntov iz $V$.
+            \item $( V \cup \Sigma )^*$ je množica vseh nizov končne dolžine končnih in nekončnih
+            simbolov. Vsebuje tudi prazen niz $\varepsilon$, saj je to niz dolžine $0$.
             \item Prazen niz $\varepsilon$ je enota za operacijo stik.
-            \item Standardno z velikimi tiskanimi črkami označujemo nekončne simbole, z malimi 
-            tiskanimi črkami označujemo končne simbole in z grškimi črkami označujemo končne nize
-            nekončnih in končnih simbolov. Ko govorimo o poljubnem simbolu, ga označimo z $y$.
+            \item Okrajšamo z KNG.
         \end{itemize}
+        \begin{exampleblock}{Primer}
+            Naj bo $ V = \{ S\}$, 
+            $\Sigma = \{ a,b,c \}$, 
+            $P = \{ (S,\mathit{aSb}), (S , \epsilon) \}$ in
+            $S = S$.
+        \end{exampleblock}
     }
 \end{frame}
 
@@ -97,27 +100,21 @@
         \item Prepisovalno pravilo $(A, \beta) \in P$ pišemo $A \rightarrow \beta$.
         \item Niz $\alpha A \gamma$ se \emph{prepiše s pravilom} $A \rightarrow \beta$ v 
         $\alpha\beta\gamma$, pišemo $\alpha A \gamma \Rightarrow \alpha\beta\gamma$.
-        \item Niz $\alpha $ \emph{izpelje} $\beta$, če lahko $\alpha$ prepišemo v $\beta$
+        \item Niz $\alpha $ \emph{izpelje} niz $\beta$, če lahko $\alpha$ prepišemo v $\beta$
         z uporabo končno mnogo prepisovalnih pravil. 
     \end{itemize}
     \pause
     \begin{definicija}
-        Jezik KNG $G$ je množica nizov $L(G)$, ki jih lahko izpeljemo iz začetnega simbola in 
+        Jezik KNG je množica nizov, ki jih lahko izpeljemo iz začetnega simbola in 
         ne vsebujejo nekončnih simbolov.
     \end{definicija}
     \note{
         \begin{itemize}
-            \item Za kontekstno-neodvisno gramatiko uporabljamo okrajšavo KNG in se sklicujemo
-            na komponente četrverice $(V, \Sigma, P, S)$ brez njene eksplicitne navedbe.
             \item \emph{Leva stran prepisovalnega pravila $A \rightarrow \beta$} je $A$ in 
             \emph{desna stran prepisovalnega pravila} je $\beta$.
         \end{itemize}
-        Napišemo primer in preverimo, da je res KNG.
         \begin{exampleblock}{Primer}
-            Naj bo $ V = \{ S\}$, 
-            $\Sigma = \{ a,b,c \}$, 
-            $P = \{ S \rightarrow \mathit{aSb}, S \rightarrow \epsilon \}$ in
-            $S = S$.
+            prepisovalna pravila zapišemo kot $P = \{ S \rightarrow \mathit{aSb}, S \rightarrow \epsilon \}$.
             Izpeljemo nize
             \[
                 S \Rightarrow \epsilon, \ 
@@ -154,7 +151,7 @@
         \begin{itemize}
             \item Glavna ideja je, da je jezik $G_w$ je $\{w\}$, saj lahko enolično rekonstruramo 
             niz $w$.
-            \item Alternativni pristop je: KNG $G$ je poznana tako kodirniku kot dekodirniku in 
+            \item Alternativni pristop: KNG $G$ je poznana tako kodirniku kot dekodirniku in 
             jezik KNG $G$ vsebuje vse nize, ki jih želimo stistniti. Posamezni niz stisnemo tako,
             da stistnemo izpeljavo niza iz začetnega simbola.
         \end{itemize}
@@ -167,8 +164,7 @@
     \frametitle{Dopustna gramatika}
     \begin{definicija}
         KNG je \emph{deterministična}, če vsak nekončen simbol $A \in V$ nastopa natanko enkrat
-        kot leva stran nekega prepisovalnega pravila. Sicer je 
-        \emph{nedeterministična}.
+        kot leva stran nekega prepisovalnega pravila.
     \end{definicija}
     \pause
     \begin{trditev}
@@ -176,27 +172,28 @@
     \end{trditev}
     \note{
         \begin{itemize}
-            \item Prejšnji primer ni deterministična gramatika. Kaj se zgodi, če odstranimo
-            $S \rightarrow \varepsilon$, da postane deterministična.
-            \item Determinizem sam po sebi ni dovolj močan, da prepreči praznost jezika, kot
-            pokažeta sledeča primera, kjer se v izpeljavi “zaciklamo”. Zato bomo od dopustnih
-            gramatik zahtevali, da je njihov jezik neprazen.
-            \item Prav tako nočemo, da je ta enojec prazen niz $\varepsilon$. To se zgodi, če
-            odstarnimo pravilo $S \rightarrow \mathit{aSb}$.
+            \item Prejšnji primer ni deterministična gramatika.
+            \item Če odstranimo odstarnimo pravilo $S \rightarrow \mathit{aSb}$,
+            postane deterministična, a je jezik $\{ \varepsilon \}$.
+            \item Če odstranimo $S \rightarrow \varepsilon$ postane deterministična, a je 
+            njen jezik prazna množica.
+            \item Determinizem sam po sebi ni dovolj močan, da prepreči praznost jezika.
+            Zato bomo od dopustnih gramatik zahtevali, da je njihov jezik neprazen in da ne
+            vsebuje pravila oblike $A \rightarrow \varepsilon$.
         \end{itemize}
     }
 \end{frame}
 
 \begin{frame}
     \begin{definicija}
-        KNG $G$ \emph{ne vsebuje neuporabnih simbolov}, 
+        KNG \emph{ne vsebuje neuporabnih simbolov}, 
         če se vsak simbol $ y \in V \cup \Sigma, \ y \neq S $ pojavi vsaj enkrat v izpeljavi 
-        niza, ki je v jeziku KNG $G$.
+        niza, ki je v jeziku KNG.
     \end{definicija}
     \note{
-        Povedano drugače:
         \begin{itemize}
-            \item Simbol je odvečen, če se ne pojavi v nobeni izpeljavi niza, ki je v jeziku KNG.
+            \item Povedano drugače: simbol je neupraven, če se ne pojavi v nobeni izpeljavi niza,
+            ki je v jeziku KNG.
         \end{itemize}
     }
 \end{frame}
@@ -204,7 +201,7 @@
 
 \begin{frame}
     \begin{definicija}
-        KNG $G$ je \emph{dopustna gramatika}, če je:
+        KNG je \emph{dopustna gramatika}, če je:
         \begin{itemize}
             \item deterministična,
             \item ne vsebuje neuporabnih simbolov,
@@ -217,9 +214,6 @@
     \begin{posledica}
         Jezik dopustne gramatike je enojec. 
     \end{posledica}
-    \note{
-        Vse povedano sestavimo skupaj.
-    }
 \end{frame}
 
 \section{Prirejanj gramatike}
@@ -267,7 +261,7 @@
     \note{
     \begin{itemize}
         \item Z zahtevo $5.$ so nekončni simboli poimenovani po edinstvem vrstnem redu.
-        Ta vrstni red bo dekodirniku omogočil pravilno določiti naslednji nekončni simbol. Opomni
+        Ta vrstni red omogoča pravilno dekodiranje.
         \item KNG $G \notin \G(\A)$, ki izpolnjuje zahtevi $1.$ in $2.$, preimenujmo nekončne
         simbole tako, da izpolnimo $5.$ zahtevo. Potem izpolnimo tudi $3.$ in $4.$ zahtevi. 
         Dobimo $[G] \in \G(\A)$, ki jo imenujemo \emph{kanonično oblika $G$}, in velja da sta jezika
@@ -302,11 +296,6 @@
             w &\mapsto G_w.
         \end{align*}
     \end{definicija}
-    \note{
-        \begin{itemize}
-            \item Sedaj lahko definiramo prirejanje gramatike nizu abecede.
-        \end{itemize}
-    }
 \end{frame}
 
 \begin{frame}
@@ -322,10 +311,8 @@
     \end{definicija}
     \note{
         \begin{itemize}
-            \item Sedaj lahko definiramo prirejanje gramatike nizu abecede.
             \item Za prirejanja, ki jih predstavimo potrebujemo še eno omejitev s 
             katero se v predstavitvi ne obremenjujemo.
-            \item Definicijo pa rabimo razumeti.
         \end{itemize}
     }
 \end{frame}
@@ -341,83 +328,9 @@
             \lim_{n \rightarrow \infty} \max_{w \in \A^n} \frac{\abs{G_w}}{\abs{w}} = 0.
         \]
     \end{definicija}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Bisekcijsko prirejanje gramatike}
-    Naj bo $w \in \A^+$, $w_1w_2 \cdots w_n$ predstavitev niza $w$ s črkami abecede.
-    \begin{block}{Bisekcijska členitev niza}
-        $\sigma_{\text{bis}}(w) = \{ w \} \cup \Bigl\{ w_iw_{i+1} \cdots w_j \Bigm| \log_2(j-i-1) \in \N_0
-        \text{ in } \frac{i-1}{j-i-1} \in \N_0 \bigr\}$.
-    \end{block}
-    \pause
-    \begin{block}{Končni simboli}
-        $\Sigma = \{ u \in \sigma_{\text{bis}}(w) \mid \abs{u} = 1 \}$.
-    \end{block}
-    \begin{block}{Nekončni simboli}
-        $V = \{ A_u \mid u \in \sigma_{\text{bis}}(w) \}$.
-    \end{block}
-    \begin{block}{Začetni simbol}
-        $S = A_w$.
-    \end{block}
     \note{
         \begin{itemize}
-            \item Prvi pogoj pove, da $\sigma_{\text{bis}}(w)$ vsebuje le podnize dolžine $2^n$ 
-            za $n \in \N_0$.  Drugi pogoj pove, da se po nizu $w$ ``premikamo'' s korakom dolžine podniza.
-        \end{itemize}
-        \begin{exampleblock}{Primer}
-            Naj bo $w = 0001010$. Poiščimo podmnožico nizov $\sigma_{\text{bis}}(w)$. Po definiciji je 
-            $0001010 \in \sigma_{\text{bis}}(w)$. Ker je $\abs{w} = 7$, zaradi prvega pogoja gledamo 
-            podnize dolžine $1, 2, 4$. Vsi nizi dolžine $1$ so trivialno vsebovani. Poglejmo podnize 
-            dolžine $2$. Zaradi drugega pogoja se po nizu ``premikamo'' s korakom dolžine $2$.
-            Nato se po nizu ``premikamo'' s korakom dolžine $4$. 
-            Podčratmo vse nize, ki so vsebovani v $\sigma_{\text{bis}}(w)$. Vidimo zakaj jo imenujemo
-            \emph{bisekcijska} dopustna gramatika:
-            \begin{gather*}
-                \underline{\underline{\underline{\underline{0} \, \underline{0}} \,
-                \underline{\underline{0} \, \underline{1}}} \, \underline{\underline{0} \, \underline{1}}
-                \, \underline{0}}.
-            \end{gather*}
-        \end{exampleblock}
-    }
-\end{frame}
-
-\begin{frame}
-    \begin{block}{Prepisovalna pravila}
-        Za vsak $u \in \sigma_{\text{bis}}(w)$ velja:
-        \begin{itemize}
-            \item Če je $\abs{u} = 1$, je prepisovalno pravilo oblike
-            \[
-                A_u \rightarrow u.
-            \]
-            \item Če je $\log_2(\abs{u}) \in \N$, je prepisovalno pravilo oblike 
-            \[
-                A_u \rightarrow A_lA_d,
-            \]
-            kjer je $\abs{l} = \abs{d}$ in $ld = u$.
-            \item Sicer je $\log_2(\abs{u}) \notin \N$. Prepisovalno pravilo je oblike 
-            \[
-                A_u \rightarrow A_{u_1}A_{u_2} \cdots A_{u_m},
-            \]
-            kjer je  $\abs{w} > \abs{u_1} > \abs{u_2} > \cdots > \abs{u_m}$ in $u_1u_2 \cdots u_m = w$
-        \end{itemize}
-    \end{block}
-    \note{
-        \begin{itemize}
-            \item Niz $u$ zapišemo kot stik dveh enako dolgih nizov $l$ in $d$.
-            \item Prej smo izračunali $\sigma_{\text{bis}}(w) = \{ 0001010, 0001, 01, 00, 1, 0 \}$ 
-            in iz podčranega niza vidimo, da je $\underline{0001} \, \underline{01} \, \underline{0}$
-            iskano razbitje niza $w$. Prepisovalna pravila dopustne gramatike $G^\text{bis}_w$ so
-            \begin{align*}
-                A_w &\rightarrow A_{0001}A_{01}A_{0}, \\
-                A_{0001} &\rightarrow A_{00}A_{01}, \\
-                A_{01} &\rightarrow A_{0}A_{1}, \\
-                A_{00} &\rightarrow A_{0}A_{0}, \\
-                A_{1} &\rightarrow 1, \\
-                A_{0} &\rightarrow 0.
-            \end{align*}
-            \item Seveda moramo še ustrezno preimenovati nekončne simbole, da dobimo kanonično
-            obliko.
+            \item Primer je bisekcijsko prirejanje gramatike.
         \end{itemize}
     }
 \end{frame}
@@ -442,131 +355,12 @@
     \note{
         \begin{itemize}
             \item Primer prekrivajočih mest je $\underline{11}1$ in  $1\underline{11}$.
+            \item Primer neprekriavjočih mest je $\underline{11} \ \underline{11}$.
             \item Različna neskrčjiva prirejanja gramatike dobimo tako, da izvajamo 
-            različne sisteme ``skrčitev''.
-            \item Poglejmo si en tak sistem in sicer metodo najdaljšega ujemajočega podniza.
-            \item V delu je predstavljenih več pravil, saj lahko z njimi oblikujemo različne
-            sisteme redukcij.
+            različne nabore skrčitvenih pravil.
+            \item Primer je metodo najdaljšega ujemajočega podniza.
         \end{itemize}
     }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Metoda najdaljšega ujemajočega podniza}
-    Naj bo $w \in \A$. Začnemo s trivilano dopustno gramatiko
-    \[
-    S \rightarrow w.
-    \]
-    Ponavljaj dokler lahko: poiščemo najdaljši podniz, ki se pojavi dvakrat na neprekriavjočih 
-    se mestih levih  strani prepisovalnih pravil, uporabi eno izmed skrčitvenih pravil:
-\end{frame}
-
-\begin{frame}
-    \frametitle{Metoda najdaljšega ujemajočega podniza}
-    \begin{block}{Skrčitveno pravilo 1}
-        Če obstaja prepisovalno pravilo
-        \[
-            A \rightarrow \alpha_1 \beta \alpha_2 \beta \alpha_3,
-        \]
-        kjer so $\alpha_1, \alpha_2, \alpha_3, \beta \in (V \cup \Sigma)^*$ in $\abs{\beta} \geq 2$,
-        izberemo $B \notin V \cup \Sigma$ in
-        \begin{itemize}
-            \item dodamo pravilo $B \rightarrow \beta$;
-            \item nadomestimo pravilo $A \rightarrow \alpha_1 \beta \alpha_2 \beta \alpha_3$ z 
-            $A \rightarrow \alpha_1 B \alpha_2 B \alpha_3$.
-        \end{itemize}
-    \end{block}
-    \note{
-        \begin{itemize}
-            \item Jezik spremenjene dopsutne gramatike je enak jeziku stare.
-            \item Nova dopustna gramatika je ``bližje'' zadostitvi $2.$ zahtevi 
-            definicije neskrčljive gramatike:
-
-            Ne obstajata $y_1,y_2 \in V \cup \Sigma$, da niz $y_1y_2$ nastopa kot podniz desne 
-            strani kateregali prepisovalnega pravila več kot enkrat na neprekrivajočih se mestih.
-        \end{itemize}
-    }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Metoda najdaljšega ujemajočega podniza}
-    \begin{block}{Skrčitveno pravilo 2}
-        Če obstajata prepisovalni pravili
-        \begin{align*}
-            A &\rightarrow \alpha_1 \beta \alpha_2, \\
-            B &\rightarrow \alpha_3 \beta \alpha_4,
-        \end{align*}
-        kjer so $\alpha_1, \alpha_2, \alpha_3, \alpha_4, \beta \in (V \cup \Sigma)^*$, $\abs{\beta} \geq 2$,
-        $(\alpha_1 \neq \varepsilon \vee \alpha_2 \neq \varepsilon)$ in 
-        $(\alpha_3 \neq \varepsilon \vee \alpha_4 \neq \varepsilon)$,
-        izberemo $C \notin V \cup \Sigma$ in
-        \begin{itemize}
-            \item dodamo pravilo $C \rightarrow \beta$;
-            \item nadomestimo pravilo $A \rightarrow \alpha_1 \beta \alpha_2$ 
-            z $A \rightarrow \alpha_1 C \alpha_2$;
-            \item nadomestimo pravilo $A \rightarrow \alpha_3 \beta \alpha_4$ 
-            z $A \rightarrow \alpha_3 C \alpha_4$.
-        \end{itemize}
-    \end{block}
-    \note{
-        \begin{itemize}
-            \item Jezik spremenjene dopsutne gramatike je enak jeziku stare.
-            \item Nova dopustna gramatika je ``bližje'' zadostitvi $2.$ zahtevi 
-            definicije neskrčljive gramatike:
-
-            Ne obstajata $y_1,y_2 \in V \cup \Sigma$, da niz $y_1y_2$ nastopa kot podniz desne 
-            strani kateregali prepisovalnega pravila več kot enkrat na neprekrivajočih se mestih.
-        \end{itemize}
-    }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Metoda najdaljšega ujemajočega podniza}
-    \begin{block}{Skrčitveno pravilo 3}
-        Če obstajata prepisovalni pravili
-        \begin{align*}
-            A &\rightarrow \alpha_1 \beta \alpha_2, \\
-            B &\rightarrow \beta,
-        \end{align*}
-        kjer so $\alpha_1, \alpha_2, \beta \in (V \cup \Sigma)^*$, $\abs{\beta} \geq 2$
-        in $\alpha_1 \neq \varepsilon \vee \alpha_2 \neq \varepsilon$,
-        \begin{itemize}
-            \item nadomestimo pravilo $A \rightarrow \alpha_1 \beta \alpha_2$ z
-            $A \rightarrow \alpha_1 B \alpha_2$.
-        \end{itemize}
-    \end{block}
-    \note{
-        \begin{itemize}
-            \item Jezik spremenjene dopsutne gramatike je enak jeziku stare.
-            \item Nova dopustna gramatika je ``bližje'' zadostitvi $1.$ zahtevi 
-            definicije neskrčljive gramatike:
-
-            Vsak $A \in V$, $A \neq S$ nastopa vsaj dvakrat v desni strani prepisovalnih pravil.
-
-            \item Vprašamo se ali z metodo najdaljšega ujemajočega podniza pridelamo neskrčljivo
-            gramatiko v končno mnogo korakih?
-        \end{itemize}
-    }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Metoda najdaljšega ujemajočega podniza}
-    \begin{definicija}
-        Za dopustno gramatiko $G$ je $C(G) = 2 \abs{G} - \abs{V}$.
-    \end{definicija}
-    \pause
-    \begin{trditev}
-        Za vsako dopustno gramatiko $G$ je $C(G) > 0$.
-    \end{trditev}
-    \begin{trditev}
-        Naj bo $G$ dopustna gramatika in $G^\prime$ dopustna gramatika dobljena z uporabno nekega
-        skrčitvenega pravila na $G$. Potem je $C(G^\prime) < C(G)$. 
-    \end{trditev}
-    \pause
-    \begin{izrek}
-        Iz dopustne gramatike $G$ dobimo neskrčljivo gramatiko $G^\prime$ z uporabo največ 
-        $C(G) - 1$ skrčitvenih previl.
-    \end{izrek}
 \end{frame}
 
 \section{Binarno kodiranje gramatike}
@@ -598,11 +392,6 @@
             G &\mapsto B(G).
         \end{align*}
     \end{definicija} 
-    \note{
-        \begin{itemize}
-            \item Sedaj poznamo dva razreda prirejanj gramatike $G_w$.
-        \end{itemize}
-    }
 \end{frame}
 
 \begin{frame}
@@ -613,6 +402,11 @@
             \item $ \forall G \in \G(\A) \colon \abs{B(G)} \leq \abs{\A} + 4 \abs{G} + \lceil H(G) \rceil$.
         \end{enumerate}
     \end{izrek}
+    \note{
+        \begin{itemize}
+            \item Abeceda je poznana tako kodirniku kot dekodirniku.
+        \end{itemize}
+    }
 \end{frame}
 
 \begin{frame}
@@ -620,7 +414,7 @@
         \emph{Stiskanje niza abecede $\A$ z gramatikami $\G(\A)$} je 
         par preslikav kodne in dekodne preslikave $\varPhi = (\kappa, \delta)$. Kodna preslikava je
         \begin{align*}
-            \kappa \colon A^+ &\to \{ 0, 1\}^+,\\
+            \kappa \colon \A^+ &\to \{ 0, 1\}^+,\\
             w &\mapsto B(\pi(w)),
         \end{align*}
         kjer je $\pi$ prirejanje gramatike nizu abecede $\A$ in
