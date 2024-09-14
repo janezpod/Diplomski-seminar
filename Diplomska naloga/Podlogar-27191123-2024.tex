@@ -137,6 +137,7 @@ stiskanje brez izgube\sep univerzalen kod}
   \vbox{\hrule width#1}%
   \hbox{\vrule height.3ex}}
 
+% Absolutna vrednost
 \providecommand{\abs}[1]{\left\lvert #1 \right\rvert}
 
 % Naravna števila
@@ -981,7 +982,7 @@ Za kontekstno-neodvisno gramatiko uporabljamo okrajšavo KNG in se sklicujemo na
 \begin{primer}
     Naj bo $ V = \{ S\}$, 
     $\Sigma = \{ a,b \}$, 
-    $P = \{ S \rightarrow aSb, S \rightarrow \epsilon \}$ in
+    $P = \{ S \rightarrow \mathit{aSb}, S \rightarrow \epsilon \}$ in
     $S = S$.
     To je res KNG, saj sta množici $V$ in $\Sigma$ končni, disjunktni in je $P$ celovita.
     Izpeljemo nize
@@ -1004,8 +1005,8 @@ označujemo končne simbole in z grškimi črkami označujemo končne nize nekon
 Ko govorimo o poljubnem simbolu, ga označimo z $y$.
 
 \begin{definicija}\label{primer:kng}
-    Jezik KNG $G$ je $L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}$. Jezik so torej nizi,
-    ki jih lahko izpeljemo s pravili iz začetnega simbola in vsebujejo le končne simbole.
+    Jezik KNG $G$ je $L(G) = \{ w \in \Sigma^* \mid S \xRightarrow{*} w \}$. Jezik so torej
+    končni nizi abecede $\Sigma$, ki jih lahko izpeljemo s pravili iz začetnega simbola.
 \end{definicija}
 
 \begin{primer}
@@ -1063,7 +1064,7 @@ njihov jezik neprazen.
 
 \begin{primer}
     Naj bo G KNG, $V = \{ S, A, B \} $, $\Sigma = \{ a \}$, 
-    $P = \{ S \rightarrow \mathit{Aa}, A \rightarrow \mathit{Ba}, B \rightarrow Aa \}$ in $S = S$. 
+    $P = \{ S \rightarrow \mathit{Aa}, A \rightarrow \mathit{Ba}, B \rightarrow \mathit{Aa} \}$ in $S = S$. 
     KNG je deterministična. Jezik je prazen, saj ne moremo izpeljati niza, ki bi vseboval le 
     končne simbole. Z uporabo končno mnogo prepisovalnih pravil se le ciklamo med $A$ in $B$, 
     pri tem število ponovitev končnega simbola $a$ pove kolikokrat smo uporabili pravila.
@@ -1802,8 +1803,7 @@ in \emph{bisekcijsko prirejanje gramatike}.
 \end{primer}
 
 \begin{definicija}
-    Naj bo $w \in \A^+$, $w_1w_2 \cdots w_n$ predstavitev niza $w$ s črkami abecede.
-    \emph{Bisekcijska dopustna gramatika $G^\text{bis}_w$} je
+    Naj bo $w \in \A^+$. \emph{Bisekcijska dopustna gramatika $G^\text{bis}_w$} je
     \begin{itemize}
         \item $\Sigma = \{ u \in \sigma_{\text{bis}}(w) \mid \abs{u} = 1 \}$;
         \item $V = \{ A_u \mid u \in \sigma_{\text{bis}}(w) \}$;
@@ -2039,11 +2039,11 @@ S skrčitvenimi pravili zasnujemo različna neskrčljiva prirejanja gramatike. P
 prirejanji.
 
 \begin{definicija}
-    Za podani niz $w$ začnemo z trivialno dopustno gramatiko $S \rightarrow w$. 
-    Dokler lahko, uporabi eno izmed skrčitvenih pravil $2, 3, 4$. 
-    Dobimo neskrčljivo dopustno gramatiko $G^\text{nup}_w$.
+    Za podani niz $w$ začnemo z trivialno dopustno gramatiko $S \rightarrow w$. Ponavljaj dokler
+    lahko: poiščemo najdaljši podniz, ki se pojavi dvakrat na neprekriavjočih se mestih levih 
+    strani prepisovalnih pravil, uporabi eno izmed skrčitvenih pravil $2, 3, 4$. 
     
-    Da dobimo kanonično obliko, ustrezno preimenujemo nekončne simbole. 
+    Dobimo neskrčljivo dopustno gramatiko $G^\text{nup}_w$. Da dobimo kanonično obliko, ustrezno preimenujemo nekončne simbole. 
     Prirejanje $w \mapsto [G^\text{nup}_w]$ imenujemo \emph{metoda najdaljšega ujemajočega podniza}.
 \end{definicija}
 
