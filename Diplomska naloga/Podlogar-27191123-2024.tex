@@ -1676,9 +1676,10 @@ in \emph{bisekcijsko prirejanje gramatike}.
         \begin{center}
         $\vdots$
         \end{center}
-        \item Poiščemo najmanjši $i_{m} \in \N$, da $u_{i_m} = w_{i_{m-1}+1} \cdots w_{i_m}$
+        \item Poiščemo najmanjši $i_{m} \in \N$, da $u_m = w_{i_{m-1}+1} \cdots w_{i_m}$
         ne nastopa v $\sigma_{\text{lz}}(w)$. Dodamo $u_m$ v $\sigma_{\text{lz}}(w)$.
-        Ker je $i_m = n$, zaključimo.
+        Če je $i_m = n$, zaključimo. Če tak $i_{m} \in \N$ ne obstaja, dodamo 
+         $u_m = w_{i_{m-1}+1} \cdots w_n$ v $\sigma_{\text{lz}}(w)$ in zaključimo.
     \end{itemize}
 \end{definicija}
 
