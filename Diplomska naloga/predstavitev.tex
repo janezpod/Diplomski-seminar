@@ -1,8 +1,8 @@
 \documentclass{beamer}
 
-%\setbeameroption{hide notes} % Prosojnice
-%\setbeameroption{show only notes} % Zapiski
-\setbeameroption{show notes on second screen=right} % Oboje
+\setbeameroption{hide notes} % Prosojnice
+% \setbeameroption{show only notes} % Zapiski
+% \setbeameroption{show notes on second screen=right} % Oboje
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -51,12 +51,38 @@
 
 \begin{frame}
     \titlepage
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+        \item Kodiranje je spreminjanje zapisa sporočila.
+        \item Stiskanje podatkov je zapis sporočilo v zgoščeni obliki.
+        \item Gramatike je nabor pravil za tvorjenje nizov.
+    \end{itemize}
     \note{
-        Razdeljamo pojme v naslovu.
         \begin{itemize}
-            \item Kodiranje je spreminjanje zapisa sporočila.
-            \item Stiskanje podatkov je kodiranje, katerega cilj je zapisati sporočilo v zgoščeni
-            obliki.
+            \item Ideja je: Stistniti niz z ``majhno'' gramatiko.
+        \end{itemize}
+        \begin{exampleblock}{Primer}
+            Naj bo $ V = \{ S\}$, 
+            $\Sigma = \{ a,b,c \}$, 
+            $P = \{ S \rightarrow \mathit{aSb}, S \rightarrow \epsilon \}$ in
+            $S = S$.
+            Izpeljemo nize
+            \[
+                S \Rightarrow \epsilon, \ 
+                S \Rightarrow \mathit{aSb} \Rightarrow \mathit{ab}, \ 
+                S \Rightarrow \mathit{aSb} \Rightarrow \mathit{aaSbb} \Rightarrow \mathit{aabb}, \ 
+                \ldots
+            \]
+        \end{exampleblock}
+        \begin{itemize}
+            \item Elementom $P$ pravimo \emph{prepisovalna pravila}.
+            \item Prazen niz $\varepsilon$ je enota za operacijo stik.
+            \item Niz $\alpha A \gamma$ se \emph{prepiše s pravilom} $A \rightarrow \beta$ v 
+            $\alpha\beta\gamma$, pišemo $\alpha A \gamma \Rightarrow \alpha\beta\gamma$.
+            \item Niz $\alpha $ \emph{izpelje} niz $\beta$, če lahko $\alpha$ prepišemo v $\beta$
+            z uporabo končno mnogo prepisovalnih pravil.
         \end{itemize}
     }
 \end{frame}
@@ -75,34 +101,6 @@
             \item $S \in V$ \emph{začetni simbol}.
         \end{itemize}
     \end{definicija}
-    \note{
-        \begin{itemize}
-            \item Abeceda je končna neprazna množica.
-            \item Relacija $R \subseteq A \times B$ je \emph{celovita}, če velja 
-            $\forall x \in A \ \exists y \in B \colon (x,y) \in R$.
-            \item $( V \cup \Sigma )^*$ je množica vseh nizov končne dolžine končnih in nekončnih
-            simbolov. Vsebuje tudi prazen niz $\varepsilon$, saj je to niz dolžine $0$.
-            \item Prazen niz $\varepsilon$ je enota za operacijo stik.
-            \item Okrajšamo z KNG.
-        \end{itemize}
-        \begin{exampleblock}{Primer}
-            Naj bo $ V = \{ S\}$, 
-            $\Sigma = \{ a,b,c \}$, 
-            $P = \{ (S,\mathit{aSb}), (S , \epsilon) \}$ in
-            $S = S$.
-        \end{exampleblock}
-    }
-\end{frame}
-
-\begin{frame}
-    \begin{itemize}
-        \item Elementom relacije $P$ pravimo \emph{prepisovalna pravila}.
-        \item Prepisovalno pravilo $(A, \beta) \in P$ pišemo $A \rightarrow \beta$.
-        \item Niz $\alpha A \gamma$ se \emph{prepiše s pravilom} $A \rightarrow \beta$ v 
-        $\alpha\beta\gamma$, pišemo $\alpha A \gamma \Rightarrow \alpha\beta\gamma$.
-        \item Niz $\alpha $ \emph{izpelje} niz $\beta$, če lahko $\alpha$ prepišemo v $\beta$
-        z uporabo končno mnogo prepisovalnih pravil. 
-    \end{itemize}
     \pause
     \begin{definicija}
         Jezik KNG je množica nizov, ki jih lahko izpeljemo iz začetnega simbola in 
@@ -110,18 +108,12 @@
     \end{definicija}
     \note{
         \begin{itemize}
-            \item \emph{Leva stran prepisovalnega pravila $A \rightarrow \beta$} je $A$ in 
-            \emph{desna stran prepisovalnega pravila} je $\beta$.
+            \item Abeceda je končna neprazna množica.
+            \item $( V \cup \Sigma )^*$ je množica vseh nizov končne dolžine končnih in nekončnih
+            simbolov. Vsebuje tudi prazen niz $\varepsilon$, saj je to niz dolžine $0$.
+            \item Okrajšamo z KNG.
         \end{itemize}
         \begin{exampleblock}{Primer}
-            prepisovalna pravila zapišemo kot $P = \{ S \rightarrow \mathit{aSb}, S \rightarrow \epsilon \}$.
-            Izpeljemo nize
-            \[
-                S \Rightarrow \epsilon, \ 
-                S \Rightarrow \mathit{aSb} \Rightarrow \mathit{ab}, \ 
-                S \Rightarrow \mathit{aSb} \Rightarrow \mathit{aaSbb} \Rightarrow \mathit{aabb}, \ 
-                \ldots
-            \]
             Jezik je $\{ a^n b^n \mid n \geq 0 \}$.
         \end{exampleblock}
     }
@@ -132,7 +124,7 @@
     \tikzset{block/.style={draw, thick, text width=3cm, minimum height=1.5cm, align=center}, line/.style={-latex}}
     \begin{figure}[H]
         \centering
-        \scalebox{0.8}{
+        \scalebox{0.75}{
         \begin{tikzpicture}
             \node (a) {$w$};
             \node[block,right=of a, xshift=6mm] (b) {prirejanje gramatike};
@@ -238,83 +230,6 @@
         \end{tikzpicture}
         }
     \end{figure}
-    Od tu naprej naj bo:
-    \begin{itemize}
-        \item $\A$ poljubna abeceda , $\abs{\A} \geq 2$;
-        \item $\{ A_0, A_1, \ldots \}$ končna množica ,
-        $\A \cap \{ A_0, A_1, \ldots \} = \emptyset$.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \begin{definicija}
-        Naj bo $\G(\A)$ množica vseh KNG $G$, ki zadostujejo:
-        \begin{enumerate}
-            \item $G$ je dopustna gramatika;
-            \item $\Sigma \subseteq \A$;
-            \item $V = \{ A_0, A_1, \ldots, A_{\abs{V}-1} \}$;
-            \item $S=A_0$;
-            \item Če naštejemo nekončne simbole $V$ v vrstnem redu prve pojavitve pri izpeljavi
-            niza gramatike, dobimo zaporedje $A_0, A_1, A_2, \ldots, A_{\abs{V}-1}$.
-        \end{enumerate}
-    \end{definicija}
-    \note{
-    \begin{itemize}
-        \item Z zahtevo $5.$ so nekončni simboli poimenovani po edinstvem vrstnem redu.
-        Ta vrstni red omogoča pravilno dekodiranje.
-        \item KNG $G \notin \G(\A)$, ki izpolnjuje zahtevi $1.$ in $2.$, preimenujmo nekončne
-        simbole tako, da izpolnimo $5.$ zahtevo. Potem izpolnimo tudi $3.$ in $4.$ zahtevi. 
-        Dobimo $[G] \in \G(\A)$, ki jo imenujemo \emph{kanonično oblika $G$}, in velja da sta jezika
-        $[G]$ in $G$ enaka.
-    \end{itemize}
-}
-\end{frame}
-
-\begin{frame}
-    \tikzset{block/.style={draw, thick, text width=3cm, minimum height=1.5cm, align=center}, line/.style={-latex}}
-    \begin{figure}[H]
-        \centering
-        \scalebox{0.8}{
-        \begin{tikzpicture}
-            \node (a) {$w$};
-            \node[block,right=of a, xshift=6mm] (b) {prirejanje gramatike};
-            \node[right=of b, xshift=3mm] (c) {$G_w$};
-            \node[block,right=of c, xshift=3mm] (d) {kodiranje gramatike};
-            \node[right=of d, xshift=6mm] (e) {$B(G_w)$};
-
-            \draw[line] (a)-- (b);
-            \draw[line] (b)-- (c);
-            \draw[line] (c)-- (d);
-            \draw[line] (d)-- (e);
-        \end{tikzpicture}
-        }
-    \end{figure}
-    \begin{definicija}
-        \emph{Prirejanje gramatike nizu abecede $\A$} je preslikava
-        \begin{align*}
-            \pi \colon \A^+ &\to \G(\A), \\
-            w &\mapsto G_w.
-        \end{align*}
-    \end{definicija}
-\end{frame}
-
-\begin{frame}
-    \begin{definicija}
-        Z $\G^*(\A)$ označimo pravo podmnožico množice $\G(\A)$, da za vsak $G \in \G^*(\A)$ velja
-        \[
-            \forall A,B \in V, \ A \neq B \colon f_G^\infty(A) \neq f_G^\infty(B).
-        \]
-    \end{definicija}
-    \pause
-    \begin{definicija}
-        Z $\abs{G}$ označimo vsoto dolžin desnih strani prepisovalnih pravil KNG $G$.
-    \end{definicija}
-    \note{
-        \begin{itemize}
-            \item Za prirejanja, ki jih predstavimo potrebujemo še eno omejitev s 
-            katero se v predstavitvi ne obremenjujemo.
-        \end{itemize}
-    }
 \end{frame}
 
 \subsection{Asimptotsko kompaktno prirejanje gramatike}
@@ -323,15 +238,25 @@
     \frametitle{Asimptotsko kompaktno prirejanje gramatike}
     \begin{definicija}
         Prirejanje gramatike nizu abecede $\A$ je \textit{asimptotsko kompaktno}, če za vsak niz
-        $w \in \A^+$ velja $G_w \in \G^*(\A)$ in je
+        $w \in \A^+$ velja
         \[
             \lim_{n \rightarrow \infty} \max_{w \in \A^n} \frac{\abs{G_w}}{\abs{w}} = 0.
         \]
     \end{definicija}
     \note{
         \begin{itemize}
+            \item Z $\abs{G_w}$ označimo vsoto dolžin desnih strani prepisovalnih pravil KNG
             \item Primer je bisekcijsko prirejanje gramatike.
         \end{itemize}
+        \begin{exampleblock}{Primer}
+            Naj bo $w = 000101$. Podčrtamo podnize 
+            $\underline{\underline{\underline{0} \, \underline{0}} \,
+            \underline{\underline{0} \, \underline{1}}} \, \underline{\underline{0} \, \underline{1}}$.
+            \\
+            $A_{w} \rightarrow A_{0001}A_{01}$, \ $A_{0001} \rightarrow A_{00}A_{01}$, \ 
+            $A_{00} \rightarrow A_00$, \ $A_{01} \rightarrow A_01$, \ $A_{0} \rightarrow 1$, \
+            $A_{1} \rightarrow 1$.
+        \end{exampleblock}
     }
 \end{frame}
 
@@ -340,26 +265,28 @@
 \begin{frame}
     \frametitle{Neskrčljivo prirejanje gramatike}
     \begin{definicija}
-        Pravimo, da je $G \in \G^*(\A)$ \emph{neskrčljiva gramatika}, če:
+        Pravimo, da je KNG $G$ \emph{neskrčljiva gramatika}, če:
         \begin{enumerate}
             \item Vsak $A \in V$, $A \neq S$ nastopa vsaj dvakrat v desni strani prepisovalnih pravil;
             \item Ne obstajata $y_1,y_2 \in V \cup \Sigma$, da niz $y_1y_2$ nastopa kot podniz desne 
             strani kateregali prepisovalnega pravila več kot enkrat na neprekrivajočih se mestih. 
         \end{enumerate}
     \end{definicija}
-    \pause
-    \begin{definicija}
-        \emph{Neskrčljivo prirejanje gramatike nizu abecede $\A$} vsakemu nizu abecede $\A$ priredi
-        neskrčljivo gramatiko.
-    \end{definicija}
     \note{
         \begin{itemize}
             \item Primer prekrivajočih mest je $\underline{11}1$ in  $1\underline{11}$.
             \item Primer neprekriavjočih mest je $\underline{11} \ \underline{11}$.
-            \item Različna neskrčjiva prirejanja gramatike dobimo tako, da izvajamo 
-            različne nabore skrčitvenih pravil.
             \item Primer je metodo najdaljšega ujemajočega podniza.
         \end{itemize}
+        \begin{exampleblock}{Primer}
+            Naj bo $w = 001 01 01 0 001 $. Začnemo z trivialno dopustno gramatiko in 
+            podčratmo najdaljši podniz, ki se ponovi vsaj dvakrat.
+            $S \rightarrow \underline{001} 01 01 0 \underline{001}$.
+            \\
+            $S \rightarrow A \underline{01} \ \underline{01} 0 A, \ A \rightarrow 0 \underline{01}$.
+            \\
+            $S \rightarrow A B B 0 A, \ A \rightarrow 0 B, \ B \rightarrow 01$.
+        \end{exampleblock}
     }
 \end{frame}
 
@@ -370,7 +297,7 @@
     \tikzset{block/.style={draw, thick, text width=3cm, minimum height=1.5cm, align=center}, line/.style={-latex}}
     \begin{figure}[H]
         \centering
-        \scalebox{0.8}{
+        \scalebox{0.75}{
         \begin{tikzpicture}
             \node (a) {$w$};
             \node[block,right=of a, xshift=6mm] (b) {prirejanje gramatike};
@@ -385,33 +312,23 @@
         \end{tikzpicture}
         }
     \end{figure}
-    \begin{definicija}
-        \emph{Binarno kodiranje dopustne gramatike} je preslikava 
-        \begin{align*}
-            B \colon \G(\A) &\to \{ 0, 1 \}^+, \\
-            G &\mapsto B(G).
-        \end{align*}
-    \end{definicija} 
-\end{frame}
-
-\begin{frame}
+    \pause
     \begin{izrek}
-        Obstaja bijektivno binarno kodiranje dopustne gramatike, da
-        \begin{enumerate}
-            \item $ \forall G_1, G_2 \in \G(\A), G_1 \neq G_2 $ niz $B(G_1)$ ni predpona niza $B(G_2)$,
-            \item $ \forall G \in \G(\A) \colon \abs{B(G)} \leq \abs{\A} + 4 \abs{G} + \lceil H(G) \rceil$.
-        \end{enumerate}
+        Obstaja bijektivno brezpredponsko binarno kodiranje gramatike, da
+        \[
+            \forall G \in \G(\A) \colon \abs{B(G)} \leq \abs{\A} + 4 \abs{G} + \lceil H(G) \rceil.
+        \]
     \end{izrek}
     \note{
         \begin{itemize}
-            \item Abeceda je poznana tako kodirniku kot dekodirniku.
+            \item $H(\G)$ je entropija KNG $G$.
         \end{itemize}
     }
 \end{frame}
 
 \begin{frame}
     \begin{definicija}
-        \emph{Stiskanje niza abecede $\A$ z gramatikami $\G(\A)$} je 
+        \emph{Stiskanje niza abecede $\A$ z gramatikami} je 
         par preslikav kodne in dekodne preslikave $\varPhi = (\kappa, \delta)$. Kodna preslikava je
         \begin{align*}
             \kappa \colon \A^+ &\to \{ 0, 1\}^+,\\
